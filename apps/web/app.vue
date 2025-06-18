@@ -17,7 +17,6 @@
         'mr-3': !drawerOpen || placement === 'right',
       }"
     />
-
     <component
       :is="SiteConfigurationDrawer"
       v-if="drawerOpen"
