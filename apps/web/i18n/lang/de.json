@@ -399,7 +399,9 @@
     "name": "Gutschein",
     "pleaseProvideCoupon": "Bitte geben Sie einen gültigen Gutscheincode ein.",
     "remove": "Entfernen",
-    "title": "Haben Sie einen Gutscheincode?"
+    "title": "Haben Sie einen Gutscheincode?",
+    "outstandingAmount": "Zu zahlender Betrag",
+    "paidAmount": "Bezahlter Betrag"
   },
   "createCustomerReview": "Bewertung abgeben",
   "currentPage": "Die aktuelle Seite ist {page}",

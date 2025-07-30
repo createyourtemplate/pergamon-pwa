@@ -22,7 +22,7 @@
     </p>
     <p v-else class="text-right">{{ getShippingAmount(orderGetters.getOriginalShippingCost(order)) }}</p>
   </div>
-  <div v-if="orderGetters.getCouponValue(order.totals) < 0" class="grid grid-cols-2 mt-2">
+  <div v-if="orderGetters.getCouponValue(order.totals) < 0 && orderGetters.getCouponType(order.totals) === 'promotion'" class="grid grid-cols-2 mt-2">
     <p class="font-medium text-base">{{ t('coupon.name') }}:</p>
     <p class="text-right">{{ format(orderGetters.getCouponValue(order.totals)) }}</p>
   </div>
@@ -54,6 +54,20 @@
         showNetPrices ? format(orderGetters.getTotalNet(originalTotals)) : format(orderGetters.getTotal(originalTotals))
       }}
     </p>
+  </div>
+  <div v-if="orderGetters.getCouponValue(order.totals) < 0 && orderGetters.getCouponType(order.totals) === 'sales'">
+    <div class="grid grid-cols-2 mt-2">
+      <p class="font-medium text-base">{{ t('coupon.name') }}:</p>
+      <p class="text-right">{{ format(orderGetters.getCouponValue(order.totals)) }}</p>
+    </div>
+    <div class="grid grid-cols-2 mt-2">
+      <p class="font-medium text-base">{{ t('coupon.paidAmount') }}:</p>
+      <p class="text-right">{{ format(orderGetters.getPaidAmount(order.totals)) }}</p>
+    </div>
+    <div class="grid grid-cols-2 mt-2">
+      <p class="font-medium text-base">{{ t('coupon.outstandingAmount') }}:</p>
+      <p class="text-right">{{ format(orderGetters.getOpenAmount(order.totals) ?? 0) }}</p>
+    </div>
   </div>
 </template>
 

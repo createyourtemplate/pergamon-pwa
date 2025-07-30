@@ -31,7 +31,14 @@
           <p data-testid="shipping-label">
             {{ t('delivery') }} <span v-if="showNetPrices">({{ t('netPrice') }})</span>
           </p>
-          <p v-if="cartGetters.getCouponDiscount(props.cart)" data-testid="coupon-label">{{ t('coupon.name') }}</p>
+          <p
+            v-if="
+              cartGetters.getCouponDiscount(props.cart) && cartGetters.getCouponCampaignType(props.cart) === 'promotion'
+            "
+            data-testid="coupon-label"
+          >
+            {{ t('coupon.name') }}
+          </p>
           <p v-for="(vat, index) in totals.vats" :key="index" data-testid="vat-label">
             {{ showNetPrices ? t('excludedTax') : t('includedTax') }} ({{ cartGetters.getTotalVatValue(vat) }}%)
           </p>
@@ -41,7 +48,13 @@
           <p data-testid="shipping" class="font-medium">
             {{ getShippingAmount(cartGetters.getShippingAmountNet(props.cart)) }}
           </p>
-          <p v-if="cartGetters.getCouponDiscount(props.cart)" class="font-medium" data-testid="coupon-value">
+          <p
+            v-if="
+              cartGetters.getCouponDiscount(props.cart) && cartGetters.getCouponCampaignType(props.cart) === 'promotion'
+            "
+            class="font-medium"
+            data-testid="coupon-value"
+          >
             {{ format(cartGetters.getCouponDiscount(props.cart)) }}
           </p>
           <p v-for="(vat, index) in totals.vats" :key="index" data-testid="vat">
@@ -53,7 +66,13 @@
           <p data-testid="shipping" class="font-medium">
             {{ getShippingAmount(cartGetters.getShippingPrice(props.cart)) }}
           </p>
-          <p v-if="cartGetters.getCouponDiscount(props.cart)" class="font-medium" data-testid="coupon-value">
+          <p
+            v-if="
+              cartGetters.getCouponDiscount(props.cart) && cartGetters.getCouponCampaignType(props.cart) === 'promotion'
+            "
+            class="font-medium"
+            data-testid="coupon-value"
+          >
             {{ format(cartGetters.getCouponDiscount(props.cart)) }}
           </p>
           <p v-for="(vat, index) in totals.vats" :key="index" data-testid="vat">
@@ -81,12 +100,33 @@
         <h2 data-testid="total-net-label">{{ t('total') }} ({{ t('netPrice') }})</h2>
         <h2 data-testid="total-net">{{ format(cartGetters.getBasketAmountNet(cart)) }}</h2>
       </div>
-      <div class="flex justify-between typography-text-base font-bold pb-4 mb-4">
+      <div class="flex justify-between typography-text-base font-bold mb-1">
         <h2 data-testid="total-label">
           {{ t('total') }} <span v-if="showNetPrices">({{ t('grossPrice') }})</span>
         </h2>
         <h2 data-testid="total">{{ format(totals.total) }}</h2>
       </div>
+      <div
+        v-if="
+          cartGetters.getCouponDiscount(props.cart) &&
+          cartGetters.getCouponCampaignType(props.cart) === 'sales' &&
+          cartGetters.getOpenAmount(props.cart) !== null
+        "
+      >
+        <div class="flex justify-between typography-text-base font-bold mt-4 mb-1">
+          <h2 data-testid="coupon-sales-label">
+            {{ t('coupon.name') }}
+          </h2>
+          <h2 data-testid="coupon-sales-value">{{ format(cartGetters.getCouponDiscount(props.cart)) }}</h2>
+        </div>
+        <div class="flex justify-between typography-text-base font-bold">
+          <h2 data-testid="coupon-sales-label">{{ t('coupon.outstandingAmount') }}</h2>
+          <h2 data-testid="coupon-sales-value">{{ format(cartGetters.getOpenAmount(props.cart) ?? 0) }}</h2>
+        </div>
+      </div>
+
+      <div class="w-auto mb-4"/>
+
       <UiDivider class="w-auto mb-4" />
       <slot />
     </div>

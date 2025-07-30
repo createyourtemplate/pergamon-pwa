@@ -399,7 +399,9 @@
     "name": "Coupon",
     "pleaseProvideCoupon": "Please enter a valid coupon code.",
     "remove": "Remove",
-    "title": "Have a coupon code?"
+    "title": "Have a coupon code?",
+    "outstandingAmount": "Outstanding amount",
+    "paidAmount": "Paid amount"
   },
   "createCustomerReview": "Create review",
   "currentPage": "Current Page is {page}",
