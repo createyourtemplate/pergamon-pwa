@@ -3,7 +3,7 @@
     <div class="flex justify-between mb-2">
       <UiFormLabel>Logo</UiFormLabel>
       <SfTooltip
-        label="The logo is displayed in the header of the onlineshop. For the best performance, you should choose an image file in one of the following formats: SVG, AVIF or WebP."
+        label="The logo is displayed in the header of the shop. For the best performance you should choose an image in one of the following formats: .svg, .avif or .webp."
         :placement="'top'"
         :show-arrow="true"
         class="ml-2 z-10"
@@ -24,8 +24,7 @@
     <SfInput v-else v-model="headerLogo" placeholder="Enter Logo URL" type="text" />
 
     <span class="typography-text-xs text-neutral-700"
-      >If you choose SVG, the size must be 150 x 40 px. For other formats, the maximum size is 180 px (width) by 80 px
-      (height).</span
+      >If you choose SVG, the size must be 150 x 40 px. For other formats, the maximum size is 180 px (width) by 80 px (height).</span
     >
 
     <UiImageSelectorModal

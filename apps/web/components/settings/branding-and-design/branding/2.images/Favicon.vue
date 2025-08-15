@@ -3,7 +3,7 @@
     <div class="flex justify-between mb-2">
       <UiFormLabel>Favicon</UiFormLabel>
       <SfTooltip
-        label="A favicon helps customers recognize your site in browser tabs and bookmarks. Required file format: .ico"
+        label="A favicon helps customers recognise your shop in browser tabs and bookmarks."
         :placement="'top'"
         :show-arrow="true"
         class="ml-2 z-10"
@@ -23,7 +23,7 @@
     />
     <SfInput v-else v-model="favicon" placeholder="Enter Favicon URL" type="text" />
     <span class="typography-text-xs text-neutral-700"
-      >Recommended dimensions: A square of 32 × 32 px or 48 × 48 px
+      >Required format: ICO<br>Recommended dimensions: A square of 32 × 32 px or 48 × 48 px
     </span>
 
     <UiImageSelectorModal
