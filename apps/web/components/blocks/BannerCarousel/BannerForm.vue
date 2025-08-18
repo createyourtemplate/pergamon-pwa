@@ -172,7 +172,7 @@
             />
           </div>
           <div class="mb-6">
-            <UiFormLabel class="mb-1">Text Color</UiFormLabel>
+            <UiFormLabel class="mb-1">Text Colour</UiFormLabel>
 
             <SfInput v-model="banner.content.text.color" type="text">
               <template #suffix>
@@ -194,7 +194,7 @@
             />
           </div>
           <div v-if="banner.content.text.background" class="mb-6">
-            <UiFormLabel class="mb-1">Textbox Color</UiFormLabel>
+            <UiFormLabel class="mb-1">Textbox Colour</UiFormLabel>
 
             <SfInput v-model="banner.content.text.bgcolor" type="text">
               <template #suffix>

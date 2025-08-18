@@ -161,7 +161,7 @@
 
         <div class="controls">
           <div class="mb-6 mt-4">
-            <UiFormLabel class="mb-1">Slider Controls Color</UiFormLabel>
+            <UiFormLabel class="mb-1">Slider Controls Colour</UiFormLabel>
 
             <SfInput v-model="controls.color" type="text">
               <template #suffix>

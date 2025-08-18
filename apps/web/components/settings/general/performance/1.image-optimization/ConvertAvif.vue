@@ -4,7 +4,7 @@
       <UiFormLabel class="mb-1"
         >Convert item images to AVIF
         <SfTooltip
-          label="Automatically convert item images to modern formats for reduced file size and faster loading. This may increase cloud storage costs but can lower traffic expenses."
+          label="If item images are requested in a modern image format in which the images are currently not available, these images can automatically be generated. This reduces the image size and thus leads to a faster loading time in the shop. Note that activating this setting may lead to additional cloud storage costs for content and item images. Please also note that after activating this option, each requested item image must be generated once in a modern image format, which may initially result in longer loading times for a short time. Provides better compression than JPEG, PNG, GIF, and WebP. Supported by most modern browsers, but fewer than WebP. If not supported, WebP is used instead (if enabled)."
           :placement="'top'"
           :show-arrow="true"
           class="ml-2 z-10"
@@ -16,11 +16,6 @@
         class="checked:bg-editor-button checked:before:hover:bg-editor-button checked:border-gray-500 checked:hover:border:bg-gray-700 hover:border-gray-700 hover:before:bg-gray-700 checked:hover:bg-gray-300 checked:hover:border-gray-400"
       />
     </div>
-
-    <span class="typography-text-xs text-neutral-700"
-      >Provides better compression than JPEG, PNG, GIF, and WebP. Supported by most modern browsers, but fewer than
-      WebP. If not supported, WebP is used instead (if enabled).
-    </span>
   </div>
 </template>
 <script setup lang="ts">

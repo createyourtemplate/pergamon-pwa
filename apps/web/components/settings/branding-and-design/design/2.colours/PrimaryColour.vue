@@ -1,9 +1,9 @@
 <template>
   <div class="py-2">
     <div class="flex justify-between mb-2">
-      <UiFormLabel>Primary color</UiFormLabel>
+      <UiFormLabel>Primary colour</UiFormLabel>
       <SfTooltip
-        label="The shop uses a primary and secondary color palette. Each palette consists of ten shades. The colors configured here serve as the base value for the respective palette. All other shades are automatically generated during the build process."
+        label="Select the main colour for the shop. We’ll generate 10 matching shades and apply them to key elements to define your shop's overall look and feel."
         :placement="'top'"
         :show-arrow="true"
         class="ml-2 z-10"
@@ -23,7 +23,6 @@
           </label>
         </template>
       </SfInput>
-      <span class="typography-text-xs text-neutral-700">Choose primary color</span>
     </label>
   </div>
 </template>

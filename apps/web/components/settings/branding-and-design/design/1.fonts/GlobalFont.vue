@@ -3,7 +3,7 @@
     <div class="flex justify-between mb-2">
       <UiFormLabel>Global fonts</UiFormLabel>
       <SfTooltip
-        label="The shop supports Google Fonts. Fonts are downloaded during the build process. This means the shop does not connect to Google while the shop is running."
+        label="Choose one Google Font for all texts. Fonts are served locally to ensure privacy compliance, with no live requests to Google."
         :placement="'top'"
         :show-arrow="true"
         class="ml-2 z-10"
@@ -24,7 +24,6 @@
       select-label=""
       deselect-label="Selected"
     />
-    <span class="typography-text-xs text-neutral-700">Choose one Google font for all texts</span>
   </div>
 </template>
 

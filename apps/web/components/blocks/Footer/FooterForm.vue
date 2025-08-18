@@ -228,7 +228,7 @@
       summary-class="w-full hover:bg-neutral-100 px-4 py-5 flex justify-between items-center select-none border-b"
     >
       <template #summary>
-        <h2>Color</h2>
+        <h2>Colour</h2>
       </template>
       <div class="py-2">
         <div class="flex justify-between mb-2">

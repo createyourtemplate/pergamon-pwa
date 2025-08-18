@@ -1,9 +1,9 @@
 <template>
   <div class="py-2">
     <div class="flex justify-between mb-2">
-      <UiFormLabel>Icon color</UiFormLabel>
+      <UiFormLabel>Icon colour</UiFormLabel>
       <SfTooltip
-        label="Use this to override the default white icon color in the header, ensuring sufficient contrast with your chosen background."
+        label="If set, this colour overrides the default white of the icons in the header, ensuring sufficient contrast with your chosen background."
         :placement="'top'"
         :show-arrow="true"
         class="ml-2 z-10"
@@ -23,7 +23,6 @@
           </label>
         </template>
       </SfInput>
-      <span class="typography-text-xs text-neutral-700">Choose icon color</span>
     </label>
   </div>
 </template>

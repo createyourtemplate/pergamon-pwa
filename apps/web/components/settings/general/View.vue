@@ -1,6 +1,6 @@
 <template>
   <SiteConfigurationView>
-    <template #setting-title> General Settings </template>
+    <template #setting-title> General settings </template>
   </SiteConfigurationView>
 </template>
 
