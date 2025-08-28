@@ -2,6 +2,7 @@
   <NuxtLayout name="checkout" :back-label-desktop="t('back')" :back-label-mobile="t('back')" :heading="t('checkout')">
     <div v-if="cart" class="lg:grid lg:grid-cols-12 lg:gap-x-6">
       <div class="col-span-6 xl:col-span-7 mb-10 lg:mb-0">
+        <button @click="triggerEvent">trigger event</button>
         <UiDivider id="top-contact-information-divider" class="w-screen md:w-auto -mx-4 md:mx-0" />
         <ContactInformation id="contact-information" />
         <UiDivider id="top-shipping-divider" class="w-screen md:w-auto -mx-4 md:mx-0" />
@@ -80,6 +81,11 @@ const { paymentLoading, shippingLoading, handleShippingMethodUpdate, handlePayme
   useCheckoutPagePaymentAndShipping();
 
 emit('frontend:beginCheckout', cart.value);
+
+const triggerEvent = () => {
+  console.log('triggered');
+  emit('frontend:beginCheckout', cart.value);
+};
 
 const checkPayPalPaymentsEligible = async () => {
   if (import.meta.client) {
