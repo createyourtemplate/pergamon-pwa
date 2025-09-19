@@ -7,6 +7,7 @@ export const useToolbar = () => {
   const { updatePageTemplate } = useUpdatePageTemplate();
   const { data: dataProduct } = useProducts();
   const route = useRoute();
+  const router = useRouter();
   const save = async () => {
     const messageList: string[] = [];
     let hasError = false;
@@ -50,8 +51,15 @@ export const useToolbar = () => {
       });
     }
   };
+
+  const isOnCategoryPage = () => {
+    const routeName = route?.name ?? '';
+
+    return typeof routeName === 'string' ? routeName.startsWith('slug___') : false;
+  }
+
   const isEditablePage = computed(() => {
-    return route.path === '/' || dataProduct.value.category?.type === 'content';
+    return route.path === '/' || isOnCategoryPage() || dataProduct.value.category?.type === 'content';
   });
 
   return { save, isEditablePage };
