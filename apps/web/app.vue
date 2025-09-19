@@ -2,6 +2,7 @@
   <ClientOnly>
     <component :is="Toolbar" v-if="clientPreview" />
   </ClientOnly>
+  <UiButton @click="useSdk().getInit">trigger api call</UiButton>
   <div
     class="w-100 relative md:flex"
     :class="{
@@ -56,6 +57,8 @@
 </template>
 
 <script setup lang="ts">
+import { InitResult } from '@plentymarkets/shop-api';
+
 const { $isPreview } = useNuxtApp();
 const bodyClass = ref('');
 const route = useRoute();
@@ -114,6 +117,14 @@ useHead({
     { rel: 'apple-touch-icon', href: fav.value },
   ],
 });
+
+
+const getInit = () => useFetch('/api/init');
+const useSdk = () => {
+  return {
+    getInit,
+  };
+}
 
 await callOnce(async () => {
   await setInitialDataSSR();

@@ -137,10 +137,10 @@
                 </template>
               </i18n-t>
             </div>
-            <template v-if="showPayPalButtons">
+            <ClientOnly v-if="showPayPalButtons">
               <PayPalExpressButton type="SingleItem" class="mt-4" @validation-callback="paypalHandleAddToCart" />
               <PayPalPayLaterBanner placement="product" :amount="priceWithProperties * quantitySelectorValue" />
-            </template>
+            </ClientOnly>
           </div>
         </section>
       </div>
