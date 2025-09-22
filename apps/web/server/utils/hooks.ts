@@ -5,6 +5,9 @@ export const beforeRequest = (event: H3Event<EventHandlerRequest>, headers: { [k
     headers['x-config-id'] = process.env.CONFIG_ID || '';
 
     const cookies = parseCookies(event);
+
+    console.log('Request cookies:', cookies['pwa-session-id']);
+
     headers.cookie = Object.entries(cookies)
         .map(([key, value]) => {
             if (key.includes('pwa-session-id')) {

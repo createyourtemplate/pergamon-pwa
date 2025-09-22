@@ -26,6 +26,11 @@ export const useRequest = () => {
                 headers: {
                     ...customHeaders,
                 },
+                async onRequest({ request, options }) {
+                    // Log request
+                    console.log("[fetch request]", options);
+                
+                  }
             });
 
             afterRequest(event, response);

@@ -47,7 +47,8 @@ const setInitialDataSSR: SetInitialData = async () => {
   cartLoading.value = true;
 
   try {
-    const { data } = await $fetch('/api/init');
+    const requestFetch = useRequestFetch()
+    const { data } = await requestFetch('/api/init');
 
     if (data) {
       setCategoryTree(data?.categories);
