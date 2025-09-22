@@ -47,14 +47,14 @@ const setInitialDataSSR: SetInitialData = async () => {
   cartLoading.value = true;
 
   try {
-    const { data } = await useAsyncData(() => useSdk().plentysystems.getInit());
-    if (data.value?.data) {
-      setUser(data.value.data.session.user);
-      setCart(data.value.data.session?.basket as Cart);
-      setCategoryTree(data.value.data.categories);
-      setWishlistItemIds(Object.values(data.value.data.session?.basket?.itemWishListIds || []));
-      if (data.value.data.robots) {
-        setRobots(data.value.data.robots);
+    const { data } = await useFetch('/api/init');
+    if (data.value) {
+      setUser(data.value.session?.user);
+      setCart(data.value.session?.basket as Cart);
+      setCategoryTree(data.value.categories);
+      setWishlistItemIds(Object.values(data.value.session?.basket?.itemWishListIds || []));
+      if (data.value.robots) {
+        setRobots(data.value.robots);
       }
     }
   } catch (error) {

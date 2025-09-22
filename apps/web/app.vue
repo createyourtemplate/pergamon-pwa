@@ -126,10 +126,6 @@ const useSdk = () => {
   };
 }
 
-const { data } = await getInit();
-data.value?.user?.birthdayAt;
-
-
 await callOnce(async () => {
   await setInitialDataSSR();
 });
