@@ -1,13 +1,13 @@
 import { ApiError } from '@plentymarkets/shop-api';
 import { type H3Event, type EventHandlerRequest } from 'h3';
-import { cookieHelper } from './cookie.helper';
+import { afterRequest, beforeRequest } from './hooks';
 
+
+// todo create a custom fetch instance with interceptors for request and response
+// https://nuxt.com/docs/3.x/getting-started/data-fetching
 export const useRequest = () => {
     const apiEndpoint = process.env.API_ENDPOINT || '';
-    const defaultHeaders = {
-        'x-security-token': process.env.API_SECURITY_TOKEN || '',
-        'x-config-id': process.env.CONFIG_ID || '',
-    };
+
 
     const request = async <T>(
         event: H3Event<EventHandlerRequest>,
@@ -17,39 +17,19 @@ export const useRequest = () => {
     ): Promise<T> => {
         try {
 
-            const cookies = parseCookies(event);
-            const customHeaders: { cookie?: string } = {};
-
-            customHeaders.cookie = Object.entries(cookies)
-                .map(([key, value]) => {
-                    if (key.includes('pwa-session-id')) {
-                        const cookie = `${key}=${encodeURIComponent(value)}`;
-                        return cookieHelper().changeHeaderValueKey(cookie, 'pwa-session-id', 'plentyID');
-                    }
-                    return `${key}=${encodeURIComponent(value)}`;
-                })
-                .join('; ');
+            const { headers: customHeaders } = beforeRequest(event, {});
 
             const response = await $fetch.raw<T>(apiEndpoint + url, {
                 method,
                 body: data ?? null,
                 credentials: 'include',
                 headers: {
-                    ...defaultHeaders,
                     ...customHeaders,
                 },
             });
 
-            if (import.meta.server) {
-                // https://nuxt.com/docs/3.x/getting-started/data-fetching#pass-cookies-from-server-side-api-calls-on-ssr-response
-                const cookies = response.headers.getSetCookie();
-                for (let cookie of cookies) {
-                    cookie = cookieHelper().replaceDomain(cookie);
-                    cookie = cookieHelper().changeHeaderValueKey(cookie, 'plentyID', 'pwa-session-id')
-                    appendResponseHeader(event, 'set-cookie', cookie);
-                }
-            }
-            return response._data as T;
+            afterRequest(event, response);
+            return response._data as T; 
         } catch (error: ApiError | unknown) {
             console.error(error);
             throw new ApiError(error as ApiError);

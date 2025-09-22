@@ -119,12 +119,15 @@ useHead({
 });
 
 
-const getInit = () => useFetch('/api/init');
+const getInit = async () => { 
+  const data = await $fetch('/api/init');
+}
 const useSdk = () => {
   return {
     getInit,
   };
 }
+
 
 await callOnce(async () => {
   await setInitialDataSSR();

@@ -47,17 +47,19 @@ const setInitialDataSSR: SetInitialData = async () => {
   cartLoading.value = true;
 
   try {
-    const { data } = await useFetch('/api/init');
-    if (data.value) {
-      setUser(data.value.session?.user);
-      setCart(data.value.session?.basket as Cart);
-      setCategoryTree(data.value.categories);
-      setWishlistItemIds(Object.values(data.value.session?.basket?.itemWishListIds || []));
-      if (data.value.robots) {
-        setRobots(data.value.robots);
+    const { data } = await $fetch('/api/init');
+
+    if (data) {
+      setCategoryTree(data?.categories);
+      setUser(data?.session?.user);
+      setCart(data?.session?.basket as Cart);
+      setWishlistItemIds(Object.values(data?.session?.basket?.itemWishListIds || []));
+      if (data?.robots) {
+        setRobots(data?.robots);
       }
     }
   } catch (error) {
+    console.log(error);
     useHandleError(error as ApiError);
   } finally {
     cartLoading.value = false;
