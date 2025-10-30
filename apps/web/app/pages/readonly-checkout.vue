@@ -135,13 +135,9 @@ const {
   anyAddressFormIsOpen,
   hasShippingAddress,
   hasBillingAddress,
-  persistShippingAddress,
-  persistBillingAddress,
   backToFormEditing,
   scrollToShippingAddress,
   scrollToBillingAddress,
-  setBillingSkeleton,
-  setShippingSkeleton,
 } = useCheckout();
 
 const paypalOrderId = route?.query?.orderId?.toString() || '';
@@ -169,16 +165,6 @@ const handle = async () => {
 
   await setAddressesFromPayPal(paypalOrderId);
   await fetchSession();
-
-  await useFetchAddressesData()
-    .fetch()
-    .then(() => persistShippingAddress())
-    .then(() => persistBillingAddress())
-    .catch((error) => useHandleError(error))
-    .finally(() => {
-      setBillingSkeleton(false);
-      setShippingSkeleton(false);
-    });
 
   if (user.value === null && (billingAddress.value?.email || shippingAddress.value?.email)) {
     await loginAsGuest(billingAddress.value?.email || shippingAddress.value?.email || '');

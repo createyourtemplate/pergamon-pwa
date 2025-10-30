@@ -54,7 +54,6 @@
 
 <script setup lang="ts">
 import { SfLoaderCircular } from '@storefront-ui/vue';
-import type { ApiError } from '@plentymarkets/shop-api';
 import { AddressType, cartGetters } from '@plentymarkets/shop-api';
 
 definePageMeta({
@@ -67,55 +66,23 @@ const { send } = useNotification();
 const { t } = useI18n();
 const localePath = useLocalePath();
 const { emit } = usePlentyEvent();
-const { countryHasDelivery, hasCheckoutAddress } = useCheckoutAddress(AddressType.Shipping);
+const { countryHasDelivery } = useCheckoutAddress(AddressType.Shipping);
 const checkoutReady = ref(false);
 const {
   cart,
   cartIsEmpty,
   cartLoading,
-  persistShippingAddress,
-  persistBillingAddress,
-  setBillingSkeleton,
-  setShippingSkeleton,
   showBillingAddressSection,
 } = useCheckout();
 const { preferredDeliveryAvailable } = usePreferredDelivery();
 const { fetchPaymentMethods } = usePaymentMethods();
-const { getScript } = usePayPal();
 const { paymentLoading, shippingLoading, handleShippingMethodUpdate, handlePaymentMethodUpdate } =
   useCheckoutPagePaymentAndShipping();
 
 emit('frontend:beginCheckout', cart.value);
 
-const checkPayPalPaymentsEligible = async () => {
-  if (import.meta.client) {
-    const { data: cart } = useCart();
-    const currency = computed(() => cartGetters.getCurrency(cart.value) || (useAppConfig().fallbackCurrency as string));
-
-    await getScript(currency.value, true);
-  }
-};
 await callOnce(async () => {
   await fetchPaymentMethods();
-});
-
-onNuxtReady(async () => {
-  await useFetchAddressesData()
-    .fetch()
-    .then(() => persistShippingAddress())
-    .then(() => persistBillingAddress())
-    .catch((error: ApiError) => useHandleError(error))
-    .finally(() => {
-      setBillingSkeleton(false);
-      setShippingSkeleton(false);
-    });
-
-  await Promise.all([
-    checkPayPalPaymentsEligible(),
-    ...(hasCheckoutAddress.value ? [useCartShippingMethods().getShippingMethods()] : []),
-  ]);
-
-  checkoutReady.value = true;
 });
 
 const disableShippingPayment = computed(() => shippingLoading.value || paymentLoading.value);
