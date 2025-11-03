@@ -1,7 +1,7 @@
 export type MultilingualKeysState = {
   key: string;
   translations: { [locale: string]: string };
-}
+};
 
 export type CompiledMessage = {
   type?: number;
@@ -14,4 +14,4 @@ export type CompiledMessage = {
   end?: number;
   body?: unknown;
   items?: unknown[];
-}
+};
