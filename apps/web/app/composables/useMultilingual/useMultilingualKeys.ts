@@ -8,7 +8,7 @@ export const useMultilingualKeys = () => {
     isLoaded: false,
   }));
 
-  const isCompiledMessage = (value: unknown): value is CompiledMessage => {
+  const isCompiledMessage = (value: unknown): boolean => {
     return (
       typeof value === 'object' &&
       value !== null &&
@@ -30,7 +30,7 @@ export const useMultilingualKeys = () => {
     return null;
   };
 
-  const isNestedObject = (value: unknown): value is Record<string, unknown> => {
+  const isNestedObject = (value: unknown): boolean => {
     return value !== null && typeof value === 'object' && !Array.isArray(value) && !isCompiledMessage(value);
   };
 
