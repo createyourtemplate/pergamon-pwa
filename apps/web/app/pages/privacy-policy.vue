@@ -10,7 +10,7 @@ definePageMeta({
   pageType: 'static',
 });
 
-const { t } = useI18n();
+
 const { setPageMeta } = usePageMeta();
 
 const icon = 'page';

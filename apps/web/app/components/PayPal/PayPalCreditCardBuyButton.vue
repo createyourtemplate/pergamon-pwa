@@ -12,7 +12,7 @@
 </template>
 <script lang="ts" setup>
 const emits = defineEmits(['click']);
-const { t } = useI18n();
+
 
 const props = withDefaults(defineProps<{ disabled?: boolean }>(), {
   disabled: false,

@@ -23,7 +23,7 @@ const {
   getIsReadyToPayRequest,
 } = useGooglePay();
 const { getCurrentScript } = usePayPal();
-const { t } = useI18n();
+
 const emits = defineEmits<{
   (event: 'button-clicked', callback: PayPalAddToCartCallback): Promise<void>;
 }>();

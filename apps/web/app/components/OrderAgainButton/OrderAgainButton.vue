@@ -10,6 +10,6 @@ import type { OrderAgainButtonProps } from './types';
 
 defineProps<OrderAgainButtonProps>();
 
-const { t } = useI18n();
+
 const { openOrderAgainModal, order: selectedOrder } = useOrderAgain();
 </script>

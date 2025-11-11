@@ -90,7 +90,6 @@ const props = defineProps<SortFilterProps>();
 
 const showSortAndFilter = ref(false);
 const { isOpen, open, close } = useDisclosure();
-const { t } = useI18n({ useScope: 'global' });
 const clientPreview = ref(false);
 
 const { $isPreview } = useNuxtApp();

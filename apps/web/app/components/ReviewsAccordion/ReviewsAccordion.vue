@@ -44,7 +44,7 @@ import type { ProductAccordionPropsType } from '~/components/ReviewsAccordion/ty
 
 const { product } = defineProps<ProductAccordionPropsType>();
 
-const { t } = useI18n();
+
 
 const viewport = useViewport();
 const reviewsOpen = ref(true);

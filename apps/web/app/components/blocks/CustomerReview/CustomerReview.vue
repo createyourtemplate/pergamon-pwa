@@ -86,7 +86,7 @@ import type { CustomerReviewProps } from './types';
 
 const props = defineProps<CustomerReviewProps & ProductAccordionPropsType>();
 
-const { t } = useI18n();
+
 
 const viewport = useViewport();
 const reviewsOpen = ref(!props.content.layout.initiallyCollapsed);

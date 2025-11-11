@@ -22,7 +22,7 @@ import { SfCheckbox } from '@storefront-ui/vue';
 
 const { shippingPrivacyAgreement, showErrors, setShippingPrivacyAgreement } = useAdditionalInformation();
 const { selectedMethod } = useCartShippingMethods();
-const { t } = useI18n();
+
 
 const parcelServiceInformation = computed(() =>
   selectedMethod.value ? shippingProviderGetters.getShippingMethodName(selectedMethod.value) : '',

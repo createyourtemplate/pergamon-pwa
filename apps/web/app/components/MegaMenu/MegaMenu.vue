@@ -216,7 +216,7 @@ import type { MegaMenuProps } from '~/components/MegaMenu/types';
 const props = defineProps<MegaMenuProps>();
 const NuxtLink = resolveComponent('NuxtLink');
 
-const { t } = useI18n();
+
 const viewport = useViewport();
 const localePath = useLocalePath();
 const { buildCategoryMenuLink } = useLocalization();

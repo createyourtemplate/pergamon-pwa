@@ -192,7 +192,7 @@ const {
 } = useCookieBar();
 const NuxtLink = resolveComponent('NuxtLink');
 const localePath = useLocalePath();
-const { t } = useI18n();
+
 
 const furtherSettingsOn = ref(false);
 

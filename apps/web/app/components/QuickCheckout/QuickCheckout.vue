@@ -80,7 +80,7 @@
       </div>
       <div class="py-8 px-10">
         <div class="mb-8">
-          <p class="font-medium text-base">{{ t('quickCheckout.cartContains', cartItemsCount) }}</p>
+          <p class="font-medium text-base">{{ t('quickCheckout.cartContains', { count: cartItemsCount }) }}</p>
           <div class="grid grid-cols-2">
             <p class="text-base">{{ t('quickCheckout.subTotal') }}:</p>
             <p v-if="showNetPrices" data-testid="subtotal" class="font-medium text-right">
@@ -126,7 +126,7 @@ import { paths } from '~/utils/paths';
 
 const props = defineProps<QuickCheckoutProps>();
 
-const { t } = useI18n();
+
 const { format } = usePriceFormatter();
 
 const { showNetPrices } = useCart();

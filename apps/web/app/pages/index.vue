@@ -11,7 +11,7 @@ definePageMeta({
   type: 'immutable',
   identifier: 'index',
 });
-const { t } = useI18n();
+
 const { setPageMeta } = usePageMeta();
 const icon = 'home';
 setPageMeta(t('homepage.title'), icon);

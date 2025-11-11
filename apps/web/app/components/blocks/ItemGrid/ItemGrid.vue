@@ -74,7 +74,7 @@ import { productGetters } from '@plentymarkets/shop-api';
 import { SfLink } from '@storefront-ui/vue';
 import type { ItemGridProps } from '~/components/blocks/ItemGrid/types';
 
-const { t } = useI18n();
+
 const { getFacetsFromURL } = useCategoryFilter();
 
 const viewport = useViewport();

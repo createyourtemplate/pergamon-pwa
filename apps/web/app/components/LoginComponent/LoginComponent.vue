@@ -49,7 +49,7 @@ import type { LoginProps } from './types';
 
 const { login, loading } = useCustomer();
 const { send } = useNotification();
-const { t } = useI18n();
+
 
 const { isSoftLogin = false, isModal = false } = defineProps<LoginProps>();
 const emits = defineEmits(['loggedIn', 'change-view', 'change-forgot-password']);

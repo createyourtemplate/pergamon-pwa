@@ -82,7 +82,7 @@ import type { PayPalAddToCartCallback } from '~/components/PayPal/types';
 import { keyBy } from '~/utils/keyBy';
 import type { PaymentButtonComponent } from '@plentymarkets/shop-core';
 
-const { t } = useI18n();
+
 const { components } = useDynamicPaymentButtons();
 const { loading: createOrderLoading, createOrder } = useMakeOrder();
 const { isLoading: navigationInProgress } = useLoadingIndicator();

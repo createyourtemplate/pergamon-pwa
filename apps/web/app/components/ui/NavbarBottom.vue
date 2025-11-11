@@ -42,7 +42,7 @@ import { useCustomer } from '~/composables/useCustomer';
 
 const localePath = useLocalePath();
 const route = useRoute();
-const { t } = useI18n();
+
 const { wishlistItemIds } = useWishlist();
 const { data: cart } = useCart();
 const { isAuthorized } = useCustomer();

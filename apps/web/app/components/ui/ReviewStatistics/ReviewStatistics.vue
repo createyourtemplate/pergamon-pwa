@@ -53,7 +53,7 @@ const props = defineProps<ReviewStatisticsProps>();
 
 const productId = Number(productGetters.getItemId(props.product));
 
-const { t } = useI18n();
+
 const { data: productReviews, openReviewModal } = useProductReviews(productId);
 const countsProductReviews = computed(() => reviewGetters.getReviewCounts(productReviews.value));
 

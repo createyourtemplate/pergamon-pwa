@@ -20,7 +20,7 @@ import { SfSelect } from '@storefront-ui/vue';
 import { isPageOfType } from '~/utils/pathHelper';
 
 const { updateSorting } = useCategoryFilter();
-const { t } = useI18n();
+
 const { getJsonSetting: availableSortingOptions } = useSiteSettings('availableSortingOptions');
 const { getSetting: defaultSortingSearch } = useSiteSettings('defaultSortingSearch');
 const { getSetting: defaultSortingOption } = useSiteSettings('defaultSortingOption');

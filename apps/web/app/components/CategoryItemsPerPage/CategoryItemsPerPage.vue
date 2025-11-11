@@ -29,7 +29,7 @@ import { defaults } from '~/composables';
 const props = defineProps<CategoryItemsPerPageProps>();
 
 const { updateItemsPerPage, getFacetsFromURL } = useCategoryFilter();
-const { t } = useI18n();
+
 
 const options = ref(
   defaults.PER_PAGE_STEPS.map((o: number) => ({ label: o.toString(), value: o.toString(), disabled: false })),

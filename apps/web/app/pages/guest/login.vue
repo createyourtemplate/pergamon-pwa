@@ -89,7 +89,7 @@ const { login, loading } = useCustomer();
 const { send } = useNotification();
 const { data: cart } = useCart();
 const { isAvailable, loadConfig, loadedConfig } = usePayPal();
-const { t } = useI18n();
+
 const localePath = useLocalePath();
 const NuxtLink = resolveComponent('NuxtLink');
 

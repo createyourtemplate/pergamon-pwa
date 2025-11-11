@@ -508,7 +508,7 @@ import draggable from 'vuedraggable/src/vuedraggable';
 const layoutOpen = ref(true);
 const textOpen = ref(true);
 const imageOpen = ref(true);
-const { t } = useI18n();
+
 
 const {
   learnMoreUrl,

@@ -22,5 +22,5 @@ definePageMeta({
   pageType: 'static',
   middleware: ['auth-guard'],
 });
-const { t } = useI18n();
+
 </script>

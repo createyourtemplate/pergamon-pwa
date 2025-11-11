@@ -23,7 +23,7 @@ const documents = computed(() => orderGetters.getDocuments(props.order));
 
 const { data, getDocument, downloadFile } = useOrderDocument();
 
-const { t } = useI18n();
+
 
 const translations = {
   correction_document: t('documents.correctionDocuments'),

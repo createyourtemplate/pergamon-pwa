@@ -2,9 +2,20 @@
   <NuxtLayout name="default">
     <div class="md:max-w-[677px] mx-auto px-4 pt-4 pb-20 md:px-0 md:mt-4">
       <h1 class="font-bold mb-10 typography-headline-3 md:typography-headline-2">
-        {{ t('contact.contact') }}
+        {{ t('contact.contact') }} "{{ t('shopModuleMollie.buy') }}" & "{{ t('numberInWishlist', { count: 12 }) }}"
       </h1>
       <p class="mb-10">{{ t('contact.contactShopMessage') }}</p>
+
+      <div @click="getMessages">Get messages</div>
+      <div @click="loadKeys">
+        {{ loading ? 'LÄDT' : 'WAs GHT' }}
+      </div>
+      <div v-for="(locale, i) in availableLocales.values()" :key="i">
+        {{locale}}: {{ getTranslatedCount(locale.toString()) }}
+      </div>
+      <div>
+        {{ keys }}
+      </div>
 
       <div
         v-if="turnstileSiteKey.length === 0"
@@ -164,7 +175,7 @@ definePageMeta({
   pageType: 'static',
 });
 
-const { t } = useI18n();
+const { availableLocales } = useI18n();
 const { loading: isContactLoading, doCustomerContactMail } = useCustomerContact();
 const localePath = useLocalePath();
 const { getSetting } = useSiteSettings('cloudflareTurnstileApiSiteKey');
@@ -172,6 +183,7 @@ const turnstileSiteKey = getSetting() ?? '';
 const turnstileElement = ref();
 const turnstileLoad = ref(false);
 const { send } = useNotification();
+const { loadKeys, loading, keys, getTranslatedCount } = useEditorLocalizationKeys();
 const { getRobots, setRobotForStaticPage } = useRobots();
 const { setPageMeta } = usePageMeta();
 
@@ -283,5 +295,10 @@ if (turnstileSiteKey.length > 0) {
       turnstileWatcher();
     }
   });
+}
+
+const getMessages = () => {
+  const { $i18n } = useNuxtApp();
+  console.log($i18n.messages);
 }
 </script>

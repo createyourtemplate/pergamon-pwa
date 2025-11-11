@@ -76,7 +76,7 @@ definePageMeta({
   middleware: ['auth-guard'],
 });
 const { isOpen, open, close } = useDisclosure();
-const { t } = useI18n();
+
 const lastActiveElement = ref();
 const modalElement = ref();
 const openedForm = ref('');

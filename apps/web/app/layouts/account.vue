@@ -101,7 +101,7 @@ import { paths } from '~/utils/paths';
 
 const localePath = useLocalePath();
 const viewport = useViewport();
-const { t } = useI18n();
+
 const router = useRouter();
 const { logout } = useCustomer();
 

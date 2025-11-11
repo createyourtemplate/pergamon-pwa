@@ -15,7 +15,7 @@
 import type { ShippingOptionItemProps } from './types';
 import { SfRadio } from '@storefront-ui/vue';
 
-const { t } = useI18n();
+
 const { format } = usePriceFormatter();
 const props = defineProps<ShippingOptionItemProps>();
 

@@ -36,7 +36,7 @@ const props = defineProps<{
 const route = useRoute();
 const { productParams } = createProductParams(route.params);
 const { buildProductLanguagePath } = useLocalization();
-const { t } = useI18n();
+
 
 const selectedUnit = ref(productParams?.variationId?.toString() || '');
 

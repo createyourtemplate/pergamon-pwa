@@ -40,6 +40,7 @@ export default defineNuxtConfig({
         '@intlify/shared',
         '@paypal/paypal-js',
         '@plentymarkets/shop-api',
+        '@plentymarkets/shop-module-mollie',
         '@plentymarkets/tailwind-colors',
         '@storefront-ui/shared',
         '@storefront-ui/vue',
@@ -274,6 +275,9 @@ export default defineNuxtConfig({
   },
   shopCore: {
     apiUrl: validateApiUrl(process.env.API_URL) ?? 'http://localhost:8181',
+    apiEndpoint: process.env.API_ENDPOINT,
+    securityToken: process.env.API_SECURITY_TOKEN,
+    configId: Number(process.env.CONFIG_ID) || 1,
   },
   shopModuleMollie: {
     checkoutUrl: paths.checkout,

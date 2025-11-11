@@ -150,7 +150,7 @@ const emit = defineEmits(['load']);
 const { addModernImageExtension, getImageForViewport } = useModernImage();
 const { data: cartData, setCartItemQuantity, deleteCartItem } = useCart();
 const { send } = useNotification();
-const { t } = useI18n();
+
 const { format } = usePriceFormatter();
 const localePath = useLocalePath();
 

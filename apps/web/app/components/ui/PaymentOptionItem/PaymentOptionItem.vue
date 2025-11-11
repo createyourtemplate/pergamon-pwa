@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import type { PaymentOptionItemProps } from './types';
-const { t } = useI18n();
+
 
 const props = defineProps<PaymentOptionItemProps>();
 </script>

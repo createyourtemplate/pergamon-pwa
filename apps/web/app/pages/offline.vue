@@ -118,7 +118,7 @@
 <script setup lang="ts">
 import { useOnline, whenever } from '@vueuse/core';
 
-const { t } = useI18n();
+
 const localePath = useLocalePath();
 const isOnline = useOnline();
 

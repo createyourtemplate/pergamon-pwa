@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { AddressType } from '@plentymarkets/shop-api';
 
-const { t } = useI18n();
+
 
 definePageMeta({
   layout: 'account',

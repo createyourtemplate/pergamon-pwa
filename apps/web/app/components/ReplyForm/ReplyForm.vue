@@ -53,7 +53,7 @@ const emits = defineEmits(['on-close']);
 
 const props = defineProps<ReplyFormProps>();
 
-const { t } = useI18n();
+
 const { currentProduct } = useProducts();
 const { createProductReview } = useProductReviews(
   Number(productGetters.getItemId(currentProduct.value)),

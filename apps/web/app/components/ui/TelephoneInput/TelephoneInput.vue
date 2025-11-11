@@ -47,7 +47,7 @@ const emit = defineEmits<{
   (e: 'validPhoneNumber', validation: PhoneValidationResult): void;
 }>();
 
-const { t } = useI18n();
+
 const localValue = ref(props.modelValue);
 
 watch(
