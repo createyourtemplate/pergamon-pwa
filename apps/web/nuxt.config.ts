@@ -270,6 +270,7 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     'nuxt-lazy-hydrate',
     'nuxt-viewport',
+    'nuxt-vitalizer',
     '@vee-validate/nuxt',
     '@vite-pwa/nuxt',
     'vuetify-nuxt-module',
@@ -357,6 +358,9 @@ export default defineNuxtConfig({
       sameSite: 'Strict',
       secure: true,
     },
+  },
+  vitalizer: {
+    disableStylesheets: 'entry'
   },
   veeValidate: {
     autoImports: false,
