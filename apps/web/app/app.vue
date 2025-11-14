@@ -131,3 +131,7 @@ const UnlinkCategoryModal = defineAsyncComponent(
   () => import('~/components/ui/UnlinkCategoryModal/UnlinkCategoryModal.vue'),
 );
 </script>
+
+<style lang="scss">
+@use "~/assets/scss/style.scss";
+</style>
