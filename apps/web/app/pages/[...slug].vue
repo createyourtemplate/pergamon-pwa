@@ -7,6 +7,8 @@
   >
     <SfLoaderCircular v-if="loading" class="fixed top-[50%] right-0 left-0 m-auto z-[99999]" size="2xl" />
 
+    <div>Moin</div>
+
     <template v-if="isBlockified">
       <EditablePage
         :has-enabled-actions="isBlockified"
