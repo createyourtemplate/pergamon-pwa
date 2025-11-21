@@ -1,4 +1,4 @@
-import { createResolver, defineNuxtModule } from "nuxt/kit";
+import { createResolver, defineNuxtModule, extendPages } from "nuxt/kit";
 
 export default defineNuxtModule({
     async setup(_, nuxt) {
