@@ -20,7 +20,7 @@
         as="image"
       >
         <NuxtImg
-          :src="imageUrl"
+          :src="lastImage?.urlPreview || imageUrl"
           :alt="imageAlt"
           :title="imageTitle ? imageTitle : null"
           :loading="lazy && !priority ? 'lazy' : 'eager'"
@@ -72,7 +72,7 @@
 
         <template v-if="key === 'rating' && configuration?.fields?.rating">
           <div class="flex items-center pt-1 gap-1" :class="{ 'mb-2': !shortDescription }">
-            <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
+            <SfRating class="!text-black" size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
             <SfCounter size="xs">{{ ratingCount }}</SfCounter>
           </div>
         </template>
@@ -168,7 +168,7 @@ import type { ItemGridContent } from '~/components/blocks/ItemGrid/types';
 
 const props = withDefaults(defineProps<ProductCardProps>(), {
   configuration: () => ({
-    cardBorders: false,
+    cardBorders: true,
     contentAlignment: 'left',
     fields: {
       rating: true,
@@ -216,6 +216,10 @@ const canAddFromCategory = computed(() => productGetters.canBeAddedToCartFromCat
 const cover = computed(() => productGetters.getCoverImage(product.value));
 const secondCover = computed(() => productGetters.getSecondCoverImage(product.value));
 const firstImage = computed(() => productImageGetters.getFirstImage(product.value));
+const lastImage = computed( () => {
+  const gallery = productGetters.getGallery(product.value);
+  return gallery.length ? gallery[gallery.length - 1] : null;
+});
 
 const imageUrl = computed(() => addModernImageExtension(cover.value));
 const effectiveHoverImageUrl = computed(() => {

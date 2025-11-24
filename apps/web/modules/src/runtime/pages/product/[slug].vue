@@ -1,9 +1,12 @@
 <template>
   <NuxtLayout name="default" :breadcrumbs="breadcrumbs">
-    <EditablePage v-if="config.enableProductEditing" :identifier="'0'" :type="'product'" prevent-blocks-request />
+    <!--<EditablePage v-if="config.enableProductEditing" :identifier="'0'" :type="'product'" prevent-blocks-request />-->
 
-    <NarrowContainer v-else>
-      <div class="md:grid gap-x-6 grid-areas-product-page grid-cols-product-page">
+    <NarrowContainer>
+      <div class="hidden lg:block mb-7">
+        <span class="text-[40px] font-[CormorantGaramond]">Color</span>
+      </div>
+      <div class="lg:grid gap-x-6 grid-areas-product-page grid-cols-product-page">
         <section v-if="viewport.isLessOrEquals('md')" class="grid-in-left-top md:h-full xl:max-h-[1200px]">
           <Gallery :images="addModernImageExtensionForGallery(productGetters.getGallery(product))" />
         </section>
@@ -12,34 +15,48 @@
             <div
               v-for="(image, index) in addModernImageExtensionForGallery(productGetters.getGallery(product))" 
               :key="image.cleanImageName + index" 
-              class="relative m-2"
-              :class="{'pb-[100%] w-full': index == 0, 'pb-[50%] w-[calc(50%_-_1rem)]': index > 0}">
+              class="relative"
+              :class="{'pb-[100%] w-full': index == 0, 'm-2 pb-[50%] w-[calc(50%_-_1rem)]': index > 0}">
               <NuxtImg :src="image.urlMiddle" class="absolute w-full" />
             </div>
           </div>
         </section>
-        <section class="mb-10 grid-in-right md:mb-0">
-          <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
-          <NuxtLazyHydrate when-visible>
-            <ProductAccordion v-if="product" :product="product" class="mt-10" />
-          </NuxtLazyHydrate>
+        <section class="mb-7 lg:mb-10 grid-in-right">
+          <div class="md:sticky top-0">
+            <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
+            <NuxtLazyHydrate when-visible>
+                <ProductAccordion v-if="product" :product="product" class="mt-3 md:mt-7" />
+            </NuxtLazyHydrate>
+            <div class="w-full hover:bg-neutral-100 py-2 px-2 flex justify-between items-center select-none list-none [&::-webkit-details-marker]:hidden cursor-pointer focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm">
+                <p class="text-sm leading-6 cursor-pointer" data-testid="open-manufacturer-drawer" @click="openDrawer()">
+                    <span>{{ t('legalDetails') }}</span>
+                </p>
+                <SfIconAdd size="sm" class="text-neutral-500"/>
+            </div>
+            <UiDivider class="my-1 !border-black" />
+          </div>
         </section>
       </div>
-      <section class="md:mt-10">
+      <section v-if="reviewGetters.getTotalReviews(countsProductReviews) > 0">
         <ReviewsAccordion
           v-if="product"
           :product="product"
           :total-reviews="reviewGetters.getTotalReviews(countsProductReviews)"
         />
-
-        <div class="p-4 flex">
-          <p class="font-bold leading-6 cursor-pointer" data-testid="open-manufacturer-drawer" @click="openDrawer()">
-            <span>{{ t('legalDetails') }}</span>
-            <SfIconChevronRight />
-          </p>
-        </div>
       </section>
-      <section ref="recommendedSection" class="mx-4 mt-28 mb-20">
+      <section v-if="crossSellingItemsSimilar?.products?.length > 0" ref="similarItems" class="p-3 mb-20" :class="{'mt-7 lg:mt-10': reviewGetters.getTotalReviews(countsProductReviews) > 0}">
+        <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
+          <span>Ähnliche Artikel</span>
+        </div>
+        <ProductSlider
+          v-if="crossSellingItemsSimilar"
+          :items="crossSellingItemsSimilar.products"
+        />
+      </section>
+      <section ref="recommendedSection" class="p-3 mb-20" :class="{'mt-7 lg:mt-10': reviewGetters.getTotalReviews(countsProductReviews) > 0 || crossSellingItemsSimilar?.products?.length <= 0}">
+        <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
+          <span>Das könnte Ihnen auch gefallen</span>
+        </div>
         <component
           :is="RecommendedProductsAsync"
           v-if="showRecommended"
@@ -47,14 +64,13 @@
         />
       </section>
     </NarrowContainer>
-
     <UiReviewModal />
     <ProductLegalDetailsDrawer v-if="open" :product="product" />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { SfIconChevronRight } from '@storefront-ui/vue';
+import { SfIconAdd } from '@storefront-ui/vue';
 import type { Product } from '@plentymarkets/shop-api';
 import { productGetters, reviewGetters, categoryTreeGetters } from '@plentymarkets/shop-api';
 
@@ -192,6 +208,15 @@ const observeRecommendedSection = () => {
     observer.observe(recommendedSection.value);
   }
 };
+
+const { fetchProducts: fetchCrossSelling, data: crossSellingItemsSimilar } =
+  useProducts(productId + "Similar");
+
+fetchCrossSelling({
+  itemId: productGetters.getItemId(product.value),
+  type: "cross_selling",
+  crossSellingRelation: "Similar",
+});
 
 onNuxtReady(() => observeRecommendedSection());
 </script>

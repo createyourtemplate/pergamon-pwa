@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center w-full py-1">
-    <div class="mr-3 font-bold leading-none text-2xl" data-testid="price">
+    <div class="mr-3 font-bold leading-none text-lg lg:text-2xl" data-testid="price">
       <span>{{ format(price) }}</span>
     </div>
-    <div v-if="crossedPrice && differentPrices" class="font-normal leading-none text-red-500 line-through text-2xl">
+    <div v-if="crossedPrice && differentPrices" class="font-normal leading-none text-red-500 line-through text-lg lg:text-2xl">
       {{ format(crossedPrice) }}
     </div>
-    <div v-if="crossedPrice && differentPrices" class="ml-auto leading-none font-normal text-white bg-red-500 px-2 py-1.5 text-lg">
+    <div v-if="crossedPrice && differentPrices" class="ml-auto leading-none font-normal text-white bg-red-500 px-2 py-1.5 lg:text-lg">
       {{ Math.round(100 - crossedPrice/(price/100)) }}%
     </div>
   </div>

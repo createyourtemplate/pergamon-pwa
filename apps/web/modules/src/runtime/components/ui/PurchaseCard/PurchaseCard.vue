@@ -8,10 +8,10 @@
   >
     <div class="relative">
       <div class="drift-zoom-image">
-        <section class="p-4 xl:p-0">
+        <section class="mt-3 sm:mt-5 lg:mt-0 p-3 md:p-0">
           <template v-for="key in configuration?.fieldsOrder" :key="key">
             <template v-if="key === 'itemName' && configuration?.fields.itemName">
-              <h1 class="typography-headline-4 break-word !font-[CormorantGaramond] !text-3xl" data-testid="product-name">
+              <h1 class="typography-headline-4 break-word !font-[CormorantGaramond] mt-2 !text-2xl !lg:text-3xl" data-testid="product-name">
                 {{ productGetters.getName(product) }}
               </h1>
             </template>
@@ -35,50 +35,71 @@
                 :unit-name="productGetters.getUnitName(product)"
               />
             </template>
-            <div v-if="key === 'price' && configuration?.fields.price" class="typography-text-xs flex gap-1">
-              <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
-              <i18n-t keypath="excludedShipping" scope="global">
-                <template #shipping>
-                  <SfLink
-                    :href="localePath(paths.shipping)"
-                    target="_blank"
-                    class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
-                  >
-                    {{ t('delivery') }}
-                  </SfLink>
-                </template>
-              </i18n-t>
+            <div v-if="key === 'price' && configuration?.fields.price" class="flex lg:block gap-1 mt-1 mb-6 lg:mb-10">
+              <div class="typography-text-xs inline-block lg:flex gap-1">
+                <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
+                <i18n-t keypath="excludedShipping" scope="global">
+                  <template #shipping>
+                    <SfLink
+                      :href="localePath(paths.shipping)"
+                      target="_blank"
+                      class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
+                    >
+                      {{ t('delivery') }}
+                    </SfLink>
+                  </template>
+                </i18n-t>
+              </div>
+              <template v-if="productGetters.getAvailabilityName(product)">
+                <div class="inline-flex text-xs ml-auto lg:mt-1"><span>Lieferzeit</span><!----><span class="font-bold">{{ productGetters.getAvailabilityName(product) }}</span></div>
+              </template>
             </div>
             <template v-if="key === 'tags' && configuration?.fields.tags">
               <UiBadges class="mb-2" :product="product" :use-availability="false" :use-tags="true" />
             </template>
-            <template v-if="key === 'availability' && configuration?.fields.availability && productGetters.getAvailabilityName(product)">
-              <div class="text-xs mt-1"><span>Lieferzeit</span> <span class="font-bold">{{ productGetters.getAvailabilityName(product) }}</span></div>
-            </template>
             <template v-if="key === 'variationProperties' && configuration?.fields.variationProperties">
-              <div class="mt-10 variation-properties">
+              <div class="variation-properties">
                 <VariationProperties :product="product" />
               </div>
             </template>
-            <template v-if="key === 'starRating' && configuration?.fields.starRating">
-              <div class="inline-flex items-center mb-2">
-                <SfRating
-                  size="xs"
-                  :half-increment="true"
-                  :value="reviewGetters.getAverageRating(reviewAverage, 'half')"
-                  :max="5"
-                />
-                <span class="text-xs font-bold ml-1">{{ reviewGetters.getAverageRating(reviewAverage)  }} von 5</span>
-                <UiButton
-                  variant="tertiary"
-                  class="ml-1 text-xs !px-2 leading-none text-neutral-500 cursor-pointer"
-                  data-testid="show-reviews"
-                  @click="scrollToReviews"
+            <div v-if="key === 'starRating'" class="flex items-center justify-between">
+                <div class="inline-flex items-center mb-2">
+                  <SfRating
+                    size="xs"
+                    :half-increment="true"
+                    :value="reviewGetters.getAverageRating(reviewAverage, 'half')"
+                    :max="5"
+                    class="!text-black leading-none"
+                  />
+                  <span class="text-sm font-bold ml-2 mr-0.5">{{ reviewGetters.getAverageRating(reviewAverage)  }} von 5</span>
+                  <UiButton
+                    v-if="reviewGetters.getTotalReviews(reviewAverage) > 0"
+                    variant="tertiary"
+                    class="text-sm !px-2 leading-none text-neutral-500 cursor-pointer"
+                    data-testid="show-reviews"
+                    @click="scrollToReviews"
+                  >
+                    {{ reviewGetters.getTotalReviews(reviewAverage) }} {{ t('showAllReviews') }}
+                  </UiButton>
+                </div>
+                <div
+                  class="inline-flex items-center"
+                  :class="{ 'justify-center': configuration?.wishlistSize === 'large' }"
                 >
-                  {{ reviewGetters.getTotalReviews(reviewAverage) }} {{ t('showAllReviews') }}
-                </UiButton>
-              </div>
-            </template>
+                  <WishlistButton
+                    :variant="configuration?.wishlistSize === 'small' ? 'tertiary' : 'secondary'"
+                    :product="product"
+                    :quantity="quantitySelectorValue"
+                    :square="viewport.isLessThan('lg')"
+                    class="!m-0 !mb-2"
+                    :class="{
+                      'mr-2 mb-2 bg-white': viewport.isLessThan('lg'),
+                      'w-full': configuration?.wishlistSize === 'large',
+                      '!p-0 hover:bg-transparent active:bg-transparent': configuration?.wishlistSize === 'small',
+                    }"
+                  />
+                </div>
+            </div>
             <template v-if="key === 'previewText' && configuration?.fields.previewText">
               <div
                 v-if="productGetters.getShortDescription(product).length > 0"
@@ -86,34 +107,6 @@
                 data-testid="product-description"
                 v-html="productGetters.getShortDescription(product)"
               />
-            </template>
-
-            <template v-if="key === 'addToWishlist' && configuration?.fields.addToWishlist">
-              <div
-                class="flex items-center mt-2"
-                :class="{ 'justify-center': configuration?.wishlistSize === 'large' }"
-              >
-                <WishlistButton
-                  :variant="configuration?.wishlistSize === 'small' ? 'tertiary' : 'secondary'"
-                  :product="product"
-                  :quantity="quantitySelectorValue"
-                  :square="viewport.isLessThan('lg')"
-                  class="!m-0 !mb-2"
-                  :class="{
-                    'mr-2 mb-2 bg-white': viewport.isLessThan('lg'),
-                    'w-full': configuration?.wishlistSize === 'large',
-                    '!p-0 hover:bg-transparent active:bg-transparent': configuration?.wishlistSize === 'small',
-                  }"
-                >
-                  <div>
-                    {{
-                      !isWishlistItem(productGetters.getVariationId(product))
-                        ? t('addToWishlist')
-                        : t('removeFromWishlist')
-                    }}
-                  </div>
-                </WishlistButton>
-              </div>
             </template>
 
             <template v-if="key === 'attributes' && configuration?.fields.attributes">
@@ -210,7 +203,7 @@
 
 <script setup lang="ts">
 import { productGetters, reviewGetters, productBundleGetters } from '@plentymarkets/shop-api';
-import { SfRating, SfIconShoppingCart, SfLoaderCircular, SfTooltip, SfLink } from '@storefront-ui/vue';
+import { SfRating, SfLoaderCircular, SfTooltip, SfLink } from '@storefront-ui/vue';
 import type { PriceCardPadding, PurchaseCardProps } from '~/components/ui/PurchaseCard/types';
 import type { PayPalAddToCartCallback } from '~/components/PayPal/types';
 import { paths } from '~/utils/paths';

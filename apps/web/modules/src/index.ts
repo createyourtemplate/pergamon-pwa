@@ -48,11 +48,6 @@ export default defineNuxtModule({
                 header.filePath = resolve('./runtime/components/ui/Header/Header.vue');
             }
 
-            const footer = components.find((c) => c.pascalName === 'Footer');
-            if (footer) {
-                footer.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
-            }
-
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
             if (productCard) {
                 productCard.filePath = resolve('./runtime/components/ui/ProductCard/ProductCard.vue');
