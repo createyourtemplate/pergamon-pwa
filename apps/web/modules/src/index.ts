@@ -1,4 +1,4 @@
-import { createResolver, defineNuxtModule, extendPages } from "nuxt/kit";
+import { createResolver, defineNuxtModule, extendPages, addComponent } from "nuxt/kit";
 
 export default defineNuxtModule({
     async setup(_, nuxt) {
@@ -10,6 +10,16 @@ export default defineNuxtModule({
                 name: 'default',
                 file: resolve('./runtime/layouts/defaultLayout.vue'),
             };
+        });
+
+        await addComponent({
+            name: 'SelectedFilters',
+            filePath: resolve('./runtime/components/Filter/SelectedFilters.vue'),
+        });
+
+        await addComponent({
+            name: 'SelectedFilter',
+            filePath: resolve('./runtime/components/Filter/SelectedFilter.vue'),
         });
 
         /**
@@ -72,9 +82,26 @@ export default defineNuxtModule({
             if (accordionItem) {
                 accordionItem.filePath = resolve('./runtime/components/ui/AccordionItem/AccordionItem.vue');
             }
+
+            // WishListButton
+            const wishlistButton = components.find((c) => c.pascalName === 'WishlistButton');
+            if (wishlistButton) {
+                wishlistButton.filePath = resolve('./runtime/components/WishlistButton/WishlistButton.vue');
+            }
+
+            const pagination = components.find((c) => c.pascalName === 'UiPagination');
+            if (pagination) {
+                pagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
+            }
         });
 
         extendPages((pages: NuxtPage[]) => {
+
+            // Homepage
+            const overrideHomePage = pages.find((p) => p.name === 'index');
+            if (overrideHomePage) {
+                overrideHomePage.file = resolve('./runtime/pages/homepage/indexCyt.vue');
+            }
 
             // ProductPage
             const productPage = pages.find((p) => p.name === 'product-slug');

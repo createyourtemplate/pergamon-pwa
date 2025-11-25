@@ -2,7 +2,7 @@
   <NuxtLayout name="default" :breadcrumbs="breadcrumbs">
     <!--<EditablePage v-if="config.enableProductEditing" :identifier="'0'" :type="'product'" prevent-blocks-request />-->
 
-    <NarrowContainer>
+    <NarrowContainer class="lg:max-w-full">
       <div class="hidden lg:block mb-7">
         <span class="text-[40px] font-[CormorantGaramond]">Color</span>
       </div>

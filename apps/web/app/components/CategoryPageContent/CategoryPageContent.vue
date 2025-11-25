@@ -48,7 +48,7 @@
               :image-title="productImageGetters.getImageName(productImageGetters.getFirstImage(product)) || ''"
               :image-height="productGetters.getImageHeight(product) || 600"
               :image-width="productGetters.getImageWidth(product) || 600"
-              :slug="productGetters.getSlug(product) + `-${productGetters.getId(product)}`+ `_${productGetters.getVariationId(product)}`"
+              :slug="productGetters.getSlug(product) + `-${productGetters.getId(product)}`"
               :priority="index < 5"
               :base-price="productGetters.getDefaultBasePrice(product)"
               :unit-content="productGetters.getUnitContent(product)"

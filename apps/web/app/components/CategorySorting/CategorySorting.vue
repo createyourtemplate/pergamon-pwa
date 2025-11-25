@@ -1,14 +1,14 @@
 <template>
-  <div class="w-full" data-testid="category-sorting">
+  <div class="w-full lg:w-auto lg:ml-auto lg:mb-0" data-testid="category-sorting">
     <h6
       v-if="!selectionModeCompact"
-      class="bg-primary-50/50 mb-4 px-4 py-2 rounded-none uppercase typography-headline-6 font-bold tracking-widest select-none"
+      class="bg-primary-50/50 mb-4 px-4 py-2 rounded-none uppercase typography-headline-6 font-bold tracking-widest select-none lg:hidden"
     >
       {{ t('sortBy') }}
     </h6>
 
-    <div class="px-4">
-      <SfSelect id="sortBy" v-model="selected" :aria-label="t('sortBy')" data-testid="select-sort-by">
+    <div class="px-4 lg:px-0">
+      <SfSelect id="sortBy" v-model="selected" :aria-label="t('sortBy')" data-testid="select-sort-by" class="!lg:border-none lg:ring-0 text-base">
         <option v-if="selectionModeCompact" value="" disabled hidden>{{ t('sortBy') }}</option>
         <option v-for="option in options" :key="option" :value="option">
           {{ t(`sortType.${option}`) }}

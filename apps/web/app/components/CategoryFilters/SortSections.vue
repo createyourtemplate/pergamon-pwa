@@ -1,16 +1,16 @@
 <template>
-  <div v-if="shouldRenderFacet">
+  <div class="lg:relative" v-if="shouldRenderFacet">
     <SfAccordionItem v-if="facet" v-model="open">
       <template #summary>
-        <div class="flex justify-between py-1 px-4 mb-2 select-none bg-primary-50/50">
-          <h6 class="py-1 rounded-none uppercase typography-headline-6 font-bold tracking-widest select-none">
+        <div class="flex justify-between items-center py-1 px-4 mb-2 lg:px-2 lg:mb-0 select-none lg:bg-[#f7f7f7]" tabindex="0" @mouseleave="open = false">
+          <h5 class="py-1 rounded-none typography-headline-5 tracking-widest select-none">
             {{ facetGetters.getName(facet) }}
-          </h6>
+          </h5>
 
           <SfIconChevronLeft :class="['text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
         </div>
       </template>
-      <div v-if="facetGetters.getType(facet) === 'feedback'">
+      <div v-if="facetGetters.getType(facet) === 'feedback'" class="lg:absolute lg:shadow-md lg:bg-[#f7f7f7] lg:min-w-[250px]">
         <SfListItem v-for="(filter, index) in sortedReviews(facet)" :key="index" tag="label" class="mb-3" size="sm">
           <div class="flex items-center space-x-2">
             <span class="pt-1 flex items-center">
@@ -39,7 +39,7 @@
         </SfListItem>
       </div>
 
-      <form v-else-if="facetGetters.getType(facet) === 'price'" class="mb-4 px-4" @submit.prevent="updatePriceFilter">
+      <form v-else-if="facetGetters.getType(facet) === 'price'" class="lg:absolute lg:shadow-md lg:bg-[#f7f7f7] lg:min-w-[250px] mb-4 px-4" @submit.prevent="updatePriceFilter">
         <div class="mb-3">
           <label for="min">
             <UiFormLabel class="text-start">{{ t('min') }}</UiFormLabel>
@@ -70,7 +70,31 @@
         </div>
       </form>
 
-      <div v-else class="mb-3">
+      <div v-else-if="facetGetters.getName(facet) == 'Farbe'" class="lg:absolute lg:shadow-md lg:bg-[#f7f7f7] lg:min-w-[250px] px-2" @mouseover="open = true" @mouseleave="open = false">
+        <SfListItem
+          v-for="(filter, index) in facetGetters.getFilters(facet)"
+          :key="index"
+          tag="label"
+          size="sm"
+          :data-testid="'category-filter-' + index"
+          class="!px-1.5 bg-transparent hover:bg-transparent !gap-0 !w-auto"
+        >
+          <template #prefix>
+            <SfCheckbox
+              :id="filter.id"
+              v-model="models[filter.id]"
+              :value="filter"
+              class="flex items-center mb-2 hidden"
+              @change="facetChange"
+            />
+          </template>
+          <p class="mb-2 w-10 h-10 border border-gray-300 text-white" :style="`background-color: ${filter.cssClass}`">
+            <span class="hidden">{{ filter.name }}</span>
+          </p>
+        </SfListItem>
+      </div>
+
+      <div v-else class="lg:absolute lg:shadow-md lg:bg-[#f7f7f7] lg:min-w-[250px]" @mouseover="open = true" @mouseleave="open = false">
         <SfListItem
           v-for="(filter, index) in facetGetters.getFilters(facet)"
           :key="index"
@@ -84,11 +108,11 @@
               :id="filter.id"
               v-model="models[filter.id]"
               :value="filter"
-              class="flex items-center"
+              class="flex items-center mb-2"
               @change="facetChange"
             />
           </template>
-          <p class="select-none">
+          <p class="select-none mb-2">
             <span class="mr-2 text-sm">{{ filter.name ?? '' }}</span>
             <SfCounter size="sm">{{ filter.count ?? 0 }}</SfCounter>
           </p>
@@ -118,7 +142,7 @@ import type { SortFilterContent } from '~/components/blocks/SortFilter/types';
 const { getFacetsFromURL, updateFilters, updatePrices } = useCategoryFilter();
 const { t } = useI18n();
 
-const open = ref(true);
+const open = ref(false);
 const props = defineProps<FilterProps>();
 const filters = facetGetters.getFilters(props.facet ?? ({} as FilterGroup)) as Filter[];
 const models = ref({} as Filters);
@@ -134,6 +158,10 @@ const updatePriceFilter = () => {
   const maxValue = Number.isNaN(max) ? '' : max.toString();
 
   updatePrices(minValue, maxValue);
+};
+
+const close = () => {
+  open.value = false;
 };
 
 const resetPriceFilter = () => {
