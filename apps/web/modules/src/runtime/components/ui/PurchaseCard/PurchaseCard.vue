@@ -16,7 +16,7 @@
               </h1>
             </template>
             <template v-if="key === 'price' && configuration?.fields.price">
-              <div class="flex space-x-2 mt-4">
+              <div class="flex space-x-2 mt-4 lg:mt-2">
                 <Price :price="priceWithProperties" :crossed-price="crossedPrice" />
                 <div
                   v-if="(productBundleGetters?.getBundleDiscount(product) ?? 0) > 0 && showBundleComponents"

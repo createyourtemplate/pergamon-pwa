@@ -7,7 +7,7 @@
     <div class="relative overflow-hidden">
       <UiBadges
         :use-tags="useTagsOnCategoryPage"
-        :class="['absolute', isFromWishlist ? 'mx-2' : 'm-2']"
+        :class="['absolute', isFromWishlist ? 'hidden mx-2' : 'm-2']"
         :product="product"
         :use-availability="isFromWishlist"
       />
@@ -81,7 +81,7 @@
           <SfLink
             :tag="NuxtLink"
             :to="productPath"
-            class="no-underline"
+            class="no-underline text-sm mt-4"
             variant="secondary"
             data-testid="productcard-name"
           >

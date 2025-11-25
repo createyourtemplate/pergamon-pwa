@@ -74,6 +74,10 @@
       </template>
       {{ t('listSettings') }}
     </UiButton>
+
+    <div v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)" class="mt-3">
+      <SelectedFilters :facets="productsCatalog.facets" />
+    </div>
   </div>
 
   <template v-else>

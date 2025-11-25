@@ -1,7 +1,7 @@
 <template>
   <div>
     <UiHeader />
-    <NarrowContainer v-if="breadcrumbs?.length" class="p-4 md:px-0 hidden md:block">
+    <NarrowContainer v-if="breadcrumbs?.length" class="lg:max-w-full p-4 md:px-0 hidden md:block">
       <LazyUiBreadcrumbs :breadcrumbs="breadcrumbs" />
     </NarrowContainer>
     <main>

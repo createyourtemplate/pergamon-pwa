@@ -26,7 +26,7 @@
             <div
               ref="triggerReference"
               data-testid="category-button"
-              class="inline-flex items-center justify-center gap-2 font-medium text-base rounded-md py-2 px-4 group mr-2 !text-neutral-900 hover:bg-secondary-100 hover:!text-neutral-700 active:!bg-neutral-300 active:!text-neutral-900 cursor-pointer"
+              class="inline-flex items-center justify-center gap-2 font-medium text-lg rounded-md py-2 px-4 group mr-2 !text-neutral-900 hover:bg-secondary-100 hover:!text-neutral-700 active:!bg-neutral-300 active:!text-neutral-900 cursor-pointer"
               @click="onCategoryTap(menuNode)"
             >
               <template v-if="menuNode.childCount > 0">
