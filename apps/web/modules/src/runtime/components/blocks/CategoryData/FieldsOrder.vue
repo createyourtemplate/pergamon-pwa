@@ -1,14 +1,18 @@
 <template>
   <template v-for="key in renderOrder" :key="key">
     <template v-if="fields?.[key]">
-      <h1
-        v-if="key === 'name' && texts.name"
-        id="category-headline"
-        class="font-bold typography-headline-3 md:typography-headline-2"
-        data-testid="category-name"
-      >
-        {{ texts.name }}
-      </h1>
+      <div v-if="key === 'name' && texts.name" class="mb-6" :class="{'flex items-end md:justify-between': totalCounts > 0}">
+        <h1
+          id="category-headline"
+          class="!font-[CormorantGaramond] text-2xl lg:text-[40px] md:typography-headline-2 pl-4 pr-2 md:px-0"
+          data-testid="category-name"
+        >
+          {{ texts.name }}
+        </h1>
+        <div v-if="totalCounts > 0">
+          <span class="text-sm md:text-2xl">{{ totalCounts }} Artikel</span>
+        </div>
+      </div>
 
       <div
         v-else-if="key === 'description1' && texts.description1"
@@ -43,6 +47,7 @@ const props = defineProps<{
   fields: CategoryDataFieldsVisibility;
   fieldsOrder: CategoryDataFieldKey[];
   texts: CategoryData;
+  totalCounts: number;
 }>();
 
 const renderOrder = computed<CategoryDataFieldKey[]>(() =>

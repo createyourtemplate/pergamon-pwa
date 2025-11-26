@@ -69,7 +69,7 @@
                     :half-increment="true"
                     :value="reviewGetters.getAverageRating(reviewAverage, 'half')"
                     :max="5"
-                    class="!text-black leading-none"
+                    class="!text-black leading-none [&>svg]:-ml-0.5"
                   />
                   <span class="text-sm font-bold ml-2 mr-0.5">{{ reviewGetters.getAverageRating(reviewAverage)  }} von 5</span>
                   <UiButton
@@ -91,13 +91,14 @@
                     :product="product"
                     :quantity="quantitySelectorValue"
                     :square="viewport.isLessThan('lg')"
-                    class="!m-0 !mb-2"
+                    class="!m-0"
                     :class="{
-                      'mr-2 mb-2 bg-white': viewport.isLessThan('lg'),
+                      'mr-2 bg-white': viewport.isLessThan('lg'),
                       'w-full': configuration?.wishlistSize === 'large',
                       '!p-0 hover:bg-transparent active:bg-transparent': configuration?.wishlistSize === 'small',
                     }"
                   />
+                  <ItemShare :name="productGetters.getName(product)" class="ml-2" />
                 </div>
             </div>
             <template v-if="key === 'previewText' && configuration?.fields.previewText">

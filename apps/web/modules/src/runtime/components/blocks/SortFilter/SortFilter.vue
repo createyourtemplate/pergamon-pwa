@@ -68,12 +68,16 @@
       </template>
     </CategorySidebar>
 
-    <UiButton variant="tertiary" class="md:hidden whitespace-nowrap" @click="open">
+    <UiButton variant="primary" class="md:hidden fixed !rounded-none bottom-0 left-0 right-0 whitespace-nowrap z-40" @click="open">
       <template #prefix>
         <SfIconTune />
       </template>
       {{ t('listSettings') }}
     </UiButton>
+
+    <div v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)" class="mt-3">
+      <SelectedFilters :facets="productsCatalog.facets" />
+    </div>
   </div>
 
   <template v-else>

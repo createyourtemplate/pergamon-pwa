@@ -1,8 +1,18 @@
-import { createResolver, defineNuxtModule, extendPages, addComponent } from "nuxt/kit";
+import { createResolver, defineNuxtModule, extendPages, addComponent, addPlugin } from "nuxt/kit";
 
 export default defineNuxtModule({
     async setup(_, nuxt) {
         const {resolve} = createResolver(import.meta.url);
+
+        // H1 Font-Styling Plugin hinzufügen
+        addPlugin(resolve('./runtime/plugins/h1-font-styling.client.ts'));
+
+        nuxt.hook('tailwindcss:config', (config) => {
+            // Colors
+            if (config?.theme?.extend?.colors) {
+                 config.theme.extend.colors['pergamon'] = { 'gray': '#f7f7f7' };
+            }
+        });
         
         nuxt.hook('app:resolve', (app) => {
             // default
@@ -13,6 +23,11 @@ export default defineNuxtModule({
         });
 
         await addComponent({
+            name: 'MyImage',
+            filePath: resolve('./runtime/components/blocks/MyImage/MyImage.vue'),
+        });
+
+        await addComponent({
             name: 'SelectedFilters',
             filePath: resolve('./runtime/components/Filter/SelectedFilters.vue'),
         });
@@ -20,6 +35,11 @@ export default defineNuxtModule({
         await addComponent({
             name: 'SelectedFilter',
             filePath: resolve('./runtime/components/Filter/SelectedFilter.vue'),
+        });
+
+        await addComponent({
+            name: 'ItemShare',
+            filePath: resolve('./runtime/components/ItemShare/ItemShare.vue'),
         });
 
         /**
@@ -89,6 +109,36 @@ export default defineNuxtModule({
                 wishlistButton.filePath = resolve('./runtime/components/WishlistButton/WishlistButton.vue');
             }
 
+            const categorySidebar = components.find((c) => c.pascalName === 'CategorySidebar');
+            if (categorySidebar) {
+                categorySidebar.filePath = resolve('./runtime/components/CategorySidebar/CategorySidebar.vue');
+            }
+
+            const categoryFiltersSort = components.find((c) => c.pascalName === 'CategoryFiltersSort');
+            if (categoryFiltersSort) {
+                categoryFiltersSort.filePath = resolve('./runtime/components/CategoryFilters/Sort.vue');
+            }
+
+            const categoryFiltersSortSections = components.find((c) => c.pascalName === 'CategoryFiltersSortSections');
+            if (categoryFiltersSortSections) {
+                categoryFiltersSortSections.filePath = resolve('./runtime/components/CategoryFilters/SortSections.vue');
+            }
+
+            const categorySorting = components.find((c) => c.pascalName === 'CategorySorting');
+            if (categorySorting) {
+                categorySorting.filePath = resolve('./runtime/components/CategorySorting/CategorySorting.vue');
+            }
+
+            const categoryData = components.find((c) => c.pascalName === 'CategoryData');
+            if (categoryData) {
+                categoryData.filePath = resolve('./runtime/components/blocks/CategoryData/CategoryData.vue');
+            }
+
+            const sortFilter = components.find((c) => c.pascalName === 'SortFilter');
+            if (sortFilter) {
+                sortFilter.filePath = resolve('./runtime/components/blocks/SortFilter/SortFilter.vue');
+            }
+
             const pagination = components.find((c) => c.pascalName === 'UiPagination');
             if (pagination) {
                 pagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
@@ -97,16 +147,16 @@ export default defineNuxtModule({
 
         extendPages((pages: NuxtPage[]) => {
 
-            // Homepage
-            const overrideHomePage = pages.find((p) => p.name === 'index');
-            if (overrideHomePage) {
-                overrideHomePage.file = resolve('./runtime/pages/homepage/indexCyt.vue');
-            }
-
             // ProductPage
             const productPage = pages.find((p) => p.name === 'product-slug');
             if (productPage) {
                 productPage.file = resolve('./runtime/pages/product/[slug].vue');
+            }
+            
+            // ProductPage
+            const generalPage = pages.find((p) => p.name === 'slug');
+            if (generalPage) {
+                generalPage.file = resolve('./runtime/pages/[...slug].vue');
             }
         });
     }

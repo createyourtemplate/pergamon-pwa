@@ -7,8 +7,8 @@
         ? t('removeProductFromWishlist', { label: productName })
         : t('addProductToWishlist', { label: productName })
     "
-    :class="{ 'p-[0.5rem]': !isCloseButton, '!bg-black bottom-0 !top-auto rounded-none': isCloseButton }"
-    class="m-2"
+    :class="{ 'p-[0.25rem]': !isCloseButton, '!bg-black bottom-0 !top-auto rounded-none': isCloseButton }"
+    class="m-2 !ring-0"
     :disabled="wishlistLoading"
     data-testid="wishlist-trigger"
     @click="onWishlistClick"
