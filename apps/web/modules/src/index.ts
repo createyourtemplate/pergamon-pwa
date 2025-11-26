@@ -61,11 +61,11 @@ export default defineNuxtModule({
             //HomePage
             const homePage = pages.find((p) => p.name === 'index');
             if (homePage) {
-                homePage.file = resolve('./runtime/pages/HomePage/indexCyt.vue');
+                homePage.file = resolve('./runtime/pages/homepage/indexCyt.vue');
             }
 
             // ProductPage
-            const productPage = pages.find((p) => p.name === 'product-slug');
+            const productPage = pages.find((p) => p.name === 'product-sslug');
             if (productPage) {
                 productPage.file = resolve('./runtime/pages/product/[slug].vue');
             }
