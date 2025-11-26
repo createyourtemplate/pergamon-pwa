@@ -6,7 +6,7 @@
     <div v-if="crossedPrice && differentPrices" class="font-normal leading-none text-red-500 line-through text-lg lg:text-2xl">
       {{ format(crossedPrice) }}
     </div>
-    <div v-if="crossedPrice && differentPrices" class="ml-auto leading-none font-normal text-white bg-red-500 px-2 py-1.5 lg:text-lg">
+    <div v-if="crossedPrice && differentPrices" class="ml-auto leading-none font-normal text-white bg-red-500 px-2 py-1 lg:text-lg">
       {{ Math.round(100 - crossedPrice/(price/100)) }}%
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-md hover:shadow-lg flex flex-col"
+    class="rounded-md flex flex-col"
     data-testid="product-card"
     :class="{ 'border border-neutral-200': configuration?.cardBorders }"
   >
@@ -53,7 +53,7 @@
         <slot name="wishlistButton">
           <WishlistButton
             square
-            class="absolute bottom-0 right-0 mr-2 mb-2 bg-white ring-1 ring-inset ring-neutral-200 !rounded-full"
+            class="absolute bottom-0 right-0 mr-2 mb-2 bg-white !rounded-full"
             :product="product"
           />
         </slot>
@@ -61,7 +61,7 @@
     </div>
 
     <div
-      class="p-2 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto"
+      class="py-2 typography-text-sm flex flex-col flex-auto"
       :class="{
         'items-center': configuration?.contentAlignment === 'center',
         'items-end': configuration?.contentAlignment === 'right',
@@ -71,9 +71,9 @@
       <template v-for="key in configuration?.fieldsOrder" :key="key">
 
         <template v-if="key === 'rating' && configuration?.fields?.rating">
-          <div class="flex items-center pt-1 gap-1" :class="{ 'mb-2': !shortDescription }">
-            <SfRating class="!text-black" size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
-            <SfCounter size="xs">{{ ratingCount }}</SfCounter>
+          <div class="flex items-center gap-1" :class="{ 'mb-2': !shortDescription }">
+            <SfRating class="[&>svg]:-ml-0.5 [&>svg]:!w-4 [&>svg]:!h-4 !text-black" size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
+            <SfCounter class="!text-black" size="2xs">{{ ratingCount }}</SfCounter>
           </div>
         </template>
 
@@ -81,7 +81,7 @@
           <SfLink
             :tag="NuxtLink"
             :to="productPath"
-            class="no-underline text-sm mt-4"
+            class="no-underline text-sm mt-4 mb-1"
             variant="secondary"
             data-testid="productcard-name"
           >
@@ -168,7 +168,7 @@ import type { ItemGridContent } from '~/components/blocks/ItemGrid/types';
 
 const props = withDefaults(defineProps<ProductCardProps>(), {
   configuration: () => ({
-    cardBorders: true,
+    cardBorders: false,
     contentAlignment: 'left',
     fields: {
       title: true,
