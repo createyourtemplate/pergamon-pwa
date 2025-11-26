@@ -57,6 +57,13 @@ export default defineNuxtModule({
         });
 
         extendPages((pages: NuxtPage[]) => {
+
+            //HomePage
+            const homePage = pages.find((p) => p.name === 'index');
+            if (homePage) {
+                homePage.file = resolve('./runtime/pages/HomePage/indexCyt.vue');
+            }
+
             // ProductPage
             const productPage = pages.find((p) => p.name === 'product-slug');
             if (productPage) {
