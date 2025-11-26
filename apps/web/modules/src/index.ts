@@ -65,7 +65,7 @@ export default defineNuxtModule({
             }
 
             // ProductPage
-            const productPage = pages.find((p) => p.name === 'product-sslug');
+            const productPage = pages.find((p) => p.name === 'product-slug');
             if (productPage) {
                 productPage.file = resolve('./runtime/pages/product/[slug].vue');
             }
