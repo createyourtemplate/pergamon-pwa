@@ -13,34 +13,6 @@ export default defineNuxtModule({
                  config.theme.extend.colors['pergamon'] = { 'gray': '#f7f7f7' };
             }
         });
-        
-        nuxt.hook('app:resolve', (app) => {
-            // default
-            app.layouts['default'] = {
-                name: 'default',
-                file: resolve('./runtime/layouts/defaultLayout.vue'),
-            };
-        });
-
-        await addComponent({
-            name: 'MyImage',
-            filePath: resolve('./runtime/components/blocks/MyImage/MyImage.vue'),
-        });
-
-        await addComponent({
-            name: 'SelectedFilters',
-            filePath: resolve('./runtime/components/Filter/SelectedFilters.vue'),
-        });
-
-        await addComponent({
-            name: 'SelectedFilter',
-            filePath: resolve('./runtime/components/Filter/SelectedFilter.vue'),
-        });
-
-        await addComponent({
-            name: 'ItemShare',
-            filePath: resolve('./runtime/components/ItemShare/ItemShare.vue'),
-        });
 
         /**
         * extend i18n Cormorant Garamond
@@ -60,6 +32,43 @@ export default defineNuxtModule({
                 ]
             });
         });
+        
+        nuxt.hook('app:resolve', (app) => {
+            // default
+            app.layouts['default'] = {
+                name: 'default',
+                file: resolve('./runtime/layouts/defaultLayout.vue'),
+            };
+        });
+
+        await addComponent({
+            name: 'SelectedFilters',
+            filePath: resolve('./runtime/components/Filter/SelectedFilters.vue'),
+        });
+
+        await addComponent({
+            name: 'SelectedFilter',
+            filePath: resolve('./runtime/components/Filter/SelectedFilter.vue'),
+        });
+
+        await addComponent({
+            name: 'ItemShare',
+            filePath: resolve('./runtime/components/ItemShare/ItemShare.vue'),
+        });
+
+        extendPages((pages: NuxtPage[]) => {
+            // ProductPage
+            const productPage = pages.find((p) => p.name === 'product-slug');
+            if (productPage) {
+                productPage.file = resolve('./runtime/pages/product/[slug].vue');
+            }
+            
+            // ProductPage
+            const generalPage = pages.find((p) => p.name === 'slug');
+            if (generalPage) {
+                generalPage.file = resolve('./runtime/pages/[...slug].vue');
+            }
+        });
 
         nuxt.hook('components:extend', (components) => {
 
@@ -76,6 +85,16 @@ export default defineNuxtModule({
             const header = components.find((c) => c.pascalName === 'UiHeader');
             if (header) {
                 header.filePath = resolve('./runtime/components/ui/Header/Header.vue');
+            }
+
+            const footer = components.find((c) => c.pascalName === 'UiFooter');
+            if (footer) {
+                footer.filePath = resolve('./runtime/components/ui/Footer/Footer.vue');
+            }
+
+            const blockFooter = components.find((c) => c.pascalName === 'Footer');
+            if (blockFooter) {
+                blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
             }
 
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
@@ -142,21 +161,6 @@ export default defineNuxtModule({
             const pagination = components.find((c) => c.pascalName === 'UiPagination');
             if (pagination) {
                 pagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
-            }
-        });
-
-        extendPages((pages: NuxtPage[]) => {
-
-            // ProductPage
-            const productPage = pages.find((p) => p.name === 'product-slug');
-            if (productPage) {
-                productPage.file = resolve('./runtime/pages/product/[slug].vue');
-            }
-            
-            // ProductPage
-            const generalPage = pages.find((p) => p.name === 'slug');
-            if (generalPage) {
-                generalPage.file = resolve('./runtime/pages/[...slug].vue');
             }
         });
     }
