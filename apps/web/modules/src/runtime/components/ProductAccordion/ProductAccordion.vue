@@ -99,9 +99,6 @@ fetchCrossSellingAccessory({
   itemId: itemId,
   type: "cross_selling",
   crossSellingRelation: "Accessory",
-}).then((data) => {
-  // eslint-disable-next-line no-console
-  console.log(data);
 });
 
 // type ReplacementPart
