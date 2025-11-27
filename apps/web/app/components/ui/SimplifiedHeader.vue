@@ -2,16 +2,17 @@
   <header class="relative w-full h-full z-40 md:sticky md:shadow-md">
     <div
       :style="{ backgroundColor: headerBackgroundColor }"
-      class="flex justify-between items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-3 md:py-5 w-full h-full border-0 border-neutral-200 md:h-20 md:z-10"
+      class="flex justify-center items-center flex-wrap md:flex-nowrap px-4 md:px-10 py-3 md:py-5 w-full h-full border-0 border-neutral-200 md:h-20 md:z-10"
       data-testid="navbar-top"
     >
-      <div class="pl-4 md:pl-0">
+      <div class="pl-4 md:pl-0 lg:absolute top-0 inset-x-[calc(50%_-_90px)]">
         <NuxtLink
           :to="localePath(paths.home)"
-          aria-label="Sf Homepage"
-          class="flex shrink-0 w-full h-8 lg:w-48 lg:h-8 items-center mr-auto text-white md:mr-10 focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm"
+          aria-label="Startseite"
+          class="flex shrink-0 w-full h-8 lg:w-[180px] lg:h-[180px] items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm"
         >
-          <UiLogo />
+          <NuxtImg v-if="viewport.isLessThan('lg')" src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_sm.jpg" alt="Pergamon" />
+          <NuxtImg v-else src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_big.svg" width="180" height="180" alt="Pergamon" />
         </NuxtLink>
       </div>
     </div>
@@ -24,4 +25,5 @@ const { getSetting: getHeaderBackgroundColor } = useSiteSettings('headerBackgrou
 const headerBackgroundColor = computed(() => getHeaderBackgroundColor());
 
 const localePath = useLocalePath();
+const viewport = useViewport();
 </script>

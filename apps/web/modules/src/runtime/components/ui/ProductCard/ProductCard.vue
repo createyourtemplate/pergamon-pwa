@@ -16,7 +16,7 @@
         :tag="NuxtLink"
         rel="preload"
         :to="productPath"
-        :class="[{ 'size-48': isFromSlider }, 'relative group/image flex items-center justify-center']"
+        :class="[{ 'size-48 lg:size-[375px]': isFromSlider }, 'relative group/image flex items-center justify-center bg-pergamon-gray p-4 lg:p-8 xl:p-12']"
         as="image"
       >
         <NuxtImg
@@ -61,7 +61,7 @@
     </div>
 
     <div
-      class="py-2 typography-text-sm flex flex-col flex-auto"
+      class="p-2 typography-text-sm flex flex-col flex-auto"
       :class="{
         'items-center': configuration?.contentAlignment === 'center',
         'items-end': configuration?.contentAlignment === 'right',

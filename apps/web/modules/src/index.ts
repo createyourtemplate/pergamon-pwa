@@ -99,7 +99,7 @@ export default defineNuxtModule({
                 footer.filePath = resolve('./runtime/components/ui/Footer/Footer.vue');
             }
 
-            const blockFooter = components.find((c) => c.pascalName === 'Footer');
+            const blockFooter = components.find((c) => c.pascalName === 'BlocksFooter');
             if (blockFooter) {
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
             }

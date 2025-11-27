@@ -6,7 +6,7 @@
       <div class="hidden lg:block mb-7">
         <span class="text-[40px] font-[CormorantGaramond]">Color</span>
       </div>
-      <div class="lg:grid gap-x-6 grid-areas-product-page grid-cols-product-page">
+      <div class="lg:grid gap-x-6 grid-areas-product-page grid-cols-product-page !grid-cols-[minmax(65%,_400px)_auto]">
         <section v-if="viewport.isLessOrEquals('md')" class="grid-in-left-top md:h-full xl:max-h-[1200px]">
           <Gallery :images="addModernImageExtensionForGallery(productGetters.getGallery(product))" />
         </section>

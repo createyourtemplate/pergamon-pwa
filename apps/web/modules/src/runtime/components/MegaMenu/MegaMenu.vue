@@ -1,12 +1,9 @@
 <template>
-    <div class="bg-black text-white text-xs md:text-sm text-center flex justify-center items-center h-6 md:h-8">
-        {{  t('header.freeShippingGermany') }}
-    </div>
   <header ref="referenceRef" :class="headerClass" class="relative w-full flex justify-between items-center md:sticky border-b z-10">
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
-          class="flex flex-wrap px-6 py-2 bg-white"
+          class="flex flex-wrap px-6 py-2 bg-[#ffffffcc]"
           @blur="
             (event: FocusEvent) => {
               if (!(event.currentTarget as Element).contains(event.relatedTarget as Element)) {
@@ -36,7 +33,7 @@
                 />
               </template>
               <template v-else>
-                <NuxtLink :to="localePath(generateCategoryLink(menuNode))" class="flex items-center gap-2 w-full">
+                <NuxtLink :to="localePath(generateCategoryLink(menuNode))" class="flex items-center gap-2 w-full [&.router-link-active]:font-bold">
                   <span>{{ categoryTreeGetters.getName(menuNode) }}</span>
                 </NuxtLink>
               </template>
@@ -216,13 +213,11 @@ import {
   SfIconMenu,
   useTrapFocus,
   useDropdown,
-  useDisclosure
 } from '@storefront-ui/vue';
 import { unrefElement } from '@vueuse/core';
 import { type CategoryTreeItem, categoryTreeGetters } from '@plentymarkets/shop-api';
 import { paths } from '~/utils/paths';
 import type { MegaMenuProps } from '~/components/MegaMenu/types';
-import searchIcon from 'assets/icons/custom_paths/search.svg';
 
 const props = defineProps<MegaMenuProps>();
 const NuxtLink = resolveComponent('NuxtLink');
@@ -242,10 +237,9 @@ const { referenceRef, floatingRef, style } = useDropdown({
   placement: 'bottom-start',
   middleware: [],
 });
-const { open: searchModalOpen } = useDisclosure();
 const iconColor = computed(() => getIconColor());
 
-const headerBackgroundColor = computed(() => getHeaderBackgroundColor());
+const headerBackgroundColor = computed(() => getHeaderBackgroundColor() + 'cc');
 
 const isTouchDevice = ref(false);
 const categoryTree = ref(categoryTreeGetters.getTree(props.categories));

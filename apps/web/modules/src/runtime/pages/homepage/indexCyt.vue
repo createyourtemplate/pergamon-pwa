@@ -7,12 +7,23 @@
         <div class="mr-[3px] leading-none">
           <SfRating class="!text-black" size="lg" :half-increment="true" :value="5" :max="5" />
         </div>
-        <div class="font-[CormorantGaramond] font-normal text-lg md:text-5xl leading-1 mb-5 mt-5 md:mb-[30px]">
+        <div class="font-[CormorantGaramond] font-normal text-lg md:text-5xl !leading-[1.25] mb-5 mt-5 md:mb-[30px]">
           „Übersichtliche Website, unkomplizierter Bestellprozess. Ware wie abgebildet und beschrieben! Rasche Lieferung und gutes Preis-Leistungs-Niveau. Empfehlenswert und ich kaufe gerne wieder ein!“
         </div>
         <div class="text-sm md:text-lg">
           Lisa, 5. August 2022
         </div>
+      </div>
+      <div class="my-4 md:my-6 px-3 md:p-5">
+        <div class="flex mb-5">
+          <span class="text-3xl font-[CoramontGaramond]">Neuheiten</span>
+          <div class="mx-auto"><span class="bg-black text-white border border-black px-3 py-2">Color</span></div>
+        </div>
+        <component
+          :is="RecommendedProductsAsync"
+          category-id="570"
+          :text-heading="'Unsere Bestseller im Bereich Teppiche'"
+        />
       </div>
       <div>
         <div class="md:grid grid-cols-2">
@@ -53,9 +64,14 @@
 <script lang="ts" setup>
 import { NuxtImg } from '#components';
 import { SfRating } from '@storefront-ui/vue';
+import { text } from 'stream/consumers';
 const { setPageMeta } = usePageMeta();
 const icon = 'home';
 setPageMeta("Pergamon", icon);
+
+const RecommendedProductsAsync = defineAsyncComponent(
+  async () => await import('~/components/RecommendedProducts/RecommendedProducts.vue'),
+);
 
 const { getRobots, setRobotForStaticPage } = useRobots();
 getRobots();

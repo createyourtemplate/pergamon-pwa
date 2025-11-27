@@ -10,7 +10,7 @@
     <Cookiebar />
     <PreviewMode />
     <ClientOnly>
-      <FooterBlock v-if="!route.meta.isBlockified" />
+      <UiFooter v-if="!route.meta.isBlockified" />
     </ClientOnly>
     <QuickCheckout v-if="isOpen" :product="product" />
   </div>
@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import type { DefaultLayoutProps } from '~/layouts/types';
-import FooterBlock from '~/components/blocks/Footer/Footer.vue';
 
 defineProps<DefaultLayoutProps>();
 
