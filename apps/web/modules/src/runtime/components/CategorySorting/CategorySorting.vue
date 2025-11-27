@@ -7,7 +7,7 @@
       {{ t('sortBy') }}
     </h5>
 
-    <div>
+    <div class="[&_svg]:w-9 [&_svg]:h-8 [&_svg]:top-2">
       <SfSelect id="sortBy" v-model="selected" :aria-label="t('sortBy')" data-testid="select-sort-by" class="!border-none !ring-0 text-base">
         <option v-if="selectionModeCompact" value="" disabled hidden>{{ t('sortBy') }}</option>
         <option v-for="option in options" :key="option" :value="option">

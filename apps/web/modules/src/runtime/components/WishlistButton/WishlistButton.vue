@@ -1,13 +1,13 @@
 <template>
   <UiButton
-    :variant="variant"
+    variant="tertiary"
     size="sm"
     :aria-label="
       isWishlistItem(variationId)
         ? t('removeProductFromWishlist', { label: productName })
         : t('addProductToWishlist', { label: productName })
     "
-    :class="{ 'p-[0.25rem]': !isCloseButton, '!bg-black bottom-0 !top-auto rounded-none': isCloseButton }"
+    :class="{ 'p-[0.25rem] !bg-transparent': !isCloseButton, '!bg-black bottom-0 !top-auto rounded-none': isCloseButton }"
     class="m-2 !ring-0"
     :disabled="wishlistLoading"
     data-testid="wishlist-trigger"

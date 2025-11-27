@@ -7,11 +7,27 @@ export default defineNuxtModule({
         // H1 Font-Styling Plugin hinzufügen
         addPlugin(resolve('./runtime/plugins/h1-font-styling.client.ts'));
 
-        nuxt.hook('tailwindcss:config', (config) => {
-            // Colors
-            if (config?.theme?.extend?.colors) {
-                 config.theme.extend.colors['pergamon'] = { 'gray': '#f7f7f7' };
-            }
+        
+        nuxt.hook("tailwindcss:config", (config) => {
+            // Extend Container
+            if (!config.theme) config.theme = {};
+            if (!config.theme.extend) config.theme.extend = {};
+
+            // Colors example
+            if (!config.theme.extend.colors) config.theme.extend.colors = {};
+            config.theme.extend.colors["pergamon"] = { gray: "#f7f7f7" };
+
+            // Border radius override
+            config.theme.extend.borderRadius = {
+                none: "0",
+                sm: "0",
+                DEFAULT: "0",
+                md: "0",
+                lg: "0",
+                xl: "0",
+                "2xl": "0",
+                "3xl": "0",
+            };
         });
 
         /**
@@ -27,17 +43,32 @@ export default defineNuxtModule({
                     },
                     {
                         code: 'de',
-                        file: 'de.json',
+                        file: 'de.json'
                     },
                 ]
             });
         });
         
         nuxt.hook('app:resolve', (app) => {
-            // default
+
+            app.layouts['simplifiedHeaderAndFooter'] = {
+                name: 'simplifiedHeaderAndFooter',
+                file: resolve('./runtime/layouts/simplifiedHeaderAndFooter.vue'),
+            };
+
             app.layouts['default'] = {
                 name: 'default',
-                file: resolve('./runtime/layouts/defaultLayout.vue'),
+                file: resolve('./runtime/layouts/default.vue'),
+            };
+
+            app.layouts['order'] = {
+                name: 'order',
+                file: resolve('./runtime/layouts/order.vue'),
+            };
+
+            app.layouts['auth'] = {
+                name: 'auth',
+                file: resolve('./runtime/layouts/auth.vue'),
             };
         });
 
@@ -56,14 +87,18 @@ export default defineNuxtModule({
             filePath: resolve('./runtime/components/ItemShare/ItemShare.vue'),
         });
 
+        await addComponent({
+            name: 'Tabs',
+            filePath: resolve('./runtime/components/blocks/Tabs/Tabs.vue'),
+        });
+
         extendPages((pages: NuxtPage[]) => {
 
-            //HomePage
+            // homepage
             const homePage = pages.find((p) => p.name === 'index');
             if (homePage) {
-                homePage.file = resolve('./runtime/pages/homepage/indexCyt.vue');
+                homePage.file = resolve('./runtime/pages/homepage/index.vue');
             }
-
             // ProductPage
             const productPage = pages.find((p) => p.name === 'product-slug');
             if (productPage) {
@@ -92,6 +127,11 @@ export default defineNuxtModule({
             const header = components.find((c) => c.pascalName === 'UiHeader');
             if (header) {
                 header.filePath = resolve('./runtime/components/ui/Header/Header.vue');
+            }
+
+            const simplifiedHeader = components.find((c) => c.pascalName === 'UiSimplifiedHeader');
+            if (simplifiedHeader) {
+                simplifiedHeader.filePath = resolve('./runtime/components/ui/SimplifiedHeader.vue');
             }
 
             const footer = components.find((c) => c.pascalName === 'UiFooter');

@@ -81,7 +81,7 @@
           <SfLink
             :tag="NuxtLink"
             :to="productPath"
-            class="no-underline text-sm mt-4 mb-1"
+            class="no-underline text-sm mt-[10px] mb-1"
             variant="secondary"
             data-testid="productcard-name"
           >
@@ -105,7 +105,7 @@
           </div>
 
           <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-            <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
+            <span class="block pb-2 md:pb-0 font-bold typography-text-sm" data-testid="product-card-vertical-price">
               <span v-if="!canAddFromCategory" class="mr-1">{{
                 t('account.ordersAndReturns.orderDetails.priceFrom')
               }}</span>
@@ -114,7 +114,7 @@
             </span>
             <span
               v-if="crossedPrice && differentPrices(price, crossedPrice)"
-              class="typography-text-sm text-neutral-500 line-through md:ml-3 md:pb-2"
+              class="typography-text-sm text-neutral-500 line-through md:ml-3 md:pb-0"
             >
               {{ format(crossedPrice) }}
             </span>
@@ -153,7 +153,7 @@
       </template>
 
       <div v-if="colorValue > 0" class="mt-auto">
-        <span class="inline-block border border-black border-solid text-xs mt-[15px] py-1 px-2">in {{ colorValue }} Farben verfügbar</span>
+        <span class="inline-block border text-black border-black border-solid text-[10px] mt-[15px] px-2">in {{ colorValue }} Farben verfügbar</span>
       </div>
     </div>
   </div>

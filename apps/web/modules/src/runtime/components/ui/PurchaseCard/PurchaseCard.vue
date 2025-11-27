@@ -147,7 +147,7 @@
                       type="submit"
                       data-testid="add-to-cart"
                       size="lg"
-                      class="w-full h-full"
+                      class="w-full h-full rounded-none"
                       :disabled="loading || !productGetters.isSalable(product)"
                     >
                       <template #prefix>

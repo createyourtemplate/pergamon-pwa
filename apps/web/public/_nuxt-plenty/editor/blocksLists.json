@@ -1044,6 +1044,32 @@
       }
     ]
   },
+  "category-product-galleries": {
+    "category": "category-product-galleries",
+    "accessControl": ["content"],
+    "title": "Category-Products",
+    "blockName": "Tabs",
+    "variations": [
+      {
+        "title": "Category Product Galleries",
+        "image": "https://cdn02.plentymarkets.com/v5vzmmmcb10k/frontend/PWA/Blocks/product_galleries.png",
+        "template": {
+          "en": {
+            "name": "Tabs",
+            "type": "content",
+            "meta": { "uuid": "a7b8c9d0-e1f2-4a3b-8c4d-5e6f7a8b9c0d" },
+            "content": {}
+          },
+          "de": {
+            "name": "Tabs",
+            "type": "content",
+            "meta": { "uuid": "f3e4d5c6-b7a8-4f9e-8d0c-1b2a3f4e5d6c" },
+            "content": {}
+          }
+        }
+      }
+    ]
+  },
   "item-category": {
     "category": "item-category",
     "accessControl": ["productCategory"],

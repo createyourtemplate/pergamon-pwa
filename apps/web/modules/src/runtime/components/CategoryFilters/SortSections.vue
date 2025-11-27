@@ -7,7 +7,7 @@
             {{ facetGetters.getName(facet) }}
           </h5>
 
-          <SfIconChevronLeft :class="['text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
+          <SfIconChevronLeft :class="['!w-9 !h-8 text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
         </div>
       </template>
       <div v-if="facetGetters.getType(facet) === 'feedback'" class="lg:absolute lg:shadow-md bg-pergamon-gray lg:min-w-[250px]">
