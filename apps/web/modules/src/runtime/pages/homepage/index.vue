@@ -44,7 +44,7 @@ setBlocksListContext('content');
 </script>
 
 <style>
-  header {
+  .pergamon-header {
     position: absolute !important;
     top: 0;
   }

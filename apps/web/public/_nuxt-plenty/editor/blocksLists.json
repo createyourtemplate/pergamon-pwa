@@ -1045,13 +1045,13 @@
     ]
   },
   "category-product-galleries": {
-    "category": "category-product-galleries",
+    "category": "product-galleries",
     "accessControl": ["content"],
-    "title": "Category-Products",
+    "title": "Products",
     "blockName": "Tabs",
     "variations": [
       {
-        "title": "Category Product Galleries",
+        "title": "Category Product Gallery",
         "image": "https://cdn02.plentymarkets.com/v5vzmmmcb10k/frontend/PWA/Blocks/product_galleries.png",
         "template": {
           "en": {
