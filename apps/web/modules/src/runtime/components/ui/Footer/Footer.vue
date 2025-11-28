@@ -1,13 +1,13 @@
 <template>
   <footer data-testid="footer" class="bg-[#F7F7F7]">
     <div class="max-w-screen-3xl mx-auto pt-[30px] pb-[40px] px-[30px]">
-      <div class="lg:grid lg:grid-cols-[1fr_auto] xl:gap-[50px] mb-10">
-        <div class="md:flex md:gap-[40px] xl:gap-[65px]">
+      <div class="md:grid md:grid-cols-[1fr_auto] xl:gap-[50px] mb-10">
+        <div class="md:flex gap-[20px] lg:gap-[40px] xl:gap-[65px]">
           <div v-for="{ label, subcategories } in categories" :key="label" class="[&>[data-collapse=true]+.collapse-footer-col]:h-auto [&>[data-collapse=true]>.open-m]:hidden [&>[data-collapse=true]>.close-m]:block">
             <div :id="label.trim()" class="flex justify-between items-center mb-3 md:mb-5" data-collapse="false" @click="toggleCollapse(label.trim())"> 
-              <span class="font-[CormorantGaramond] text-2xl whitespace-nowrap">{{ label }}</span>
+              <span class="font-[CormorantGaramond] text-xl lg:text-2xl whitespace-nowrap">{{ label }}</span>
               <SfIconAdd class="open-m md:hidden" />
-              <SfIconRemove class="close-m hidden" />
+              <SfIconRemove class="close-m hidden md:!hidden" />
             </div>
             <div class="collapse-footer-col h-0 md:h-auto overflow-hidden transform transition-[height] linear duration-500">
               <ul class="flex flex-col">
@@ -30,7 +30,7 @@
         </div>
         <div class="text-center md:text-right">
           <div class="hidden md:block">
-            <span class="font-[CormorantGaramond] text-2xl whitespace-nowrap">{{ t('footer.heading.trustAndBuy') }}</span>
+            <span class="font-[CormorantGaramond] text-lg lg:text-2xl whitespace-nowrap">{{ t('footer.heading.trustAndBuy') }}</span>
           </div>
           <div>
             <div class="text-2xl md:text-sm inline-flex items-center mt-5 mb-[15px] gap-1">

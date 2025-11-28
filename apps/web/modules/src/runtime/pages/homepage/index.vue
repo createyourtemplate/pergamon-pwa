@@ -44,13 +44,11 @@ setBlocksListContext('content');
 </script>
 
 <style>
-  .pergamon-header {
-    position: absolute !important;
-    top: 0;
-  }
   .pergamon-startpage .swiper {
-    max-height: none !important;
-    height: 100vh;
+    @media screen and (min-width: 1024px) {
+      max-height: none !important;
+      height: 100vh;
+    }
   }
   .pergamon-startpage .swiper img{
     height: 100% !important;
@@ -62,19 +60,38 @@ setBlocksListContext('content');
   }
   .pergamon-startpage .rating-comment {
     max-width: 80%;
-    margin: 40px auto;
-    font-size: 48px;
-    line-height: 1.35;;
+    margin: 20px auto;
+    font-size: 18px;
+    line-height: 1.35;
+
+    @media screen and (min-width: 762px) {
+      font-size: 30px;
+    }
+
+    @media screen and (min-width: 992px) {
+      font-size: 48px;
+      margin: 40px auto;
+    }
   }
   .pergamon-startpage .col-span-6, .pergamon-startpage .col-span-6 div {
     height: 100%;
   }
   .pergamon-startpage .col-span-6 .title {
-    font-size: 60px;
+    font-size: 36px;
     line-height: 1.2;
+
+    @media screen and (min-width: 762px) {
+      font-size: 45px;
+    }
+
+    @media screen and (min-width: 992px) {
+      font-size: 60px;
+    }
   }
   .pergamon-startpage .col-span-6 div[data-testid="image-block"] {
-    height: 50rem !important;
+    @media screen and (min-width: 992px) {
+      height: 50rem !important;
+    }
   }
   .pergamon-startpage div[data-testid="block-wrapper"], .pergamon-startpage div[data-testid="multi-grid-structure"] {
     margin-right: 0 !important;
@@ -88,31 +105,22 @@ setBlocksListContext('content');
     position: relative;
     max-width: 100%;
   }
-
-  /* Checkbox verstecken */
   .readmore-toggle {
     display: none;
   }
-
-  /* Zweispaltiger Text */
   .two-columns {
-    columns: 2;
-    column-gap: 24px;
+    @media screen and (min-width: 768px) {
+      columns: 2;
+      column-gap: 24px;
+    }
   }
-
-  /* ------------------------- */
-  /* GESCHLOSSENER ZUSTAND     */
-  /* ------------------------- */
-
-  /* etwa 4 Gesamt-Zeilen */
   .readmore-text {
     max-height: 18em; /* 4 Zeilen × ~1.6 line-height = ca. 6.5em */
     overflow: hidden;
     position: relative;
     line-height: 1.6; /* wichtig! */
+    text-align: justify;
   }
-
-  /* weiches Fade-Out + Ellipse */
   .readmore-text::after {
     content: "...";
     position: absolute;
@@ -120,30 +128,19 @@ setBlocksListContext('content');
     right: 5px;
     color: #000;
     height: 2em; /* Fade-Höhe */
-    /*background: linear-gradient(to bottom, rgba(255,255,255,0), white 90%);*/
   }
-
-  /* ------------------------- */
-  /* OFFENER ZUSTAND           */
-  /* ------------------------- */
-
   .readmore-toggle:checked ~ .readmore-text {
     max-height: none;
   }
-
   .readmore-toggle:checked ~ .readmore-text::after {
     display: none;
   }
-
-  /* Button styling */
   .readmore-btn {
     display: inline-block;
     margin-top: 12px;
     color: #999999;
     cursor: pointer;
   }
-
-  /* Buttontext anpassen */
   .readmore-toggle:checked ~ .readmore-btn::after {
     content: " (schließen)";
     font-weight: 400;

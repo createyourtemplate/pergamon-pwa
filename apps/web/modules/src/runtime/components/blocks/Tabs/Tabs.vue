@@ -19,7 +19,7 @@
             :disabled="tab.disabled"
             :tabindex="isActive(tab) ? 0 : -1"
             :class="[
-                'rounded-none mr-2 border border-black px-4 py-2 rounded-md font-medium whitespace-nowrap text-neutral-500 hover:enabled:bg-primary-100 hover:enabled:text-primary-800 active:enabled:bg-primary active:enabled:text-primary-900 disabled:text-disabled-500 focus-visible:outline focus-visible:-outline-offset-2 focus-visible:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
+                'rounded-none mr-1 md:mr-2 border border-black px-2 py-1 md:px-4 md:py-2 rounded-md font-medium whitespace-nowrap text-neutral-500 hover:enabled:bg-primary-100 hover:enabled:text-primary-800 active:enabled:bg-primary active:enabled:text-primary-900 disabled:text-disabled-500 focus-visible:outline focus-visible:-outline-offset-2 focus-visible:shadow-[inset_0_0_0_4px_rgb(255,255,255)]',
                 isActive(tab) ? '!bg-black !text-white' : '',
             ]"
             @click="activeTab = tab"

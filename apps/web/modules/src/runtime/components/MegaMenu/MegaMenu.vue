@@ -1,5 +1,5 @@
 <template>
-  <header ref="referenceRef" :class="headerClass" class="pergamon-header relative w-full flex justify-between items-center md:sticky border-b z-10">
+  <header ref="referenceRef" :class="[headerClass, {'md:absolute top-0': router.currentRoute.value.path == '/'}]" class="relative w-full flex justify-between items-center border-b z-10">
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
