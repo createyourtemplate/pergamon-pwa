@@ -7,7 +7,7 @@
             <div :id="label.trim()" class="flex justify-between items-center mb-3 md:mb-5" data-collapse="false" @click="toggleCollapse(label.trim())"> 
               <span class="font-[CormorantGaramond] text-2xl whitespace-nowrap">{{ label }}</span>
               <SfIconAdd class="open-m md:hidden" />
-              <SfIconRemove class="close-m md:hidden" />
+              <SfIconRemove class="close-m hidden" />
             </div>
             <div class="collapse-footer-col h-0 md:h-auto overflow-hidden transform transition-[height] linear duration-500">
               <ul class="flex flex-col">

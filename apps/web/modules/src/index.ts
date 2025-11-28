@@ -28,6 +28,9 @@ export default defineNuxtModule({
                 "2xl": "0",
                 "3xl": "0",
             };
+            config.theme.extend.fontSize = {
+                "7xl": ["72px", "1rem"],
+            };
         });
 
         /**
