@@ -132,3 +132,17 @@ useHead({
   ],
 });
 </script>
+
+<style>
+.few-column section[data-testid="category-grid"] {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+
+  @media screen and (min-width: 762px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+</style>

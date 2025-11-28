@@ -261,6 +261,22 @@ const isActive = computed(() => isLanguageSelectOpen);
 
 onNuxtReady(() => {
   cartItemsCount.value = cart.value?.items?.reduce((price, { quantity }) => price + quantity, 0) ?? 0;
+  
+});
+
+const checkColumn = () => {
+  try {
+    const columnView = localStorage.getItem('categoryColumnView');
+   if (columnView === '1') {
+      document.documentElement.classList.add('few-column');
+    }
+  } catch {
+    return;
+  }
+};
+
+onMounted(() => {
+  checkColumn();
 });
 
 const navigateAfterAuth = (reload: boolean) => {
