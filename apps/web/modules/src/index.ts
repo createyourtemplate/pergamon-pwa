@@ -165,7 +165,7 @@ export default defineNuxtModule({
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
             }
             
-            const blockCarousel = components.find((c) => c.pascalName === 'Carousel');
+            const blockCarousel = components.find((c) => c.pascalName === 'BlocksStructureCarousel');
             if (blockCarousel) {
                 blockCarousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
             }
