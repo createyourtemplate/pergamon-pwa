@@ -1,5 +1,5 @@
 <template>
-  <UiButton variant="tertiary" class="!p-1 ml-2 !ring-0" @click="open"><SfIconShare size="xs" /></UiButton>
+  <UiButton variant="tertiary" class="!p-1 ml-2 !ring-0 hover:!bg-transparent" @click="open"><SfIconShare size="xs" /></UiButton>
 
   <SfModal
     v-model="isOpen"

@@ -30,8 +30,12 @@
         <UiDivider class="!border-black lg:hidden" />
         <slot class="overflow-y-auto md:overflow-y-visible py-4 md:p-0" />
         <div class="items-center gap-3 hidden lg:flex px-3">
-          <div @click="toggleColumn('')"><NuxtImg :src="groupMultiple" class="bg-black" width="18" height="18" alt="user icon" /></div>
-          <div @click="toggleColumn('1')"><NuxtImg :src="group" width="18" height="18" alt="user icon" /></div>
+          <UiButton :disabled="toggleStatus === ''" class="!p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('')">
+            <MultiGridIcon />
+          </UiButton>
+          <UiButton :disabled="toggleStatus === '1'" class="!p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('1')">
+            <GridIcon />
+          </UiButton>
         </div>
         <div class="fixed bottom-0 right-0 left-0 flex flex-wrap justify-between gap-3 lg:hidden">
           <UiButton class="whitespace-nowrap flex flex-1 !rounded-none" variant="primary" @click="$emit('close')">
@@ -47,30 +51,43 @@
 import { SfDrawer, SfIconClose } from '@storefront-ui/vue';
 import { facetGetters } from '@plentymarkets/shop-api';
 import type { CategorySidebarEmits, CategorySidebarProps } from '~/components/CategorySidebar/types';
-import group from '/assets/icons/custom_paths/group.svg';
-import groupMultiple from '/assets/icons/custom_paths/group_multiple.svg';
 
 const { data: productsCatalog } = useProducts();
 const { t } = useI18n();
 
+const toggleStatus = ref('');
+
+const columnView = computed(() => {
+  try {
+    return localStorage.getItem('categoryColumnView') ?? '';
+  } catch {
+    return '';
+  }
+});
+
 const toggleColumn = (col: string) => {
   try {
-    const columnView = localStorage.getItem('categoryColumnView');
     if (col === '') {
+      toggleStatus.value = '';
       localStorage.setItem('categoryColumnView', '');
       document.documentElement.classList.remove('few-column');
       return;
     } else
-    if (col === '1' && columnView !== '1') {
+    if (col === '1' && columnView.value !== '1') {
+      toggleStatus.value = '1';
       localStorage.setItem('categoryColumnView', '1');
       document.documentElement.classList.add('few-column');
-    } else if (col === '1' && columnView === '1') {
+    } else if (col === '1' && columnView.value === '1') {
       return;
     }
   } catch {
     return;
   }
 };
+
+onMounted(() => {
+  toggleStatus.value = columnView.value;
+});
 
 defineProps<CategorySidebarProps>();
 defineEmits<CategorySidebarEmits>();

@@ -15,7 +15,10 @@ export default defineNuxtModule({
 
             // Colors example
             if (!config.theme.extend.colors) config.theme.extend.colors = {};
-            config.theme.extend.colors["pergamon"] = { gray: "#f7f7f7" };
+            config.theme.extend.colors["pergamon"] = { 
+                "gray": "#bebebe",
+                "light-gray": "#f7f7f7"
+             };
 
             // Border radius override
             config.theme.extend.borderRadius = {
@@ -55,7 +58,7 @@ export default defineNuxtModule({
         nuxt.hook('app:resolve', (app) => {
 
             app.layouts['simplifiedHeaderAndFooter'] = {
-                name: 'simplifiedHeaderAndFooter',
+                name: 'simplified-header-and-footer',
                 file: resolve('./runtime/layouts/simplifiedHeaderAndFooter.vue'),
             };
 
@@ -73,6 +76,21 @@ export default defineNuxtModule({
                 name: 'auth',
                 file: resolve('./runtime/layouts/auth.vue'),
             };
+        });
+
+        await addComponent({
+            name: 'MultiGridIcon',
+            filePath: resolve('./runtime/components/ui/Icons/MultiGridIcon.vue'),
+        });
+        
+        await addComponent({
+            name: 'GridIcon',
+            filePath: resolve('./runtime/components/ui/Icons/GridIcon.vue'),
+        });
+
+        await addComponent({
+            name: 'RectIcon',
+            filePath: resolve('./runtime/components/ui/Icons/RectIcon.vue'),
         });
 
         await addComponent({
@@ -145,6 +163,11 @@ export default defineNuxtModule({
             const blockFooter = components.find((c) => c.pascalName === 'BlocksFooter');
             if (blockFooter) {
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
+            }
+            
+            const blockCarousel = components.find((c) => c.pascalName === 'Carousel');
+            if (blockCarousel) {
+                blockCarousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
             }
 
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');

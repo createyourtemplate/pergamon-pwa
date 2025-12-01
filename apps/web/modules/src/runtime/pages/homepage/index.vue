@@ -44,22 +44,8 @@ setBlocksListContext('content');
 </script>
 
 <style>
-  .pergamon-startpage .swiper {
-    @media screen and (min-width: 1024px) {
-      max-height: none !important;
-      height: 100vh;
-    }
-  }
-  .pergamon-startpage .swiper img{
-    height: 100% !important;
-  }
-  .pergamon-startpage .swiper a {
-    color: #fff;
-    border-color: #fff;
-    --tw-ring-color: #fff;
-  }
   .pergamon-startpage .rating-comment {
-    max-width: 80%;
+    max-width: 1500px;
     margin: 20px auto;
     font-size: 18px;
     line-height: 1.35;

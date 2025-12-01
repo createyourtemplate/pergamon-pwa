@@ -15,7 +15,7 @@
       class="w-full rounded shadow-none md:translate-x-0 z-[100] md:z-0 md:static md:!block -translate-x-full shrink-0 bg-white overflow-y-auto lg:relative lg:overflow-y-visible lg:z-40"
       data-testid="category-sidebar"
     >
-      <div class="grid grid-rows-category-sidebar md:h-full md:flex lg:bg-pergamon-gray lg:py-3 lg:px-2">
+      <div class="grid grid-rows-category-sidebar md:h-full md:flex lg:bg-pergamon-light-gray lg:py-3 lg:px-2">
         <div class="p-4 flex justify-between items-center md:hidden">
           <span class="font-bold text-lg">{{ t('listSettings') }}</span>
           <UiButton variant="tertiary" :aria-label="t('closeListSettings')" @click="$emit('close')">

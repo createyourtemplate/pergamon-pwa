@@ -1,7 +1,7 @@
 <template>
     <template v-if="facet">
         <template v-for="(filter, index) in facetGetters.getFilters(facet)" :key="index">
-            <div v-if="models[filter.id]" class="flex items-center bg-[#bebebe] text-xs md:text-sm text-white py-0.5 md:py-1 px-1.5 md:px-2.5 cursor-pointer" @click="facetChange(filter.id + '')" >
+            <div v-if="models[filter.id]" class="flex items-center bg-pergamon-gray text-xs md:text-sm text-white py-0.5 md:py-1 px-1.5 md:px-2.5 cursor-pointer" @click="facetChange(filter.id + '')" >
                 <SfIconCloseSm size="sm" class="leading-none align-middle" /> <span class="leading-none">{{ filter.name }}</span>
             </div>
         </template>

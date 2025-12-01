@@ -13,10 +13,19 @@
           <span class="text-sm md:text-2xl">{{ totalCounts }} Artikel</span>
         </div>
         <div v-if="totalCounts > 0" class="flex items-center gap-3 lg:hidden self-center ml-auto pr-4">
-          <div class="md:hidden" @click="toggleColumn('1')"><NuxtImg :src="groupSingle" class="bg-black" width="18" height="18" alt="user icon" /></div>
-          <div class="hidden md:block" @click="toggleColumn('')"><NuxtImg :src="groupMultiple" width="18" height="18" alt="user icon" /></div>
-          <div class="hidden md:block" @click="toggleColumn('1')"><NuxtImg :src="group" width="18" height="18" alt="user icon" /></div>
-          <div class="md:hidden" @click="toggleColumn('')"><NuxtImg :src="group" width="18" height="18" alt="user icon" /></div>
+          <UiButton :disabled="toggleStatus === ''" class="hidden md:block !p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('')">
+            <MultiGridIcon />
+          </UiButton>
+          <UiButton :disabled="toggleStatus === '1'" class="hidden md:block !p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('1')">
+            <GridIcon />
+          </UiButton>
+          
+          <UiButton :disabled="toggleStatus === ''" class="md:hidden !p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('')">
+            <GridIcon />
+          </UiButton>
+          <UiButton :disabled="toggleStatus === '1'" class="md:hidden !p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('1')">
+            <RectIcon />
+          </UiButton>
         </div>
       </div>
 
@@ -59,18 +68,29 @@ const props = defineProps<{
   totalCounts: number;
 }>();
 
+const toggleStatus = ref('');
+
+const columnView = computed(() => {
+  try {
+    return localStorage.getItem('categoryColumnView') ?? '';
+  } catch {
+    return '';
+  }
+});
+
 const toggleColumn = (col: string) => {
   try {
-    const columnView = localStorage.getItem('categoryColumnView');
     if (col === '') {
+      toggleStatus.value = '';
       localStorage.setItem('categoryColumnView', '');
       document.documentElement.classList.remove('few-column');
       return;
     } else
-    if (col === '1' && columnView !== '1') {
+    if (col === '1' && columnView.value !== '1') {
+      toggleStatus.value = '1';
       localStorage.setItem('categoryColumnView', '1');
       document.documentElement.classList.add('few-column');
-    } else if (col === '1' && columnView === '1') {
+    } else if (col === '1' && columnView.value === '1') {
       return;
     }
   } catch {
@@ -83,4 +103,8 @@ const renderOrder = computed<CategoryDataFieldKey[]>(() =>
     ? props.fieldsOrder
     : (['name', 'description1', 'description2', 'shortDescription'] as CategoryDataFieldKey[]),
 );
+
+onMounted(() => {
+  toggleStatus.value = columnView.value;
+});
 </script>

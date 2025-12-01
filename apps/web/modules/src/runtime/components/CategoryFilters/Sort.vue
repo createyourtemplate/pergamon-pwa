@@ -9,23 +9,10 @@
       v-bind="customizedFiltersProps"
     />
   </div>
-
-  <div v-if="shouldShowShowAllButton" class="px-4">
-    <button
-      type="button"
-      data-testid="add-page-btn"
-      class="border border-editor-button w-full py-1 mb-4 rounded-md flex items-center justify-center gap-2 text-editor-button"
-      @click="isExpanded = true"
-    >
-      <SfIconExpandMore class="shrink-0" />
-      {{ getEditorTranslation('show-all-filters') }}
-    </button>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { facetGetters } from '@plentymarkets/shop-api';
-import { SfIconExpandMore } from '@storefront-ui/vue';
 import type { CategoryFiltersProps } from '~/components/CategoryFilters/types';
 import type { SortFilterContent } from '~/components/blocks/SortFilter/types';
 

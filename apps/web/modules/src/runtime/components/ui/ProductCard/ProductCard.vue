@@ -16,7 +16,7 @@
         :tag="NuxtLink"
         rel="preload"
         :to="productPath"
-        :class="[{ 'size-48 lg:size-[375px]': isFromSlider }, 'relative group/image flex items-center justify-center bg-pergamon-gray p-4 lg:p-8 xl:p-12']"
+        :class="[{ 'size-48 lg:size-[375px]': isFromSlider }, 'relative group/image flex items-center justify-center bg-pergamon-light-gray p-4 lg:p-8']"
         as="image"
       >
         <NuxtImg
@@ -29,7 +29,7 @@
           :width="getWidth()"
           :height="getHeight()"
           :class="[
-            'object-contain rounded-md aspect-square w-full transition-opacity duration-300',
+            'object-contain rounded-md aspect-square w-full transition-opacity duration-300 mix-blend-multiply',
             effectiveHoverImageUrl ? 'group-hover/image:opacity-0' : '',
           ]"
           data-testid="image-slot"

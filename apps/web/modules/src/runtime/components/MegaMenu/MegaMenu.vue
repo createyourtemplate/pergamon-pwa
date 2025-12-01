@@ -1,5 +1,5 @@
 <template>
-  <header ref="referenceRef" :class="[headerClass, {'md:absolute top-0': router.currentRoute.value.path == '/'}]" class="relative w-full flex justify-between items-center border-b z-10">
+  <header ref="referenceRef" :class="[headerClass, {'md:sticky': router.currentRoute.value.path != '/', 'md:fixed': router.currentRoute.value.path == '/'}]" class="relative w-full flex absolute top-0 justify-between items-center border-b z-10">
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
@@ -190,7 +190,7 @@
         <NuxtLink
             :to="localePath(paths.home)"
             :aria-label="t('goToHomepage')"
-            class="flex shrink-0 w-full lg:w-48 items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm"
+            class="flex shrink-0 items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm. lg:-mt-1"
         >
             <NuxtImg v-if="viewport.isLessThan('lg')" src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_sm.jpg" alt="Pergamon" />
             <NuxtImg v-else src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_big.svg" width="180" height="180" alt="Pergamon" />

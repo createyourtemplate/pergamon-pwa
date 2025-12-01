@@ -15,9 +15,9 @@
             <div
               v-for="(image, index) in addModernImageExtensionForGallery(productGetters.getGallery(product))" 
               :key="image.cleanImageName + index" 
-              class="relative"
-              :class="{'pb-[100%] w-full': index == 0, 'm-2 pb-[50%] w-[calc(50%_-_1rem)]': index > 0}">
-              <NuxtImg :src="image.urlMiddle" class="absolute w-full" />
+              class="relative pb-[100%] w-full bg-pergamon-light-gray mb-4"
+              :class="{'order-1': index < productGetters.getGallery(product).length-1 }">
+              <NuxtImg :src="image.urlMiddle" class="absolute w-full mix-blend-multiply" />
             </div>
           </div>
         </section>

@@ -9,12 +9,13 @@
       <PreviewMode />
     </NuxtLazyHydrate>
     <ClientOnly>
-      <UiFooter v-if="!route.meta.isBlockified" />
+      <FooterBlock v-if="!route.meta.isBlockified" />
     </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
+import FooterBlock from '~/components/blocks/Footer/Footer.vue';
 const route = useRoute();
 
 usePageTitle();

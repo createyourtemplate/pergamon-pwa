@@ -3,7 +3,7 @@
     <div class="mr-3 font-bold leading-none text-lg lg:text-2xl" data-testid="price">
       <span>{{ format(price) }}</span>
     </div>
-    <div v-if="crossedPrice && differentPrices" class="font-normal leading-none text-red-500 line-through text-lg lg:text-2xl">
+    <div v-if="crossedPrice && differentPrices" class="font-normal leading-none text-red-500 line-through text-lg lg:text-2xl mr-3">
       {{ format(crossedPrice) }}
     </div>
     <div v-if="crossedPrice && differentPrices" class="ml-auto leading-none font-normal text-white bg-red-500 px-2 py-1 lg:text-lg">

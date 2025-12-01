@@ -9,7 +9,7 @@
         <NuxtLink
           :to="localePath(paths.home)"
           aria-label="Startseite"
-          class="flex shrink-0 w-full h-8 lg:w-[180px] lg:h-[180px] items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm"
+          class="flex shrink-0 w-full h-8 lg:w-[180px] lg:h-[180px] items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm lg:-mt-1"
         >
           <NuxtImg v-if="viewport.isLessThan('lg')" src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_sm.jpg" alt="Pergamon" />
           <NuxtImg v-else src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_big.svg" width="180" height="180" alt="Pergamon" />

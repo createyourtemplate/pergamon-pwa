@@ -2,7 +2,7 @@
   <div v-if="shouldRenderFacet" class="lg:relative">
     <SfAccordionItem v-if="facet" v-model="open">
       <template #summary>
-        <div class="flex justify-between items-center border-b border-b-black lg:border-none py-1 px-4 lg:px-2 select-none lg:bg-pergamon-gray" tabindex="0" @mouseleave="open = false">
+        <div class="flex justify-between items-center border-b border-b-black lg:border-none py-1 px-4 lg:px-2 select-none lg:bg-pergamon-light-gray" tabindex="0" @mouseleave="open = false">
           <h5 class="py-1 rounded-none typography-headline-5 tracking-widest select-none">
             {{ facetGetters.getName(facet) }}
           </h5>
@@ -10,7 +10,7 @@
           <SfIconChevronLeft :class="['!w-9 !h-8 text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
         </div>
       </template>
-      <div v-if="facetGetters.getType(facet) === 'feedback'" class="lg:absolute lg:shadow-md bg-pergamon-gray lg:min-w-[250px]">
+      <div v-if="facetGetters.getType(facet) === 'feedback'" class="lg:absolute lg:shadow-md bg-pergamon-light-gray lg:min-w-[250px]">
         <SfListItem v-for="(filter, index) in sortedReviews(facet)" :key="index" tag="label" class="mb-3" size="sm">
           <div class="flex items-center space-x-2">
             <span class="pt-1 flex items-center">
@@ -39,7 +39,7 @@
         </SfListItem>
       </div>
 
-      <form v-else-if="facetGetters.getType(facet) === 'price'" class="lg:absolute lg:shadow-md bg-pergamon-gray lg:min-w-[250px] mb-4 px-4" @submit.prevent="updatePriceFilter">
+      <form v-else-if="facetGetters.getType(facet) === 'price'" class="lg:absolute lg:shadow-md bg-pergamon-light-gray lg:min-w-[250px] mb-4 px-4" @submit.prevent="updatePriceFilter">
         <div class="mb-3">
           <label for="min">
             <UiFormLabel class="text-start">{{ t('min') }}</UiFormLabel>
@@ -70,7 +70,7 @@
         </div>
       </form>
 
-      <div v-else-if="facetGetters.getName(facet) == 'Farbe'" class="lg:absolute lg:shadow-md bg-pergamon-gray lg:min-w-[250px] pt-3 px-2" @mouseover="open = true" @mouseleave="open = false">
+      <div v-else-if="facetGetters.getName(facet) == 'Farbe'" class="lg:absolute lg:shadow-md bg-pergamon-light-gray lg:min-w-[250px] pt-3 px-2" @mouseover="open = true" @mouseleave="open = false">
         <SfListItem
           v-for="(filter, index) in facetGetters.getFilters(facet)"
           :key="index"
@@ -94,7 +94,7 @@
         </SfListItem>
       </div>
 
-      <div v-else class="lg:absolute lg:shadow-md bg-pergamon-gray lg:min-w-[250px] pt-3" @mouseover="open = true" @mouseleave="open = false">
+      <div v-else class="lg:absolute lg:shadow-md bg-pergamon-light-gray lg:min-w-[250px] pt-3" @mouseover="open = true" @mouseleave="open = false">
         <SfListItem
           v-for="(filter, index) in facetGetters.getFilters(facet)"
           :key="index"
