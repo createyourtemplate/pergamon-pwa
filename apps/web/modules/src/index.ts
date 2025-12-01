@@ -170,6 +170,16 @@ export default defineNuxtModule({
                 blockCarousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
             }
 
+            const blockCarouselForm = components.find((c) => c.pascalName === 'BlocksStructureCarouselForm');
+            if (blockCarouselForm) {
+                blockCarouselForm.filePath = resolve('./runtime/components/blocks/structure/Carousel/CarouselForm.vue');
+            }
+            
+            const blockCarouselTypes = components.find((c) => c.pascalName === 'BlocksStructureCarouselTypes');
+            if (blockCarouselTypes) {
+                blockCarouselTypes.filePath = resolve('./runtime/components/blocks/structure/Carousel/types.ts');
+            }
+
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
             if (productCard) {
                 productCard.filePath = resolve('./runtime/components/ui/ProductCard/ProductCard.vue');
