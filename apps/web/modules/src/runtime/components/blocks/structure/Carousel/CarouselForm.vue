@@ -228,6 +228,7 @@
           />
         </div>
       </UiAccordionItem>
+    </div>
   </div>
 </template>
 
