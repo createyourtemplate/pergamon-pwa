@@ -4,16 +4,14 @@
       :id="`carousel-${index}`"
       :key="content.length"
       :modules="enableModules ? [Pagination, Navigation] : []"
-      :slides-per-view="1"
       v-bind="carouselProps"
       :aria-roledescription="t('homepage.banner.ariaRoleDescriptionCarousel')"
       :aria-label="t('homepage.banner.ariaRoleDescriptionCarousel')"
       :loop="false"
+      :direction="'vertical'"
       :pagination="paginationConfig"
       :navigation="navigationConfig"
-      :direction="configuration.direction || 'horizontal'"
-      class="!z-0 !w-full !max-h-[85vh]"
-      :class="{'full-height': configuration.fullHeight}"
+      class="!z-0 full-height"
       @swiper="onSwiperInit"
       @slide-change="onSlideChange"
     >
@@ -34,7 +32,7 @@
           :content-block="banner"
           :index="getSlideAdjustedIndex(slideIndex)"
           :slide-index="slideIndex"
-          :lazy-loading="slideIndex > 0 ? 'lazy' : 'eager'"
+          :lazy-loading="'eager'"
         />
       </SwiperSlide>
       <div
@@ -42,26 +40,6 @@
         :class="`swiper-pagination swiper-pagination-${index} swiper-pagination-bullets swiper-pagination-vertical`"
       />
     </Swiper>
-
-
-    <button
-      v-if="configuration.direction === 'horizontal' && enableModules && handleArrows()"
-      :key="`prev-${index}`"
-      type="button"
-      :class="`swiper-button-prev swiper-button-prev-${index}`"
-      :aria-controls="`carousel-${index}`"
-      :aria-label="t('homepage.banner.ariaLabelPreviousSlide')"
-      :style="{ color: configuration.controls.color + ' !important' }"
-    />
-    <button
-      v-if="configuration.direction === 'horizontal' && enableModules && handleArrows()"
-      :key="`next-${index}`"
-      type="button"
-      :class="`swiper-button-next swiper-button-next-${index}`"
-      :aria-controls="`carousel-${index}`"
-      :aria-label="t('homepage.banner.ariaLabelNextSlide')"
-      :style="{ color: configuration.controls.color + ' !important' }"
-    />
   </NuxtErrorBoundary>
 </template>
 
@@ -209,5 +187,19 @@ watch(
     color: #fff;
     border-color: #fff;
     --tw-ring-color: #fff;
+  }
+  .swiper-pagination-vertical {
+    height: auto !important;
+    right: 15px !important;
+    bottom:  0 !important;
+    top: 75% !important;
+    transform: translate3d(0px, 0%, 0) !important;
+  }
+  .swiper-pagination-vertical .swiper-pagination-bullet {
+    height: 40px;
+    border-radius: 0;
+  }
+  .swiper-pagination-vertical .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+    opacity: 0.4;
   }
 </style>

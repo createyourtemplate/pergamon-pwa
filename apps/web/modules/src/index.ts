@@ -1,11 +1,22 @@
 import { createResolver, defineNuxtModule, extendPages, addComponent, addPlugin } from "nuxt/kit";
 
 export default defineNuxtModule({
-    async setup(_, nuxt) {
+    async setup(options, nuxt) {
         const {resolve} = createResolver(import.meta.url);
 
         // H1 Font-Styling Plugin hinzufügen
         addPlugin(resolve('./runtime/plugins/h1-font-styling.client.ts'));
+
+        // nuxt.options.app.head = nuxt.options.app.head || {};
+        // nuxt.options.app.head.link = nuxt.options.app.head.link || [];
+        // nuxt.options.app.head.link.push(
+        //     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        //     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+        //     { 
+        //         rel: 'stylesheet', 
+        //         href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap' 
+        //     }
+        // );
 
         
         nuxt.hook("tailwindcss:config", (config) => {
@@ -165,20 +176,20 @@ export default defineNuxtModule({
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
             }
             
-            const blockCarousel = components.find((c) => c.pascalName === 'BlocksStructureCarousel');
+            const blockCarousel = components.find((c) => c.pascalName === 'Carousel');
             if (blockCarousel) {
                 blockCarousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
             }
-
-            const blockCarouselForm = components.find((c) => c.pascalName === 'BlocksStructureCarouselForm');
-            if (blockCarouselForm) {
-                blockCarouselForm.filePath = resolve('./runtime/components/blocks/structure/Carousel/CarouselForm.vue');
-            }
             
-            const blockCarouselTypes = components.find((c) => c.pascalName === 'BlocksStructureCarouselTypes');
-            if (blockCarouselTypes) {
-                blockCarouselTypes.filePath = resolve('./runtime/components/blocks/structure/Carousel/types.ts');
-            }
+            // const carouselForm = components.find((c) => c.pascalName === 'CarouselForm');
+            // if (carouselForm) {
+            //     carouselForm.filePath = resolve('./runtime/components/blocks/structure/Carousel/CarouselForm.vue');
+            // }
+
+            // const blockCarouselTypes = components.find((c) => c.pascalName === 'BlocksStructureCarouselTypes');
+            // if (blockCarouselTypes) {
+            //     blockCarouselTypes.filePath = resolve('./runtime/components/blocks/structure/Carousel/types.ts');
+            // }
 
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
             if (productCard) {

@@ -5,8 +5,6 @@ export type CarouselStructureProps = {
   type: string;
   content: Block[];
   configuration: {
-    direction: 'horizontal' | 'vertical';
-    fullHeight: boolean;
     controls: {
       color: string;
       displayArrows: boolean;
