@@ -76,18 +76,18 @@
           <a href="#" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconInstagram /></a>
         </div>
 
-        <div class="flex gap-2 order-1 md-order-2">
+        <div class="flex flex-wrap justify-center mx-auto md:mx-0 gap-2 order-1 md:order-2">
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">1</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">2</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">3</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">4</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">5</div>
-          <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">6</div>
-          <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">7</div>
-          <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">8</div>
+          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">6</div>
+          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">7</div>
+          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">8</div>
         </div>
 
-        <div class="w-full order-2 md-order-3 copy text-center  text-[12px] 2xl:text-left xl:flex 2xl:flex-wrap mt-10">
+        <div class="w-full order-2 md:order-3 copy text-center text-[12px] 2xl:text-left xl:flex 2xl:flex-wrap mt-10">
           <p><sup>*</sup>{{ t('footer.copyRight.1') }}</p>
           <p><sup>**</sup>{{ t('footer.copyRight.2') }}</p>
           <p class="md:pt-[10px] xl:pt-[0] xl:ml-auto">{{ companyName }} / Alle Rechte vorbehalten / <a href="https://www.createyourtemplate.com" target="_blank" title="Lösungen für den eCommerce - Online Shops, eBay Shops und Templates, Widgets, Design, Programmierung, Fullservice, Branding - createyourtemplate GmbH &amp; Co. KG - Berlin, Germany">powered by <strong>createyourtemplate</strong></a></p>

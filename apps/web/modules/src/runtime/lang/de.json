@@ -26,5 +26,14 @@
             "1": "Alle Preise inkl. MwSt. und zzgl. Versandkosten.",
             "2": "Kostenloser Versand und Rückversand nur innerhalb Deutschlands und Österreichs."
         }
+    },
+    "product": {
+        "reviews": "Bewertungen",
+        "reviews_of": "von 5",
+        "more_reviews": "weitere Bewertungen anzeigen",
+        "customer_reviews": "Kundenbewertungen",
+        "review_grade_excellent": "Excellent",
+        "recommendedProducts": "Das könnte Ihnen auch gefallen",
+        "similarProducts": "Ähnliche Artikel"
     }
 }

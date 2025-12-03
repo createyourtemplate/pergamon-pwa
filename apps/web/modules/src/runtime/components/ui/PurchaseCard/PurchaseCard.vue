@@ -67,19 +67,28 @@
                   <SfRating
                     size="xs"
                     :half-increment="true"
-                    :value="reviewGetters.getAverageRating(reviewAverage, 'half')"
+                    :value="reviewGetters.getAverageRating({
+                      ratingsCountOf1: 0,
+                      ratingsCountOf2: 0,
+                      ratingsCountOf3: 0,
+                      ratingsCountOf4: 0,
+                      ratingsCountOf5: 0,
+                      ratingsCountTotal: 0,
+                      averageValue: averageRating + '',
+                      highestCount: 0
+                    }, 'half')"
                     :max="5"
                     class="!text-black leading-none [&>svg]:-ml-0.5"
                   />
-                  <span class="text-sm font-bold ml-2 mr-0.5">{{ reviewGetters.getAverageRating(reviewAverage)  }} von 5</span>
+                  <span class="text-sm font-bold ml-2 mr-0.5">{{ averageRating }} {{ t('product.reviews_of') }}</span>
                   <UiButton
-                    v-if="reviewGetters.getTotalReviews(reviewAverage) > 0"
+                    v-if="averageRating > 0"
                     variant="tertiary"
                     class="text-sm !px-2 leading-none text-neutral-500 cursor-pointer"
                     data-testid="show-reviews"
                     @click="scrollToReviews"
                   >
-                    {{ reviewGetters.getTotalReviews(reviewAverage) }} {{ t('showAllReviews') }}
+                    <u>{{ totalReviews }} {{ t('product.reviews') }}</u>
                   </UiButton>
                 </div>
                 <div
@@ -261,10 +270,8 @@ const props = withDefaults(defineProps<PurchaseCardProps>(), {
   }),
 });
 
-const { currentProduct } = useProducts();
-
-const { data: productReviews } = useProductReviews(Number(productGetters.getItemId(currentProduct.value)));
-const reviewAverage = computed(() => reviewGetters.getReviewCounts(productReviews.value));
+const { getReviewState } = useEkomiReviews();
+const { totalReviews, averageRating } = getReviewState()
 
 const { getSetting } = useSiteSettings('dontSplitItemBundle');
 const showBundleComponents = computed(() => {
@@ -386,27 +393,11 @@ const changeQuantity = (quantity: string) => {
   quantitySelectorValue.value = Number(quantity);
 };
 
-const isReviewsAccordionOpen = () => {
-  const customerReviewsAccordionDetailsElement = document.querySelector('#customerReviewsAccordion')
-    ?.firstChild as HTMLDetailsElement;
-
-  return customerReviewsAccordionDetailsElement.open;
-};
-
-const openReviewsAccordion = () => {
-  const customerReviewsClickElement = document.querySelector('#customerReviewsClick') as HTMLElement;
-  customerReviewsClickElement?.click();
-};
-
 const isSalableText = computed(() => (productGetters.isSalable(props?.product) ? '' : t('itemNotAvailable')));
 const isNotValidVariation = computed(() => (getCombination() ? '' : t('productAttributes.notValidVariation')));
 const showPayPalButtons = computed(() => Boolean(getCombination()) && productGetters.isSalable(props?.product));
 
 const scrollToReviews = () => {
-  if (!isReviewsAccordionOpen()) {
-    openReviewsAccordion();
-  }
-
   if (reviewArea.value) {
     reviewArea.value.scrollIntoView({ behavior: 'smooth' });
   }

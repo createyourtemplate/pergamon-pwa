@@ -23,7 +23,7 @@
         </section>
         <section class="mb-7 lg:mb-10 grid-in-right">
           <div class="md:sticky top-0">
-            <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
+            <UiPurchaseCard v-if="product" :product="product" :review-average="0" />
             <NuxtLazyHydrate when-visible>
                 <ProductAccordion v-if="product" :product="product" class="mt-3 md:mt-7" />
             </NuxtLazyHydrate>
@@ -37,25 +37,19 @@
           </div>
         </section>
       </div>
-      <section v-if="reviewGetters.getTotalReviews(countsProductReviews) > 0">
-        <ReviewsAccordion
-          v-if="product"
-          :product="product"
-          :total-reviews="reviewGetters.getTotalReviews(countsProductReviews)"
-        />
-      </section>
-      <section v-if="crossSellingItemsSimilar?.products?.length > 0" ref="similarItems" class="p-3 mb-20" :class="{'mt-7 lg:mt-10': reviewGetters.getTotalReviews(countsProductReviews) > 0}">
+      <ProductReviews :product="product" />
+      <section v-if="crossSellingItemsSimilar?.products?.length > 0" ref="similarItems" class="p-3 mb-20 mt-8">
         <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
-          <span>Ähnliche Artikel</span>
+          <span>{{ t('product.similarProducts') }}</span>
         </div>
         <ProductSlider
           v-if="crossSellingItemsSimilar"
           :items="crossSellingItemsSimilar.products"
         />
       </section>
-      <section ref="recommendedSection" class="p-3 mb-20" :class="{'mt-7 lg:mt-10': reviewGetters.getTotalReviews(countsProductReviews) > 0 || crossSellingItemsSimilar?.products?.length <= 0}">
+      <section ref="recommendedSection" class="p-3 mb-20 mt-8">
         <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
-          <span>Das könnte Ihnen auch gefallen</span>
+          <span>{{ t('product.recommendedProducts') }}</span>
         </div>
         <component
           :is="RecommendedProductsAsync"
@@ -72,7 +66,7 @@
 <script setup lang="ts">
 import { SfIconAdd } from '@storefront-ui/vue';
 import type { Product } from '@plentymarkets/shop-api';
-import { productGetters, reviewGetters, categoryTreeGetters } from '@plentymarkets/shop-api';
+import { productGetters, categoryTreeGetters } from '@plentymarkets/shop-api';
 
 const route = useRoute();
 const { t } = useI18n();
@@ -83,12 +77,11 @@ const { buildProductLanguagePath } = useLocalization();
 const { addModernImageExtensionForGallery } = useModernImage();
 const { productParams, productId } = createProductParams(route.params);
 const { data: product, fetchProduct, setProductMeta, setBreadcrumbs, breadcrumbs } = useProduct(productId);
-const { data: productReviews, fetchProductReviews } = useProductReviews(Number(productId));
 const { data: categoryTree } = useCategoryTree();
 const { open, openDrawer } = useProductLegalDetailsDrawer();
 const { setPageMeta } = usePageMeta();
 
-const config = useRuntimeConfig().public;
+// const config = useRuntimeConfig().public;
 const viewport = useViewport();
 
 definePageMeta({
@@ -111,8 +104,6 @@ const productName = computed(() => productGetters.getName(product.value));
 const icon = 'sell';
 setPageMeta(productName.value, icon);
 
-const countsProductReviews = computed(() => reviewGetters.getReviewCounts(productReviews.value));
-
 await fetchProduct(productParams).then(() => {
   usePlentyEvent().emit('frontend:productLoaded', {
     product: product.value,
@@ -134,12 +125,6 @@ setBlocksListContext('product');
 onBeforeRouteLeave(() => {
   setCurrentProduct({} as Product);
 });
-
-async function fetchReviews() {
-  const productVariationId = productGetters.getVariationId(product.value);
-  await fetchProductReviews(Number(productId), productVariationId);
-}
-await fetchReviews();
 
 setBreadcrumbs();
 

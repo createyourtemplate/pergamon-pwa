@@ -7,16 +7,16 @@ export default defineNuxtModule({
         // H1 Font-Styling Plugin hinzufügen
         addPlugin(resolve('./runtime/plugins/h1-font-styling.client.ts'));
 
-        // nuxt.options.app.head = nuxt.options.app.head || {};
-        // nuxt.options.app.head.link = nuxt.options.app.head.link || [];
-        // nuxt.options.app.head.link.push(
-        //     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        //     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
-        //     { 
-        //         rel: 'stylesheet', 
-        //         href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap' 
-        //     }
-        // );
+        nuxt.options.app.head = nuxt.options.app.head || {};
+        nuxt.options.app.head.link = nuxt.options.app.head.link || [];
+        nuxt.options.app.head.link.push(
+            { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+            { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+            { 
+                rel: 'stylesheet', 
+                href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap' 
+            }
+        );
 
         
         nuxt.hook("tailwindcss:config", (config) => {
@@ -122,6 +122,11 @@ export default defineNuxtModule({
         await addComponent({
             name: 'Tabs',
             filePath: resolve('./runtime/components/blocks/Tabs/Tabs.vue'),
+        });
+
+        await addComponent({
+            name: 'ProductReviews',
+            filePath: resolve('./runtime/components/ProductReviews/ProductReviews.vue'),
         });
 
         extendPages((pages: NuxtPage[]) => {
