@@ -17,7 +17,6 @@
         <template v-if="key === 'itemRating' && props.content?.fields.itemRating">
           <CategoryFiltersSort
             v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)"
-            class="mb-1"
             :facets="productsCatalog.facets"
             :configuration="content"
             :render-key="key"
@@ -27,7 +26,6 @@
         <template v-if="key === 'manufacturer' && props.content?.fields.manufacturer">
           <CategoryFiltersSort
             v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)"
-            class="mb-1"
             :facets="productsCatalog.facets"
             :configuration="content"
             :render-key="key"
@@ -37,7 +35,6 @@
         <template v-if="key === 'price' && props.content?.fields.price">
           <CategoryFiltersSort
             v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)"
-            class="mb-1"
             :facets="productsCatalog.facets"
             :configuration="content"
             :render-key="key"
@@ -47,7 +44,6 @@
         <template v-if="key === 'availability' && props.content?.fields.availability">
           <CategoryFiltersSort
             v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)"
-            class="mb-1"
             :facets="productsCatalog.facets"
             :configuration="content"
             :render-key="key"
@@ -57,7 +53,6 @@
         <template v-if="key === 'customizedFilters' && props.content?.fields.customizedFilters">
           <CategoryFiltersSort
             v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)"
-            class="mb-1"
             :facets="productsCatalog.facets"
             :configuration="content"
             :render-key="key"
@@ -72,7 +67,7 @@
       <template #prefix>
         <SfIconTune />
       </template>
-      {{ t('listSettings') }}
+      {{ t('filter.listSettings') }}
     </UiButton>
 
     <div v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)" class="mt-3">

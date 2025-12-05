@@ -8,7 +8,7 @@
     >
       <template #summary>
         <h2 class="text-sm leading-6" :class="{'font-bold': colorDataOpen}">
-          Weitere Farben
+          {{ t('product.more_colors') }}
         </h2>
       </template>
       <div>
@@ -29,7 +29,7 @@
     >
       <template #summary>
         <h2 class="text-sm leading-6" :class="{'font-bold': formDataOpen}">
-          Weitere Formen
+          {{ t('product.more_forms') }}
         </h2>
       </template>
       <div>
@@ -50,7 +50,7 @@
     >
       <template #summary>
         <h2 class="text-sm leading-6" :class="{'font-bold': productDetailsOpen}">
-          {{ t('productDetails') }}
+          {{ t('product.description') }}
         </h2>
       </template>
       <div class="no-preflight" v-html="productGetters.getDescription(product)" />
@@ -63,7 +63,7 @@
     >
       <template #summary>
         <h2 class="text-sm leading-6" :class="{'font-bold': technicalDataOpen}">
-          {{ t('technicalData') }}
+          {{ t('product.details') }}
         </h2>
       </template>
       <div class="no-preflight" v-html="productGetters.getTechnicalData(product)" />

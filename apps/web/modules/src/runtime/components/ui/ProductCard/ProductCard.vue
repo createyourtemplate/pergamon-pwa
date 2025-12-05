@@ -153,7 +153,7 @@
       </template>
 
       <div v-if="colorValue > 0" class="mt-auto">
-        <span class="inline-block border text-black border-black border-solid text-[10px] mt-[15px] px-2">in {{ colorValue }} Farben verfügbar</span>
+        <span class="inline-block border text-black border-black border-solid text-[10px] mt-[15px] px-2">{{ t('product.inServeralColorsAvalaible', { count: colorValue }) }}</span>
       </div>
     </div>
   </div>

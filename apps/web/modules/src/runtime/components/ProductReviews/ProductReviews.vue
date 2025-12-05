@@ -27,7 +27,7 @@
             <span class="text-sm md:text-lg">({{ totalReviews }} {{ t('product.reviews') }})</span>
             </div>
         </div>
-        <div class="bg-[#F0F7FC] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-x-10 gap-y-8 py-10 px-12 mx-0 md:-mx-10 text-center sm:text-left">
+        <div class="bg-[#F0F7FC] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-x-10 gap-y-10 py-12 px-12 mx-0 md:-mx-10 text-center sm:text-left">
             <div v-for="(feedback, index) in reviews?.feedbacks" :key="feedback.date + '_' + index">
             <div class="flex items-center justify-center md:justify-start mb-3">
                 <SfRating

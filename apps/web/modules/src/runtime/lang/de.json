@@ -28,12 +28,28 @@
         }
     },
     "product": {
+        "delivery": "Lieferzeit",
+        "details": "Produktdetails",
+        "description": "Beschreibung",
+        "more_forms": "Weitere Formen",
+        "more_colors": "Weitere Farben",
         "reviews": "Bewertungen",
         "reviews_of": "von 5",
         "more_reviews": "weitere Bewertungen anzeigen",
         "customer_reviews": "Kundenbewertungen",
         "review_grade_excellent": "Excellent",
         "recommendedProducts": "Das könnte Ihnen auch gefallen",
-        "similarProducts": "Ähnliche Artikel"
+        "similarProducts": "Ähnliche Artikel",
+        "legalDetails": "Herstellerinformationen",
+        "inServeralColorsAvalaible": "in {count} Farben verfügbar",
+        "last_seen": "Zuletzt angesehen",
+        "share": {
+            "title": "Teile dieses Angebot",
+            "onSocial": "Auf {platform} teilen",
+            "viaMail": "Per E-Mail versenden"
+        }
+    },
+    "filter": {
+        "listSettings": "Filtern & Sortieren"
     }
 }

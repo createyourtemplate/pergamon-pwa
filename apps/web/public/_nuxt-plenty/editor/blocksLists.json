@@ -614,6 +614,163 @@
       }
     ]
   },
+  "image-banner-vertical": {
+    "category": "image-banner",
+    "accessControl": ["content", "productCategory", "product"],
+    "title": "Vertical image Banner",
+    "blockName": "BlocksVerticalCarousel",
+    "variations": [
+      {
+        "title": "Image Banner vertical scroll",
+        "image": "https://cdn02.plentymarkets.com/v5vzmmmcb10k/frontend/PWA/Blocks/image_banner_left.png",
+        "template": {
+          "en": {
+            "name": "VerticalCarousel",
+            "type": "structure",
+            "meta": { "uuid": "a3b7c2d9-5e1f-4a8b-9c6d-2f7a8b3c9d0e" },
+            "content": [
+              {
+                "name": "Banner",
+                "type": "content",
+                "meta": { "uuid": "6f2a8c3d-9b5e-4f7a-8c1d-5e9f2a6b8c3d" },
+                "content": {
+                  "image": {
+                    "wideScreen": "https://placehold.co/1920x1080/png",
+                    "desktop": "https://placehold.co/1024x576/png",
+                    "tablet": "https://placehold.co/768x432/png",
+                    "mobile": "https://placehold.co/320x320/png",
+                    "alt": "",
+                    "brightness": 0.5
+                  },
+                  "text": {
+                    "color": "#000",
+                    "bgcolor": "#fff",
+                    "bgopacity": 0.9,
+                    "pretitle": "Pretitle",
+                    "title": "h1 heading",
+                    "htmlDescription": "Text that supports HTML formatting",
+                    "textAlignment": "left",
+                    "justify": "top",
+                    "align": "left",
+                    "background": true
+                  },
+                  "button": {
+                    "label": "Button",
+                    "link": "/",
+                    "variant": "primary"
+                  }
+                }
+              },
+              {
+                "name": "Banner",
+                "type": "content",
+                "meta": { "uuid": "9e4b7f2a-8c3d-4e5b-9f7a-3c6d9e2b5f8a" },
+                "content": {
+                  "image": {
+                    "wideScreen": "https://placehold.co/1920x1080/png",
+                    "desktop": "https://placehold.co/1024x576/png",
+                    "tablet": "https://placehold.co/768x432/png",
+                    "mobile": "https://placehold.co/320x320/png",
+                    "alt": "",
+                    "brightness": 0.75
+                  },
+                  "text": {
+                    "color": "#000",
+                    "bgcolor": "#fff",
+                    "bgopacity": 1,
+                    "pretitle": "Pretitle",
+                    "title": "h1 heading",
+                    "htmlDescription": "Text that supports HTML formatting",
+                    "textAlignment": "left",
+                    "justify": "top",
+                    "align": "left",
+                    "background": true
+                  },
+                  "button": {
+                    "label": "Button",
+                    "link": "/",
+                    "variant": "primary"
+                  }
+                }
+              }
+            ]
+          },
+          "de": {
+            "name": "VerticalCarousel",
+            "type": "structure",
+            "meta": { "uuid": "7f8a9b2c-3d4e-4f5a-8b6c-9d0e1f2a3b4c" },
+            "content": [
+              {
+                "name": "Banner",
+                "type": "content",
+                "meta": { "uuid": "2c9f5a3b-7d1e-4c8f-9a5b-6e2f7c9a3b5d" },
+                "content": {
+                  "image": {
+                    "wideScreen": "https://placehold.co/1920x1080/png",
+                    "desktop": "https://placehold.co/1024x576/png",
+                    "tablet": "https://placehold.co/768x432/png",
+                    "mobile": "https://placehold.co/320x320/png",
+                    "alt": "",
+                    "brightness": 0.5
+                  },
+                  "text": {
+                    "color": "#000",
+                    "bgcolor": "#fff",
+                    "bgopacity": 0.9,
+                    "pretitle": "Vortitel",
+                    "title": "h1 Titel",
+                    "subtitle": "Untertitel",
+                    "htmlDescription": "Text mit HTML-Formatierung",
+                    "textAlignment": "left",
+                    "justify": "top",
+                    "align": "left",
+                    "background": true
+                  },
+                  "button": {
+                    "label": "Button",
+                    "link": "/",
+                    "variant": "primary"
+                  }
+                }
+              },
+              {
+                "name": "Banner",
+                "type": "content",
+                "meta": { "uuid": "8b3f6c2d-4a9e-4b7f-8c5a-9d3e6b8f2c5a" },
+                "content": {
+                  "image": {
+                    "wideScreen": "https://placehold.co/1920x1080/png",
+                    "desktop": "https://placehold.co/1024x576/png",
+                    "tablet": "https://placehold.co/768x432/png",
+                    "mobile": "https://placehold.co/320x320/png",
+                    "alt": "",
+                    "brightness": 0.75
+                  },
+                  "text": {
+                    "color": "#000",
+                    "bgcolor": "#fff",
+                    "bgopacity": 1,
+                    "pretitle": "Vortitel",
+                    "title": "h1 Titel",
+                    "htmlDescription": "Text mit HTML-Formatierung",
+                    "textAlignment": "left",
+                    "justify": "top",
+                    "align": "left",
+                    "background": true
+                  },
+                  "button": {
+                    "label": "Button",
+                    "link": "/",
+                    "variant": "primary"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
   "image": {
     "category": "image",
     "accessControl": ["content", "productCategory", "product"],
@@ -1047,7 +1204,7 @@
   "category-product-galleries": {
     "category": "product-galleries",
     "accessControl": ["content"],
-    "title": "Products",
+    "title": "Product category lists in tabs",
     "blockName": "Tabs",
     "variations": [
       {

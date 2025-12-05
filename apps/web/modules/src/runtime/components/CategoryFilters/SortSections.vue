@@ -3,7 +3,7 @@
     <SfAccordionItem v-if="facet" v-model="open">
       <template #summary>
         <div class="flex justify-between items-center border-b border-b-black lg:border-none py-1 px-4 lg:px-2 select-none lg:bg-pergamon-light-gray" tabindex="0" @mouseleave="open = false">
-          <h5 class="py-1 rounded-none typography-headline-5 tracking-widest select-none">
+          <h5 class="py-1 rounded-none typography-headline-5 tracking-widest select-none py-2 lg:py-0">
             {{ facetGetters.getName(facet) }}
           </h5>
 

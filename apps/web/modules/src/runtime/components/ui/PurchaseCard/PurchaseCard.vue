@@ -51,7 +51,7 @@
                 </i18n-t>
               </div>
               <template v-if="productGetters.getAvailabilityName(product)">
-                <div class="inline-flex text-xs ml-auto lg:mt-1"><span>Lieferzeit</span><!----><span class="font-bold">{{ productGetters.getAvailabilityName(product) }}</span></div>
+                <div class="inline-flex text-xs ml-auto lg:mt-1"><span>{{ t('product.delivery') }}</span>&nbsp;<span class="font-bold">{{ productGetters.getAvailabilityName(product) }}</span></div>
               </template>
             </div>
             <template v-if="key === 'tags' && configuration?.fields.tags">
@@ -82,7 +82,7 @@
                   />
                   <span class="text-sm font-bold ml-2 mr-0.5">{{ averageRating }} {{ t('product.reviews_of') }}</span>
                   <UiButton
-                    v-if="averageRating > 0"
+                    v-if="Number(averageRating) > 0"
                     variant="tertiary"
                     class="text-sm !px-2 leading-none text-neutral-500 cursor-pointer"
                     data-testid="show-reviews"
@@ -92,7 +92,7 @@
                   </UiButton>
                 </div>
                 <div
-                  class="inline-flex items-center"
+                  class="inline-flex items-center mb-2"
                   :class="{ 'justify-center': configuration?.wishlistSize === 'large' }"
                 >
                   <WishlistButton
@@ -270,8 +270,22 @@ const props = withDefaults(defineProps<PurchaseCardProps>(), {
   }),
 });
 
-const { getReviewState } = useEkomiReviews();
-const { totalReviews, averageRating } = getReviewState()
+const { getReviewState, getReviewsForProduct } = useEkomiReviews();
+
+// Kombiniere globalen State mit produktspezifischen Daten
+const totalReviews = computed(() => {
+  const stateTotal = getReviewState().totalReviews.value;
+  const productReviews = getReviewsForProduct(productGetters.getId(props.product));
+  
+  return stateTotal > 0 ? stateTotal : (productReviews?.fb_count_total || 0);
+});
+
+const averageRating = computed(() => {
+  const stateAverage = getReviewState().averageRating.value;
+  const productReviews = getReviewsForProduct(productGetters.getId(props.product));
+  
+  return stateAverage > 0 ? stateAverage : (productReviews?.fb_avg || 0);
+});
 
 const { getSetting } = useSiteSettings('dontSplitItemBundle');
 const showBundleComponents = computed(() => {

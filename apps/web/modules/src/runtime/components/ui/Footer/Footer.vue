@@ -71,9 +71,9 @@
 
       <div class="flex flex-wrap align-top justify-between">
         <div class="flex gap-2 order-3 md:order-1 mx-auto md:mx-0 mt-7 md:mt-0">
-          <a href="#" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconFacebook /></a>
-          <a href="#" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconTwitter /></a>
-          <a href="#" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconInstagram /></a>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconFacebook /></a>
+          <a href="#" aria-label="Twitter" class="w-10 h-10 text-white bg-black flex items-center justify-center"><XIcon /></a>
+          <a href="#" aria-label="Instagram" class="w-10 h-10 text-white bg-black flex items-center justify-center"><SfIconInstagram /></a>
         </div>
 
         <div class="flex flex-wrap justify-center mx-auto md:mx-0 gap-2 order-1 md:order-2">
@@ -81,10 +81,6 @@
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">2</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">3</div>
           <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">4</div>
-          <div class="w-[60px] h-10 bg-white flex items-center justify-center bg-black">5</div>
-          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">6</div>
-          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">7</div>
-          <div class="w-[60px] h-10 bg-white items-center justify-center bg-black flex">8</div>
         </div>
 
         <div class="w-full order-2 md:order-3 copy text-center text-[12px] 2xl:text-left xl:flex 2xl:flex-wrap mt-10">
@@ -99,6 +95,7 @@
 
 <script setup lang="ts">
 import { SfLink, SfListItem, SfRating, SfIconAdd, SfIconRemove, SfIconFacebook, SfIconInstagram, SfIconTwitter } from '@storefront-ui/vue';
+import XIcon from '../Icons/XIcon.vue';
 const viewport = useViewport();
 const { t } = useI18n();
 const localePath = useLocalePath();

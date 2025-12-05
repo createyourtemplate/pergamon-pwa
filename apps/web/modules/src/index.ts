@@ -90,6 +90,21 @@ export default defineNuxtModule({
         });
 
         await addComponent({
+            name: 'BlocksVerticalCarousel',
+            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarousel.vue'),
+        });
+        
+        await addComponent({
+            name: 'BlocksVerticalCarouselForm',
+            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarouselForm.vue'),
+        });
+
+        await addComponent({
+            name: 'BlocksVerticalCarouselTypes',
+            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/types.ts'),
+        });
+
+        await addComponent({
             name: 'MultiGridIcon',
             filePath: resolve('./runtime/components/ui/Icons/MultiGridIcon.vue'),
         });
@@ -127,6 +142,11 @@ export default defineNuxtModule({
         await addComponent({
             name: 'ProductReviews',
             filePath: resolve('./runtime/components/ProductReviews/ProductReviews.vue'),
+        });
+
+        await addComponent({
+            name: 'ProductList',
+            filePath: resolve('./runtime/components/ProductList/ProductList.vue'),
         });
 
         extendPages((pages: NuxtPage[]) => {
@@ -180,21 +200,6 @@ export default defineNuxtModule({
             if (blockFooter) {
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
             }
-            
-            const blockCarousel = components.find((c) => c.pascalName === 'Carousel');
-            if (blockCarousel) {
-                blockCarousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
-            }
-            
-            // const carouselForm = components.find((c) => c.pascalName === 'CarouselForm');
-            // if (carouselForm) {
-            //     carouselForm.filePath = resolve('./runtime/components/blocks/structure/Carousel/CarouselForm.vue');
-            // }
-
-            // const blockCarouselTypes = components.find((c) => c.pascalName === 'BlocksStructureCarouselTypes');
-            // if (blockCarouselTypes) {
-            //     blockCarouselTypes.filePath = resolve('./runtime/components/blocks/structure/Carousel/types.ts');
-            // }
 
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
             if (productCard) {

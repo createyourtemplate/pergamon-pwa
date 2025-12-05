@@ -38,7 +38,7 @@
       role="tabpanel"
       :aria-labelledby="tabId(tab.label)"
     >
-      <div v-if="isActive(tab)" class="p-4 text-neutral-500">
+      <div v-if="isActive(tab) && showTabContent" class="p-4 text-neutral-500">
           <NuxtLazyHydrate when-visible>
               <component
                   :is="RecommendedProductsAsync"
@@ -52,6 +52,8 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
+
+const showTabContent = ref(false);
 
 function getPreviousIndex(current: number, elements: HTMLButtonElement[]) {
   for (let index = current - 1; index >= 0; index -= 1) {
@@ -128,4 +130,25 @@ const handleKeyDown = (event: KeyboardEvent) => {
   const interaction = interactionsMap.get(event.key);
   interaction?.();
 };
+
+const observeTabSection = () => {
+  if (import.meta.client && tablistRef.value) {
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          showTabContent.value = true;
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px 0px 150px 0px',
+      },
+    );
+    observer.observe(tablistRef.value);
+  }
+};
+
+onNuxtReady(() => observeTabSection());
 </script>

@@ -147,33 +147,6 @@
 
     <div v-if="activeSlide !== undefined && slides[activeSlide]" :data-testid="`slide-settings-${activeSlide}`">
       <BlocksBannerCarouselBannerForm :uuid="slides[activeSlide]!.meta.uuid" />
-      <UiAccordionItem
-        v-model="controlsOpen"
-        summary-active-class="bg-neutral-100"
-        summary-class="w-full hover:bg-neutral-100 px-4 py-5 flex justify-between items-center select-none border-b"
-      >
-        <template #summary>
-          <h2>{{ getEditorTranslation('controls-group-label') }}</h2>
-        </template>
-
-        <div class="controls">
-          <div class="mb-6 mt-4">
-            <UiFormLabel class="mb-1">{{ getEditorTranslation('controls-color-label') }}</UiFormLabel>
-
-            <SfInput v-model="controls.color" type="text">
-              <template #suffix>
-                <label
-                  for="controls-color"
-                  :style="{ backgroundColor: controls.color }"
-                  class="border border-[#a0a0a0] rounded-lg cursor-pointer"
-                >
-                  <input id="controls-color" v-model="controls.color" type="color" class="invisible w-8" />
-                </label>
-              </template>
-            </SfInput>
-          </div>
-        </div>
-      </UiAccordionItem>
     </div>
   </div>
 </template>
@@ -184,7 +157,6 @@ import {
   SfIconChevronLeft,
   SfIconChevronRight,
   SfIconDelete,
-  SfInput,
   SfIconMoreHoriz,
   SfIconAdd,
   useDisclosure,
@@ -192,7 +164,7 @@ import {
   SfIconExpandMore,
   SfIconExpandLess,
 } from '@storefront-ui/vue';
-import type { CarouselStructureProps } from './types';
+import type { VerticalCarouselStructureProps } from './types';
 import { v4 as uuid } from 'uuid';
 import type { BannerProps } from '~/components/blocks/BannerCarousel/types';
 import draggable from 'vuedraggable/src/vuedraggable';
@@ -212,9 +184,8 @@ setIndex(blockUuid.value, 0);
 
 const activeSlide = computed(() => activeSlideIndex.value[blockUuid.value]);
 const carouselStructure = computed(
-  () => (findOrDeleteBlockByUuid(data.value, blockUuid.value) || {}) as CarouselStructureProps,
+  () => (findOrDeleteBlockByUuid(data.value, blockUuid.value) || {}) as VerticalCarouselStructureProps,
 );
-const controls = computed(() => carouselStructure.value.configuration.controls);
 
 const slides = computed({
   get: () => {
@@ -222,8 +193,6 @@ const slides = computed({
   },
   set: (value: BannerProps[]) => updateBannerItems(value, blockUuid.value),
 });
-
-const controlsOpen = ref(true);
 
 const slideClick = (index: number) => {
   setIndex(blockUuid.value, index);

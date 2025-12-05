@@ -22,14 +22,14 @@
           </div>
         </section>
         <section class="mb-7 lg:mb-10 grid-in-right">
-          <div class="md:sticky top-0">
-            <UiPurchaseCard v-if="product" :product="product" :review-average="0" />
+          <div class="md:sticky top-[60px]">
+            <UiPurchaseCard v-if="product" :product="product" />
             <NuxtLazyHydrate when-visible>
                 <ProductAccordion v-if="product" :product="product" class="mt-3 md:mt-7" />
             </NuxtLazyHydrate>
             <div class="w-full hover:bg-neutral-100 py-2 px-2 flex justify-between items-center select-none list-none [&::-webkit-details-marker]:hidden cursor-pointer focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm">
                 <p class="text-sm leading-6 cursor-pointer" data-testid="open-manufacturer-drawer" @click="openDrawer()">
-                    <span>{{ t('legalDetails') }}</span>
+                    <span>{{ t('product.legalDetails') }}</span>
                 </p>
                 <SfIconAdd size="sm" class="text-neutral-500"/>
             </div>
@@ -38,25 +38,30 @@
         </section>
       </div>
       <ProductReviews :product="product" />
-      <section v-if="crossSellingItemsSimilar?.products?.length > 0" ref="similarItems" class="p-3 mb-20 mt-8">
-        <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
-          <span>{{ t('product.similarProducts') }}</span>
-        </div>
-        <ProductSlider
-          v-if="crossSellingItemsSimilar"
-          :items="crossSellingItemsSimilar.products"
-        />
-      </section>
-      <section ref="recommendedSection" class="p-3 mb-20 mt-8">
-        <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
-          <span>{{ t('product.recommendedProducts') }}</span>
-        </div>
+      <section ref="recommendedSection">
         <component
-          :is="RecommendedProductsAsync"
+          :is="ProductListAsync"
           v-if="showRecommended"
-          :category-id="productGetters.getCategoryIds(product)[0] ?? ''"
-        />
+          :type="'last_seen'"
+        >
+          <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
+            <span>{{ t('product.recommendedProducts') }}</span>
+          </div>
+        </component>
       </section>
+     <!--<section>
+        <component
+          :is="ProductListAsync"
+          v-if="showRecommended"
+          :item-id="Number(productId)"
+          :type="'cross_selling'"
+          :cross-selling-relation="'Similar'"
+        >
+          <div class="text-2xl lg:text-3xl font-[CormorantGaramond] text-center md:text-start mb-7" >
+            <span>{{ t('product.last_seen') }}</span>
+          </div>
+        </component>
+      </section>-->
     </NarrowContainer>
     <UiReviewModal />
     <ProductLegalDetailsDrawer v-if="open" :product="product" />
@@ -96,6 +101,9 @@ definePageMeta({
 });
 const RecommendedProductsAsync = defineAsyncComponent(
   async () => await import('~/components/RecommendedProducts/RecommendedProducts.vue'),
+);
+const ProductListAsync = defineAsyncComponent(
+  async () => await import('../../components/ProductList/ProductList.vue'),
 );
 
 const showRecommended = ref(false);
@@ -194,14 +202,14 @@ const observeRecommendedSection = () => {
   }
 };
 
-const { fetchProducts: fetchCrossSelling, data: crossSellingItemsSimilar } =
-  useProducts(productId + "Similar");
+// const { fetchProducts: fetchCrossSelling, data: crossSellingItemsSimilar } =
+//   useProducts(productId + "Similar");
 
-fetchCrossSelling({
-  itemId: productGetters.getItemId(product.value),
-  type: "cross_selling",
-  crossSellingRelation: "Similar",
-});
+// fetchCrossSelling({
+//   itemId: productGetters.getItemId(product.value),
+//   type: "cross_selling",
+//   crossSellingRelation: "Similar",
+// });
 
 onNuxtReady(() => observeRecommendedSection());
 </script>
