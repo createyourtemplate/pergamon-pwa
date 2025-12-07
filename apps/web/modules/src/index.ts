@@ -90,17 +90,17 @@ export default defineNuxtModule({
         });
 
         await addComponent({
-            name: 'BlocksVerticalCarousel',
+            name: 'BlocksStructureVerticalCarousel',
             filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarousel.vue'),
         });
         
         await addComponent({
-            name: 'BlocksVerticalCarouselForm',
+            name: 'BlocksStructureVerticalCarouselForm',
             filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarouselForm.vue'),
         });
 
         await addComponent({
-            name: 'BlocksVerticalCarouselTypes',
+            name: 'BlocksStructureVerticalCarouselTypes',
             filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/types.ts'),
         });
 
