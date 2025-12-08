@@ -90,63 +90,57 @@ export default defineNuxtModule({
         });
 
         await addComponent({
-            name: 'BlocksStructureVerticalCarousel',
-            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarousel.vue'),
-        });
-        
-        await addComponent({
-            name: 'BlocksStructureVerticalCarouselForm',
-            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/VerticalCarouselForm.vue'),
-        });
-
-        await addComponent({
-            name: 'BlocksStructureVerticalCarouselTypes',
-            filePath: resolve('./runtime/components/blocks/structure/VerticalCarousel/types.ts'),
-        });
-
-        await addComponent({
             name: 'MultiGridIcon',
             filePath: resolve('./runtime/components/ui/Icons/MultiGridIcon.vue'),
+            global: true,
         });
         
         await addComponent({
             name: 'GridIcon',
             filePath: resolve('./runtime/components/ui/Icons/GridIcon.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'RectIcon',
             filePath: resolve('./runtime/components/ui/Icons/RectIcon.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'SelectedFilters',
             filePath: resolve('./runtime/components/Filter/SelectedFilters.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'SelectedFilter',
             filePath: resolve('./runtime/components/Filter/SelectedFilter.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'ItemShare',
             filePath: resolve('./runtime/components/ItemShare/ItemShare.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'Tabs',
             filePath: resolve('./runtime/components/blocks/Tabs/Tabs.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'ProductReviews',
             filePath: resolve('./runtime/components/ProductReviews/ProductReviews.vue'),
+            global: true,
         });
 
         await addComponent({
             name: 'ProductList',
             filePath: resolve('./runtime/components/ProductList/ProductList.vue'),
+            global: true,
         });
 
         extendPages((pages: NuxtPage[]) => {
@@ -199,6 +193,11 @@ export default defineNuxtModule({
             const blockFooter = components.find((c) => c.pascalName === 'BlocksFooter');
             if (blockFooter) {
                 blockFooter.filePath = resolve('./runtime/components/blocks/Footer/Footer.vue');
+            }
+
+            const carousel = components.find((c) => c.pascalName === 'Carousel');
+            if (carousel) {
+                carousel.filePath = resolve('./runtime/components/blocks/structure/Carousel/Carousel.vue');
             }
 
             const productCard = components.find((c) => c.pascalName === 'UiProductCard');
