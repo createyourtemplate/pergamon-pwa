@@ -1,5 +1,5 @@
 <template>
-  <header ref="referenceRef" :class="[headerClass, {'md:sticky': router.currentRoute.value.path != '/', 'md:fixed': router.currentRoute.value.path == '/'}]" class="relative w-full flex absolute top-0 justify-between items-center border-b z-40">
+  <header ref="referenceRef" :class="[headerClass, extendedHeaderClass]" class="relative w-full flex absolute top-0 justify-between items-center border-b">
     <div v-if="viewport.isGreaterOrEquals('lg')">
       <nav ref="floatingRef">
         <ul
@@ -189,7 +189,7 @@
       <div class="lg:absolute top-0 inset-x-[calc(50%_-_90px)]">
         <NuxtLink
             :to="localePath(paths.home)"
-            :aria-label="t('goToHomepage')"
+            :aria-label="t('common.actions.goToHomepage')"
             class="flex shrink-0 items-center text-white focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm. lg:-mt-1 z-50"
         >
             <NuxtImg v-if="viewport.isLessThan('lg')" src="https://cdn03.plentymarkets.com/lwd3v9wa9pf9/frontend/Pergamon/logo_sm.jpg" alt="Pergamon" />
@@ -222,7 +222,6 @@ import type { MegaMenuProps } from '~/components/MegaMenu/types';
 const props = defineProps<MegaMenuProps>();
 const NuxtLink = resolveComponent('NuxtLink');
 
-const { t } = useI18n();
 const viewport = useViewport();
 const localePath = useLocalePath();
 const { buildCategoryMenuLink } = useLocalization();
@@ -231,6 +230,7 @@ const { close, open, isOpen, activeNode, category, setCategory } = useMegaMenu()
 const { setDrawerOpen } = useDrawerState();
 const { getSetting: getHeaderBackgroundColor } = useSiteSettings('headerBackgroundColor');
 const { getSetting: getIconColor } = useSiteSettings('iconColor');
+const { getSetting: isPreview } = useSiteSettings('isPreview');
 const { referenceRef, floatingRef, style } = useDropdown({
   isOpen,
   onClose: close,
@@ -240,6 +240,8 @@ const { referenceRef, floatingRef, style } = useDropdown({
 const iconColor = computed(() => getIconColor());
 
 const headerBackgroundColor = computed(() => getHeaderBackgroundColor() + 'cc');
+
+const isPreviewMode = computed(() => isPreview() + '');
 
 const isTouchDevice = ref(false);
 const categoryTree = ref(categoryTreeGetters.getTree(props.categories));
@@ -257,6 +259,12 @@ const trapFocusOptions = {
 
 const activeMenu = computed(() => (category.value ? findNode(activeNode.value, category.value) : null));
 const headerClass = computed(() => ({ 'z-[10]': isOpen.value }));
+const extendedHeaderClass = computed(() => ({
+  'md:sticky': router.currentRoute.value.path != '/' && isPreviewMode.value !== 'true',
+  'md:fixed': router.currentRoute.value.path == '/' && isPreviewMode.value !== 'true',
+  'z-40': isPreviewMode.value !== 'true',
+  'z-20': isPreviewMode.value === 'true',
+}));
 
 const findNode = (keys: number[], node: CategoryTreeItem): CategoryTreeItem => {
   if (keys.length > 1) {

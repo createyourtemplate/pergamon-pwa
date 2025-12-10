@@ -52,7 +52,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Mousewheel, Pagination } from 'swiper/modules';
 import type { CarouselStructureProps } from './types';
 import type { Swiper as SwiperType } from 'swiper';
-const { t } = useI18n();
 const { activeSlideIndex, setIndex } = useCarousel();
 const { content, index, configuration, meta } = defineProps<CarouselStructureProps>();
 const isInternalChange = ref(false);
@@ -95,11 +94,7 @@ const onSwiperInit = async (swiper: SwiperType) => {
 };
 
 const onScroll = async (swiper: SwiperType, e: WheelEvent) => {
-  // eslint-disable-next-line no-console
-  console.log(swiper.isEnd, window.screenY, e.deltaY);
   if (swiper.isEnd && e.deltaY > 0) {
-    // eslint-disable-next-line no-console
-    console.log(swiper.isEnd, window.screenY, e.deltaY);
     window.scroll({ left: 0, top: window.screenY + e.deltaY, behavior: 'smooth' });
   }
 };

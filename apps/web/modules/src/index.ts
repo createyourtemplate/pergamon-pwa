@@ -17,7 +17,6 @@ export default defineNuxtModule({
                 href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap' 
             }
         );
-
         
         nuxt.hook("tailwindcss:config", (config) => {
             // Extend Container
@@ -30,6 +29,9 @@ export default defineNuxtModule({
                 "gray": "#bebebe",
                 "light-gray": "#f7f7f7"
              };
+            
+             if (!config.theme.extend.fontFamily) config.theme.extend.fontFamily = {};
+             config.theme.extend.fontFamily["CormorantGaramond"] = ["'Cormorant Garamond'", "Arial", "sans-serif"];
 
             // Border radius override
             config.theme.extend.borderRadius = {
@@ -42,6 +44,8 @@ export default defineNuxtModule({
                 "2xl": "0",
                 "3xl": "0",
             };
+
+            // Font size
             config.theme.extend.fontSize = {
                 "7xl": ["72px", "1rem"],
             };
@@ -264,6 +268,11 @@ export default defineNuxtModule({
             const pagination = components.find((c) => c.pascalName === 'UiPagination');
             if (pagination) {
                 pagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
+            }
+
+            const recommendedProducts = components.find((c) => c.pascalName === 'RecommendedProducts');
+            if (recommendedProducts) {
+                recommendedProducts.filePath = resolve('./runtime/components/RecommendedProducts/RecommendedProducts.vue');
             }
         });
     }

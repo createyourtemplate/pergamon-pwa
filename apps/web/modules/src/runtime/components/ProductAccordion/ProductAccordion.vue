@@ -80,7 +80,6 @@ import { SfLink } from '@storefront-ui/vue';
 const props = defineProps<ProductAccordionPropsType>();
 
 const { product } = toRefs(props);
-const { t } = useI18n();
 
 const productDetailsOpen = ref(false);
 const technicalDataOpen = ref(false);

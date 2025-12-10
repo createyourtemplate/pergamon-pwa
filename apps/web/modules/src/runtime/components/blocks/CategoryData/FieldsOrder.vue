@@ -57,9 +57,6 @@ import type {
   CategoryDataFieldsVisibility,
   CategoryData,
 } from '~/components/blocks/CategoryData/types';
-import group from '/assets/icons/custom_paths/group.svg';
-import groupSingle from '/assets/icons/custom_paths/group_single.svg';
-import groupMultiple from '/assets/icons/custom_paths/group_multiple.svg';
 
 const props = defineProps<{
   fields: CategoryDataFieldsVisibility;

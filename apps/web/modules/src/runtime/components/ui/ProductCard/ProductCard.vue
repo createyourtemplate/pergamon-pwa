@@ -72,8 +72,8 @@
 
         <template v-if="key === 'rating' && configuration?.fields?.rating">
           <div class="flex items-center gap-1" :class="{ 'mb-2': !shortDescription }">
-            <SfRating class="[&>svg]:-ml-0.5 [&>svg]:!w-4 [&>svg]:!h-4 !text-black" size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
-            <SfCounter class="!text-black" size="2xs">{{ ratingCount }}</SfCounter>
+            <SfRating class="[&>svg]:-ml-0.5 [&>svg]:!w-4 [&>svg]:!h-4 !text-black" size="xs" :half-increment="true" :value="reviewData.average ?? 0" :max="5" />
+            <SfCounter class="!text-black" size="2xs">{{ reviewData.count }}</SfCounter>
           </div>
         </template>
 
@@ -105,12 +105,12 @@
           </div>
 
           <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-            <span class="block pb-2 md:pb-0 font-bold typography-text-sm" data-testid="product-card-vertical-price">
+            <span class="block text-black pb-2 md:pb-0 font-bold typography-text-sm" data-testid="product-card-vertical-price">
               <span v-if="!canAddFromCategory" class="mr-1">{{
                 t('account.ordersAndReturns.orderDetails.priceFrom')
               }}</span>
               <span>{{ format(price) }}</span>
-              <span>{{ t('asterisk') }}</span>
+              <span>{{ t('common.labels.asterisk') }}</span>
             </span>
             <span
               v-if="crossedPrice && differentPrices(price, crossedPrice)"
@@ -165,6 +165,8 @@ import { SfLink, SfIconShoppingCart, SfLoaderCircular, SfRating, SfCounter } fro
 import type { ProductCardProps } from '~/components/ui/ProductCard/types';
 import { defaults } from '~/composables';
 import type { ItemGridContent } from '~/components/blocks/ItemGrid/types';
+const { data: reviews } = useEkomiReviews();
+
 
 const props = withDefaults(defineProps<ProductCardProps>(), {
   configuration: () => ({
@@ -193,13 +195,12 @@ const props = withDefaults(defineProps<ProductCardProps>(), {
 });
 
 const product = computed(() => props.product);
-
+const reviewData = computed(() => reviews.value[Number(productGetters.getItemId(product.value))] || { usedPeriodFrom: '', average: 0, count: 0 });
 const configuration = computed(() => props.configuration || ({} as ItemGridContent));
 
 const { addModernImageExtension } = useModernImage();
 const localePath = useLocalePath();
 const { format } = usePriceFormatter();
-const { t } = useI18n();
 const { openQuickCheckout } = useQuickCheckout();
 const { addToCart } = useCart();
 const { price, crossedPrice } = useProductPrice(product.value);

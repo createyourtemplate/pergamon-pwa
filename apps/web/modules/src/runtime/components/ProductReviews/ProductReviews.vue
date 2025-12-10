@@ -1,6 +1,6 @@
 <template>
     <section v-if="totalReviews > 0" id="customerReviewsClick" ref="reviewArea" class="mt-10 mb-10">
-        <span class="block font-[CormorantGaramond] text-2xl md:text-3xl text-center md:text-left">{{ t('product.customer_reviews') }}</span>
+        <span class="block !font-[CormorantGaramond] text-2xl md:text-3xl text-center md:text-left">{{ t('product.customer_reviews') }}</span>
         <div class="flex justify-center md:justify-between items-center my-4 md:mb-8 md:mt-6">
             <span class="text-lg hidden md:block">{{ productGetters.getName(props.product) }}</span>
             <div class="flex items-center gap-3 md:gap-4">
@@ -67,31 +67,16 @@ import { productGetters, reviewGetters } from '@plentymarkets/shop-api';
 import type { PurchaseCardProps } from '~/components/ui/PurchaseCard/types';
 
 const props = defineProps<PurchaseCardProps>();
-
+const productId = productGetters.getItemId(props?.product);
 const {
   reviewArea,
-} = useProductReviews(parseInt(productGetters.getItemId(props?.product)), parseInt(productGetters.getId(props?.product)));
+} = useProductReviews(parseInt(productGetters.getItemId(props?.product)), parseInt(productId));
 
 const viewport = useViewport();
-const { fetchReviews, getReviewState } = useEkomiReviews();
+const { fetchProductReviews, data: reviews, totalReviews, averageRating } = useEkomiProductReviews(productId);
 const reviewLimit = ref(viewport.isLessThan('lg') ? 5 : 10);
-const { reviews, refresh, pending } = fetchReviews(Number(productGetters.getItemId(props?.product)), reviewLimit);
 
-const totalReviews = computed(() => {
-  const stateTotal = getReviewState().totalReviews.value;
-
-  if (stateTotal > 0) return stateTotal;
-
-  return reviews.value?.fb_count_total || 0;
-});
-
-const averageRating = computed(() => {
-  const stateAverage = getReviewState().averageRating.value;
-
-  if (stateAverage > 0) return stateAverage;
-
-  return reviews.value?.fb_avg || 0;
-});
+fetchProductReviews({limit: reviewLimit.value});
 
 const showMoreReviews = () => {
   reviewLimit.value += viewport.isLessThan('lg') ? 5 : 10;

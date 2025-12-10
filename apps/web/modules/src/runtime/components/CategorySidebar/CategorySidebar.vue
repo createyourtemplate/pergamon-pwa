@@ -18,7 +18,7 @@
       <div class="grid grid-rows-category-sidebar lg:h-full lg:flex lg:bg-[#f7f7f7] lg:py-3 lg:px-2">
         <div class="p-4 flex justify-between items-center lg:hidden">
           <span class="font-bold text-lg">{{ t('filter.listSettings') }}</span>
-          <UiButton variant="primary" size="sm" class="rounded-none !p-0" :aria-label="t('closeListSettings')" @click="$emit('close')">
+          <UiButton variant="primary" size="sm" class="rounded-none !p-0" :aria-label="t('common.navigation.closeListSettings')" @click="$emit('close')">
             <template #prefix>
               <SfIconClose />
             </template>
@@ -56,7 +56,6 @@ import { facetGetters } from '@plentymarkets/shop-api';
 import type { CategorySidebarEmits, CategorySidebarProps } from '~/components/CategorySidebar/types';
 
 const { data: productsCatalog } = useProducts();
-const { t } = useI18n();
 
 const toggleStatus = ref('');
 

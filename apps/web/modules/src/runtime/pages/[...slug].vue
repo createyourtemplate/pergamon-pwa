@@ -18,14 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import { categoryGetters, categoryTreeGetters } from '@plentymarkets/shop-api';
+import { categoryGetters, categoryTreeGetters, productGetters } from '@plentymarkets/shop-api';
 import { SfLoaderCircular } from '@storefront-ui/vue';
 
-const { t, locale } = useI18n();
+const { locale } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const { setCategoriesPageMeta } = useCanonical();
-const { setBlocksListContext } = useBlockManager();
+const { setBlocksListContext } = useBlocksList();
 const { getFacetsFromURL, checkFiltersInURL } = useCategoryFilter();
 const { fetchProducts, data: productsCatalog, loading } = useProducts();
 const { data: categoryTree } = useCategoryTree();
@@ -49,7 +49,7 @@ const breadcrumbs = computed(() => {
       categoryTree.value,
       categoryGetters.getId(productsCatalog.value.category),
     );
-    breadcrumb.unshift({ name: t('home'), link: '/' });
+    breadcrumb.unshift({ name: t('common.labels.home'), link: '/' });
 
     return breadcrumb;
   }
@@ -58,9 +58,22 @@ const breadcrumbs = computed(() => {
 });
 
 const canonicalDb = productsCatalog.value.category?.details?.[0]?.canonicalLink;
+const products = computed(() => productsCatalog.value.products || []);
+const productIds = ref(products.value.map((product) => productGetters.getItemId(product)));
+
+const { fetchReviews } = useEkomiReviews();
+
+const getProductReviews = () => {
+  if (productIds.value.length > 0) {
+    fetchReviews({
+      productIds
+    });
+  }
+};
 
 const handleQueryUpdate = async () => {
   await fetchProducts(getFacetsFromURL()).then(() => checkFiltersInURL());
+  getProductReviews();
 
   if (!productsCatalog.value.category) {
     throw createError({

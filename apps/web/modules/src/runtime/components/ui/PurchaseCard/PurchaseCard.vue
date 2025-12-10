@@ -37,15 +37,15 @@
             </template>
             <div v-if="key === 'price' && configuration?.fields.price" class="flex lg:block gap-1 mt-1 mb-6 lg:mb-10">
               <div class="typography-text-xs inline-block lg:flex gap-1">
-                <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
-                <i18n-t keypath="excludedShipping" scope="global">
+                <span>{{ showNetPrices ? t('product.priceExclVAT') : t('product.priceInclVAT') }}</span>
+                <i18n-t keypath="shipping.excludedLabel" scope="global">
                   <template #shipping>
                     <SfLink
                       :href="localePath(paths.shipping)"
                       target="_blank"
                       class="focus:outline focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
                     >
-                      {{ t('delivery') }}
+                      {{ t('common.labels.delivery') }}
                     </SfLink>
                   </template>
                 </i18n-t>
@@ -161,7 +161,7 @@
                     >
                       <template #prefix>
                         <div v-if="!loading" class="flex row items-center font-normal">
-                          {{ t('addToCart') }}
+                          {{ t('common.actions.addToCart') }}
                           <NuxtImg :src="cartIcon" class="invert ml-2" width="17" height="15" alt="shopping cart" />
                         </div>
                         <div v-else>
@@ -270,22 +270,9 @@ const props = withDefaults(defineProps<PurchaseCardProps>(), {
   }),
 });
 
-const { getReviewState, getReviewsForProduct } = useEkomiReviews();
+const productId = productGetters.getId(props?.product);
 
-// Kombiniere globalen State mit produktspezifischen Daten
-const totalReviews = computed(() => {
-  const stateTotal = getReviewState().totalReviews.value;
-  const productReviews = getReviewsForProduct(productGetters.getId(props.product));
-  
-  return stateTotal > 0 ? stateTotal : (productReviews?.fb_count_total || 0);
-});
-
-const averageRating = computed(() => {
-  const stateAverage = getReviewState().averageRating.value;
-  const productReviews = getReviewsForProduct(productGetters.getId(props.product));
-  
-  return stateAverage > 0 ? stateAverage : (productReviews?.fb_avg || 0);
-});
+const { totalReviews, averageRating  } = useEkomiProductReviews(productGetters.getItemId(props?.product));
 
 const { getSetting } = useSiteSettings('dontSplitItemBundle');
 const showBundleComponents = computed(() => {
@@ -309,7 +296,7 @@ const quantitySelectorValue = ref(productGetters.getMinimumOrderQuantity(props?.
 const { isWishlistItem } = useWishlist();
 const { openQuickCheckout } = useQuickCheckout();
 const { crossedPrice } = useProductPrice(props?.product);
-const { reviewArea } = useProductReviews(Number(productGetters.getId(props?.product)));
+const { reviewArea } = useProductReviews(Number(productId));
 const localePath = useLocalePath();
 
 const inlineStyle = computed(() => {
@@ -374,12 +361,12 @@ const handleAddToCart = async (quickCheckout = true) => {
   }
 
   if (!getCombination()) {
-    send({ message: t('productAttributes.notValidVariation'), type: 'negative' });
+    send({ message: t('product.attributes.notValidVariation'), type: 'negative' });
     return false;
   }
 
   const addedToCart = await addToCart({
-    productId: Number(productGetters.getId(props?.product)),
+    productId: Number(productId),
     quantity: Number(quantitySelectorValue.value),
     basketItemOrderParams: getPropertiesForCart(),
   });
@@ -387,7 +374,7 @@ const handleAddToCart = async (quickCheckout = true) => {
   if (addedToCart) {
     quickCheckout
       ? openQuickCheckout(props?.product, quantitySelectorValue.value)
-      : send({ message: t('addedToCart'), type: 'positive' });
+      : send({ message: t('common.actions.addedToCart'), type: 'positive' });
 
     if (getSetting() === '0') {
       send({ message: t('error.notificationsItemBundleSplitted'), type: 'warning' });
@@ -408,7 +395,7 @@ const changeQuantity = (quantity: string) => {
 };
 
 const isSalableText = computed(() => (productGetters.isSalable(props?.product) ? '' : t('itemNotAvailable')));
-const isNotValidVariation = computed(() => (getCombination() ? '' : t('productAttributes.notValidVariation')));
+const isNotValidVariation = computed(() => (getCombination() ? '' : t('product.attributes.notValidVariation')));
 const showPayPalButtons = computed(() => Boolean(getCombination()) && productGetters.isSalable(props?.product));
 
 const scrollToReviews = () => {

@@ -167,7 +167,6 @@ import { SfIconChevronLeft, SfIconChevronRight, usePagination } from '@storefron
 import type { PaginationProps } from '~/components/ui/Pagination/types';
 
 const { updatePage } = useCategoryFilter();
-const { t } = useI18n();
 
 const {
   currentPage,

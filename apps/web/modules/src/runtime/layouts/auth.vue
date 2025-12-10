@@ -27,5 +27,4 @@ defineProps<{
 }>();
 
 const route = useRoute();
-const viewport = useViewport();
 </script>

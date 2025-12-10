@@ -4,14 +4,14 @@
       v-if="!selectionModeCompact"
       class="rounded-none typography-headline-5 tracking-widest select-none lg:hidden"
     >
-      {{ t('sortBy') }}
+      {{ t('common.labels.sortBy') }}
     </h5>
 
     <div class="[&_svg]:w-9 [&_svg]:h-8 [&_svg]:top-2">
-      <SfSelect id="sortBy" v-model="selected" :aria-label="t('sortBy')" data-testid="select-sort-by" class="!border-none !ring-0 text-base">
-        <option v-if="selectionModeCompact" value="" disabled hidden>{{ t('sortBy') }}</option>
+      <SfSelect id="sortBy" v-model="selected" :aria-label="t('common.labels.sortBy')" data-testid="select-sort-by" class="!border-none !ring-0 text-base">
+        <option v-if="selectionModeCompact" value="" disabled hidden>{{ t('common.labels.sortBy') }}</option>
         <option v-for="option in options" :key="option" :value="option">
-          {{ t(`sortType.${option}`) }}
+          {{ t(`category.sorting.${option}`) }}
         </option>
       </SfSelect>
     </div>

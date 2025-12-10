@@ -98,7 +98,7 @@ const tabs: Tab[] = [
 ];
 
 const RecommendedProductsAsync = defineAsyncComponent(
-  async () => await import('~/components/RecommendedProducts/RecommendedProducts.vue'),
+  async () => await import('../../RecommendedProducts/RecommendedProducts.vue'),
 );
 
 const tablistRef = ref<HTMLDivElement>();

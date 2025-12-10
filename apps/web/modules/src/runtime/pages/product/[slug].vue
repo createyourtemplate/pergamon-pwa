@@ -38,7 +38,7 @@
         </section>
       </div>
       <ProductReviews :product="product" />
-      <section ref="recommendedSection">
+      <!--<section ref="recommendedSection">
         <component
           :is="ProductListAsync"
           v-if="showRecommended"
@@ -48,8 +48,8 @@
             <span>{{ t('product.recommendedProducts') }}</span>
           </div>
         </component>
-      </section>
-     <!--<section>
+      </section>-->
+     <section>
         <component
           :is="ProductListAsync"
           v-if="showRecommended"
@@ -61,7 +61,7 @@
             <span>{{ t('product.last_seen') }}</span>
           </div>
         </component>
-      </section>-->
+      </section>
     </NarrowContainer>
     <UiReviewModal />
     <ProductLegalDetailsDrawer v-if="open" :product="product" />
@@ -72,21 +72,21 @@
 import { SfIconAdd } from '@storefront-ui/vue';
 import type { Product } from '@plentymarkets/shop-api';
 import { productGetters, categoryTreeGetters } from '@plentymarkets/shop-api';
-
 const route = useRoute();
-const { t } = useI18n();
 const { setCurrentProduct } = useProducts();
-const { setBlocksListContext } = useBlockManager();
+const { setBlocksListContext } = useBlocksList();
 const { setProductMetaData, setProductRobotsMetaData, setProductCanonicalMetaData } = useStructuredData();
 const { buildProductLanguagePath } = useLocalization();
 const { addModernImageExtensionForGallery } = useModernImage();
 const { productParams, productId } = createProductParams(route.params);
-const { data: product, fetchProduct, setProductMeta, setBreadcrumbs, breadcrumbs } = useProduct(productId);
+const { productForEditor, fetchProduct, setProductMeta, setBreadcrumbs, breadcrumbs } = useProduct(productId);
+const product = productForEditor;
+const { disableActions } = useEditor();
 const { data: categoryTree } = useCategoryTree();
 const { open, openDrawer } = useProductLegalDetailsDrawer();
 const { setPageMeta } = usePageMeta();
+const { resetNotification } = useEditModeNotification(disableActions);
 
-// const config = useRuntimeConfig().public;
 const viewport = useViewport();
 
 definePageMeta({
@@ -99,9 +99,7 @@ definePageMeta({
   isBlockified: false,
   identifier: 0,
 });
-const RecommendedProductsAsync = defineAsyncComponent(
-  async () => await import('~/components/RecommendedProducts/RecommendedProducts.vue'),
-);
+
 const ProductListAsync = defineAsyncComponent(
   async () => await import('../../components/ProductList/ProductList.vue'),
 );
@@ -127,6 +125,15 @@ if (Object.keys(product.value).length === 0) {
   });
 }
 setCurrentProduct(product.value || ({} as Product));
+
+watch(
+  disableActions,
+  () => {
+    setCurrentProduct(productForEditor.value || ({} as Product));
+  },
+  { immediate: true },
+);
+
 setProductMeta();
 setBlocksListContext('product');
 
@@ -202,14 +209,9 @@ const observeRecommendedSection = () => {
   }
 };
 
-// const { fetchProducts: fetchCrossSelling, data: crossSellingItemsSimilar } =
-//   useProducts(productId + "Similar");
-
-// fetchCrossSelling({
-//   itemId: productGetters.getItemId(product.value),
-//   type: "cross_selling",
-//   crossSellingRelation: "Similar",
-// });
+onBeforeRouteLeave(() => {
+  resetNotification();
+});
 
 onNuxtReady(() => observeRecommendedSection());
 </script>

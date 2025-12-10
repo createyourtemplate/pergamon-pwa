@@ -6,7 +6,7 @@
           class="relative text-white hover:text-white active:text-white hover:bg-header-400 active:bg-header-400 rounded-md md:hidden"
           square
           :style="{ color: iconColor }"
-          :aria-label="t('openSearchModalButtonLabel')"
+          :aria-label="t('common.navigation.openSearchModal')"
           @click="searchModalOpen"
       >
           <NuxtImg :src="searchIcon" width="15" height="15" alt="search icon" />
@@ -19,7 +19,7 @@
             class="relative text-white hover:text-white active:text-white hover:bg-header-400 active:bg-header-400 rounded-md mr-1.5"
             square
             :style="{ color: iconColor }"
-            :aria-label="t('openSearchModalButtonLabel')"
+            :aria-label="t('common.navigation.openSearchModal')"
             @click="searchModalOpen"
         >
             <NuxtImg :src="searchIcon" width="15" height="15" alt="search" />
@@ -65,7 +65,7 @@
           :style="{ color: iconColor }"
           class="group relative hover:bg-header-400 active:!bg-header-400 mr-1 -ml-0.5 rounded-md"
           variant="tertiary"
-          :aria-label="t('auth.login.openLoginForm')"
+          :aria-label="t('authentication.login.openLoginForm')"
           square
           @click="navigateToLogin"
         >
@@ -76,7 +76,7 @@
           :tag="NuxtLink"
           :to="localePath(paths.wishlist)"
           :style="{ color: iconColor }"
-          :aria-label="t('numberInWishlist', { count: wishlistItemIds.length })"
+          :aria-label="t('cart.numberInWishlist', { count: wishlistItemIds.length })"
           variant="tertiary"
           square
           data-testid="wishlist-page-navigation"
@@ -90,7 +90,7 @@
           :tag="NuxtLink"
           :style="{ color: iconColor }"
           :to="localePath(paths.cart)"
-          :aria-label="t('numberInCart', { count: cartItemsCount })"
+          :aria-label="t('cart.numberInCart', { count: cartItemsCount })"
           variant="tertiary"
           square
         >
@@ -105,7 +105,7 @@
         <UiButton
             v-if="!isLanguageSelectOpen"
             class="group relative hover:bg-header-400 active:bg-header-400 mr-1 -ml-0.5 rounded-md cursor-pointer"
-            :aria-label="t('languageSelector')"
+            :aria-label="t('common.navigation.languageSelector')"
             variant="tertiary"
             :style="{ color: iconColor }"
             square
@@ -120,7 +120,7 @@
         <UiButton
             v-else
             class="group relative hover:bg-header-400 active:bg-header-400 mr-1 -ml-0.5 rounded-md cursor-pointer"
-            :aria-label="t('languageSelector')"
+            :aria-label="t('common.navigation.languageSelector')"
             :style="{ color: isActive ? iconColor : '' }"
             variant="tertiary"
             square
@@ -138,7 +138,7 @@
         :tag="NuxtLink"
         :to="localePath(paths.wishlist)"
         :style="{ color: iconColor }"
-        :aria-label="t('numberInWishlist', { count: wishlistItemIds.length })"
+        :aria-label="t('cart.numberInWishlist', { count: wishlistItemIds.length })"
         variant="tertiary"
         square
         data-testid="wishlist-page-navigation"
@@ -152,7 +152,7 @@
         :tag="NuxtLink"
         :style="{ color: iconColor }"
         :to="localePath(paths.cart)"
-        :aria-label="t('numberInCart', { count: cartItemsCount })"
+        :aria-label="t('cart.numberInCart', { count: cartItemsCount })"
         variant="tertiary"
         square
       >
@@ -244,7 +244,7 @@ const iconColor = computed(() => getIconColor());
 const headerBackgroundColor = computed(() => getHeaderBackgroundColor());
 
 const NuxtLink = resolveComponent('NuxtLink');
-const { t, localeCodes } = useI18n();
+const { localeCodes } = useI18n();
 const route = useRoute();
 const localePath = useLocalePath();
 const { isOpen: isAccountDropdownOpen, toggle: accountDropdownToggle } = useDisclosure();

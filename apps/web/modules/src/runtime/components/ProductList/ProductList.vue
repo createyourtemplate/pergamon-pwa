@@ -9,7 +9,9 @@
 
 <script setup lang="ts">
 import type { ProductListProps } from './types';
+import { productGetters } from '@plentymarkets/shop-api';
 
+const { fetchReviews } = useEkomiReviews();
 const props = withDefaults(defineProps<ProductListProps>(), { cacheKey: '' });
 
 const params = computed(() => {
@@ -23,8 +25,15 @@ const params = computed(() => {
   return baseParams;
 });
 
-const { fetchProducts: fetchProductList, data: productList } =
-  useProducts(props.cacheKey + "_" + props.type);
+const { 
+  fetchProducts: fetchProductList, 
+  data: productList } = useProducts(props.cacheKey + "_" + props.type);
 
-fetchProductList(params.value);
+fetchProductList(params.value).then(() => {
+  const productIds = ref(productList.value.products?.map((product) => productGetters.getItemId(product)));
+    
+  if (productIds.value.length > 0) {
+    fetchReviews({ productIds });
+  }
+});
 </script>
