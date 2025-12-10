@@ -27,9 +27,8 @@
         <div v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)" class="px-3 lg:hidden">
           <SelectedFilters :facets="productsCatalog.facets" />
         </div>
-        <UiDivider class="!border-black lg:hidden" />
         <slot class="overflow-y-auto md:overflow-y-visible py-4 md:p-0" />
-        <div class="items-center gap-3 hidden lg:flex px-3">
+        <div class="toggle-grid items-center gap-3 hidden lg:flex px-3">
           <UiButton :disabled="toggleStatus === ''" class="!p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('')">
             <MultiGridIcon />
           </UiButton>
@@ -46,6 +45,9 @@
           </UiButton>
         </div>
       </div>
+      <div v-if="productsCatalog.facets && facetGetters.hasFilters(productsCatalog.facets)" class="px-3">
+          <SelectedFilters :facets="productsCatalog.facets" />
+        </div>
     </SfDrawer>
   </transition>
 </template>

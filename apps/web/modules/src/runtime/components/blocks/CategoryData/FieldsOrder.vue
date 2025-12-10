@@ -10,7 +10,7 @@
           {{ texts.name }}
         </h1>
         <div v-if="totalCounts > 0">
-          <span class="text-sm md:text-2xl">{{ totalCounts }} Artikel</span>
+          <span class="text-sm md:text-2xl">{{ t('page.itemsAmount', { count: totalCounts }) }}</span>
         </div>
         <div v-if="totalCounts > 0" class="flex items-center gap-3 lg:hidden self-center ml-auto pr-4">
           <UiButton :disabled="toggleStatus === ''" class="hidden md:block !p-0 hover:!bg-transparent" variant="tertiary" :square="true" @click="toggleColumn('')">

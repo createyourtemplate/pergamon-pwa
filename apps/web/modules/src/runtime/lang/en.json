@@ -1,30 +1,59 @@
 {
     "header": {
-        "freeShippingGermany": "Kostenloser Versand innerhalb Deutschlands"
+        "freeShippingGermany": "Free shipping within Germany"
+    },
+    "page": {
+        "search": "Search results for \"{phrase}\"",
+        "itemsAmount": "{count} items"
     },
     "footer": {
         "heading": {
             "myAccount": "My Account",
-            "info": "Informations",
-            "legal": "Rechtliches",
-            "trustAndBuy": "Sicher und vertrauensvoll einkaufen"
+            "info": "Information",
+            "legal": "Legal",
+            "trustAndBuy": "Safe and trustworthy shopping"
         },
         "info": "Information",
         "login": "Login",
-        "register": "Registrieren",
-        "cart": "Warenkorb",
-        "aboutUs": "Über uns",
-        "shippingInformation": "Versandinformationen",
-        "paymentInformation": "Zahlungsarten",
-        "returns": "Retouren",
-        "cancellationRights": "Widerrufsrecht",
-        "legalDisclosure": "Impressum",
-        "privacyPolicy": "Datenschutz",
-        "termsAndConditions": "AGB",
-        "declarationOfAccessibility": "Barrierefreiheitserklärung",
+        "register": "Register",
+        "cart": "Cart",
+        "aboutUs": "About us",
+        "shippingInformation": "Shipping information",
+        "paymentInformation": "Payment methods",
+        "returns": "Returns",
+        "cancellationRights": "Right of withdrawal",
+        "legalDisclosure": "Imprint",
+        "privacyPolicy": "Privacy policy",
+        "termsAndConditions": "Terms and conditions",
+        "declarationOfAccessibility": "Declaration of accessibility",
         "copyRight": {
-            "1": "Alle Preise inkl. MwSt. und zzgl. Versandkosten.",
-            "2": "Kostenloser Versand und Rückversand nur innerhalb Deutschlands und Österreichs."
+            "1": "All prices include VAT plus shipping costs.",
+            "2": "Free shipping and return shipping only within Germany and Austria."
         }
+    },
+    "product": {
+        "delivery": "Delivery time",
+        "details": "Product details",
+        "description": "Description",
+        "more_forms": "More shapes",
+        "more_colors": "More colors",
+        "reviews": "Reviews",
+        "reviews_of": "of 5",
+        "more_reviews": "show more reviews",
+        "customer_reviews": "Customer reviews",
+        "review_grade_excellent": "Excellent",
+        "recommendedProducts": "You might also like",
+        "similarProducts": "Similar products",
+        "legalDetails": "Manufacturer information",
+        "inServeralColorsAvalaible": "available in {count} colors",
+        "last_seen": "Recently viewed",
+        "share": {
+            "title": "Share this offer",
+            "onSocial": "Share on {platform}",
+            "viaMail": "Send via email"
+        }
+    },
+    "filter": {
+        "listSettings": "Filter & Sort"
     }
 }

@@ -159,6 +159,12 @@ export default defineNuxtModule({
             if (productPage) {
                 productPage.file = resolve('./runtime/pages/product/[slug].vue');
             }
+
+             // ProductPage
+            const search = pages.find((p) => p.name === 'search');
+            if (search) {
+                search.file = resolve('./runtime/pages/search.vue');
+            }
             
             // ProductPage
             const generalPage = pages.find((p) => p.name === 'slug');
@@ -235,9 +241,24 @@ export default defineNuxtModule({
                 wishlistButton.filePath = resolve('./runtime/components/WishlistButton/WishlistButton.vue');
             }
 
+            const categoryPageContent = components.find((c) => c.pascalName === 'CategoryPageContent');
+            if (categoryPageContent) {
+                categoryPageContent.filePath = resolve('./runtime/components/CategoryPageContent/CategoryPageContent.vue');
+            }
+            
+            const wishlistPageContent = components.find((c) => c.pascalName === 'WishlistPageContent');
+            if (wishlistPageContent) {
+                wishlistPageContent.filePath = resolve('./runtime/components/WishlistPageContent/WishlistPageContent.vue');
+            }
+            
             const categorySidebar = components.find((c) => c.pascalName === 'CategorySidebar');
             if (categorySidebar) {
                 categorySidebar.filePath = resolve('./runtime/components/CategorySidebar/CategorySidebar.vue');
+            }
+
+            const categoryFiltersFilter = components.find((c) => c.pascalName === 'CategoryFiltersFilter');
+            if (categoryFiltersFilter) {
+                categoryFiltersFilter.filePath = resolve('./runtime/components/CategoryFilters/Filter.vue');
             }
 
             const categoryFiltersSort = components.find((c) => c.pascalName === 'CategoryFiltersSort');

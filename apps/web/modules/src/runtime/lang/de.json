@@ -2,6 +2,10 @@
     "header": {
         "freeShippingGermany": "Kostenloser Versand innerhalb Deutschlands"
     },
+    "page": {
+        "search": "Suchergebnisse für \"{phrase}\"",
+        "itemsAmount": "{count} Artikel"
+    },
     "footer": {
         "heading": {
             "myAccount": "Mein Konto",

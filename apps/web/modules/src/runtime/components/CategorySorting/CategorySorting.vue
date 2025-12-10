@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between row-start-3 pl-4 lg:pl-0 lg:ml-auto !mb-0" data-testid="category-sorting">
+  <div class="flex items-center justify-between row-start-3 pl-4 lg:pl-0 lg:ml-auto !mb-0 border-b border-b-black lg:border-b-0" data-testid="category-sorting">
     <h5
       v-if="!selectionModeCompact"
       class="rounded-none typography-headline-5 tracking-widest select-none lg:hidden"
